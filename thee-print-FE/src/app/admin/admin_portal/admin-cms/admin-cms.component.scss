@@ -1,0 +1,26 @@
+hr{
+    color: #C2CBD7;
+    border: 1px solid;
+}
+
+.button-purple-transparent{
+    border-radius: 8px;
+    background-color: transparent;
+    border: 0px;
+    color: #C0024A;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px;
+  }
+
+
+button:focus {
+    outline-color: #fff;
+}
+
+.card-body{
+    box-shadow: 0 0 3px #dee2e6;
+}
+.body-fixed{
+    height: 100px;
+}

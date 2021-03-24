@@ -1,0 +1,824 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div style="overflow: hidden; width: 100vw;">
+    <div style="max-height: 100%; overflow-y:auto; width: 100%;">
+        <!-- Add-Partners First Form -->
+        <div class="container p-20" style="width:65% !important;">
+            <div class="row d-flex flex-column">
+                <span class="back-page mt-20">
+                    <a class="c-pointer text-black" routerLink="/admin/partners-list" style="text-decoration: none;">
+                        <svg width="18" height="12" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039"
+                                stroke="#C70039" stroke-width="0" />
+                        </svg>
+                        <span class="mr-15 ml-10 fs-16" style="color:#C70039;">Cancel</span>
+                    </a>
+                </span>
+                <p class="fs-24 fw-700 text-header text-safari mt-30">Add New Partner</p>
+            </div>
+        </div>
+        <ng-container *ngIf="!show">
+            <div class="container p-0 mb-50" style="background-color: #fff; width:65% !important; ">
+                <div class="row m-0 p-20 d-flex align-items-center">
+                    <p class="fs-20 fw-700 text-header text-safari">Partner Details</p>
+                    <div class="ml-auto">
+                        <div class="w3-light-grey">
+                            <div class="w3-container w3-green w3-center w-50-per h-10"
+                                style="background: linear-gradient(47.56deg, #FF6600 -21.35%, #FFFF00 143.78%) !important;">
+                            </div>
+                        </div>
+                        <span class="fs-12 text-secondary">Next:</span><span class="fs-12 ml-5">Price List</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row p-20 m-0 d-flex flex-column">
+                    <div>
+                        <p class="fs-16 fw-700 text-header text-safari">Company Information</p>
+                    </div>
+                    <div class="d-flex">
+                        <form [formGroup]="companyForm" class="w-100-per">
+                            <p class="fs-14 fw-400 mt-10" style="color: #2C2C39;">Company Logo</p>
+                            <div class="mt-15">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-2 p-0">
+                                            <ng-container *ngIf="!cProfilePhoto">
+                                                <img *ngIf="croppedImage" class="h-100 w-100 circle"
+                                                    [src]="croppedImage" />
+                                                <img *ngIf="!croppedImage" class="circle"
+                                                    src="/assets/images/avatar_placeholder.svg">
+                                            </ng-container>
+                                            <ng-container *ngIf="cProfilePhoto">
+                                                <img class="h-100 w-100 circle" [src]="cProfilePhoto" />
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <div class="form-group inline-grid w-500 p-0 m-0 button-wrap">
+                                                <label class="fs-14 fw-700 text-safari" style="color: #252836;"
+                                                    for="userrole">Upload company logo <span
+                                                        class="required ml-5">*</span></label>
+                                                <div class="flex ai-center" style="position: relative;">
+                                                   
+                                                    <!-- <input type="file" (click)="onChange($event)"
+                                                        (change)="companyLogoChange($event)"
+                                                        accept="image/jpeg, image/png"
+                                                        formControlName="partners_company_profile_photo"
+                                                        class="form-control" style="display: none;"
+                                                         #hiddenFileInput
+                                                        id="profile_photo" /> -->
+                                                        <mat-form-field>
+                                                            <button  class="button-upload upload fw-500"
+                                                            (click)="clickCompany(hiddenFileInput)" for="profile_photo">
+                                                            <svg style="vertical-align: middle;" width="18" height="18"
+                                                                viewBox="0 0 18 18" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M11.25 12.375V7.875H14.25L9 2.625L3.75 7.875H6.75V12.375H11.25ZM9 4.7475L10.6275 6.375H9.75V10.875H8.25V6.375H7.3725L9 4.7475ZM14.25 15.375V13.875H3.75V15.375H14.25Z"
+                                                                    fill="#C0024A" />
+                                                            </svg>
+                                                            Choose a file</button>
+                                                            
+                                                            <ngx-mat-file-input 
+                                                                (click)="onChange($event)"
+                                                                (change)="companyLogoChange($event)" formControlName="partners_company_profile_photo" 
+                                                                class="form-control" 
+                                                                accept="image/jpeg, image/png" 
+                                                                #hiddenFileInput 
+                                                                id="profile_photo"
+                                                                style="display: none;">
+                                                            </ngx-mat-file-input>
+                                                        </mat-form-field>
+                                                        
+                                                    <!-- <ng-container *ngIf="companyLogo; else noImage">
+                                                                <span class="italic">{{companyLogo}}</span>
+                                                            </ng-container>
+                                                            <ng-template #noImage> 
+                                                                <span class="italic">No file choosen</span>
+                                                            </ng-template> -->
+                                                </div>
+                                            </div>
+
+                                            <div class="text-secondary fs-12 mt-15">
+                                                <p class="m-0 text-grey fs-12" style="position: absolute; top: 90px;">Maximum image file size is 1MB. Try
+                                                    rezising it to atleast 500x500 px in resolution.</p>
+                                                <input type="hidden" name="hidden_partners_company_profile_photo"
+                                                    formControlName="hidden_partners_company_profile_photo" />
+                                            </div>
+                                            <div class="form-validator"
+                                                *ngIf="companyForm.controls.hidden_partners_company_profile_photo.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="companyForm.controls.hidden_partners_company_profile_photo.hasError('required')">
+                                                    *Company logo is required</p>
+                                            </div>
+                                            <ngx-smart-modal #cropperviewer identifier="cropperviewer" closable="false"
+                                                [customClass]="'modal-cropper-class p-30'">
+                                                <div class="card-body">
+                                                    <p style="font-weight: 500; font-size: 16px;">Crop image</p>
+                                                    <hr style="background-color: #e0dbdb;">
+                                                    <div id="cropper-container">
+                                                        <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                                            [maintainAspectRatio]="true" [aspectRatio]="5 / 5"
+                                                            format="png,jpg,jpeg,ico" alignImage="center"
+                                                            imageQuality="50" (imageCropped)="imageCropped($event)"
+                                                            (imageLoaded)="imageLoaded()"
+                                                            (cropperReady)="cropperReady()"
+                                                            (loadImageFailed)="loadImageFailed()">
+                                                        </image-cropper>
+                                                        <hr class="mt-10" style="background-color: #e0dbdb;">
+                                                        <div style="text-align: right;">
+                                                            <button id="crop-photo-action"
+                                                                class="button-red-rounded mt-10 ml-20"
+                                                                (click)="dismissCropperModal()"
+                                                                style="height:35px;padding:0px 27px">Done</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ngx-smart-modal>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group mt-15">
+                                            <label class="fs-14 text-safari" for="company_name">Company Name<span
+                                                    class="required ml-5">*</span></label>
+                                            <input type="text" autocomplete="off" formControlName="company_name"
+                                                class="form-control" id="company_name" maxlength="100"
+                                                placeholder="ex: Thee Print"
+                                                [ngClass]="{'is-invalid':companyForm.controls.company_name.touched&&companyForm.controls.company_name.hasError('required')}" />
+                                            <div class="form-validator"
+                                                *ngIf="companyForm.controls.company_name.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="companyForm.controls.company_name.hasError('required')">*This
+                                                    field is required.</p>
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="companyForm.controls.company_name.hasError('maxlength')">
+                                                    *Maximum of 100 characters only.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 pr-0">
+                                        <div class="form-group mt-15">
+                                            <label class="fs-14 text-safari" for="tin_number">TIN Number<span
+                                                    class="required ml-5">*</span></label>
+                                            <input type="text" autocomplete="off"          
+                                                formControlName="tin_number"  
+                                                class="form-control" 
+                                                id="tin_number" maxlength="15"
+                                                mask="000-000-000-000"
+                                                (keypress)="keyPressNumbers($event)"
+                                                style="width: 120%;"
+                                                placeholder="ex: 353-766-854-000"
+                                                [ngClass]="{'is-invalid':companyForm.controls.tin_number.touched && companyForm.controls.tin_number.hasError('required')}" />
+                                            <div class="form-validator" *ngIf="companyForm.controls.tin_number.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="companyForm.controls.tin_number.hasError('required')">*This
+                                                    field is required.</p>
+                                                    <p class="mb-0" style="color: red" *ngIf="companyForm.controls.tin_number.hasError('minlength')">*Minimum of 12 characters.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 p-0 mt-20">
+                                <div class="form-group">
+                                    <label class="fs-14 text-safari" for="company_address">Company Address<span
+                                            class="required ml-5">*</span></label>
+                                    <textarea name="company_address" id="company_address" cols="30" rows="10"
+                                        formControlName="company_address" class="form-control" maxlength="250"
+                                        style="height: 90px !important;"
+                                        placeholder="9999 Sgt. Yabut Circle, Guadalupe Nuevo, Makati City"
+                                        [ngClass]="{'is-invalid':companyForm.controls.company_address.touched &&companyForm.controls.company_address.hasError('required')}">
+                                            </textarea>
+                                    <div class="form-validator" *ngIf="companyForm.controls.company_address.touched">
+                                        <p class="mb-0" style="color: red"
+                                            *ngIf="companyForm.controls.company_address.hasError('required')">*This
+                                            field is required.</p>
+                                        <p class="mb-0" style="color: red"
+                                            *ngIf="companyForm.controls.company_address.hasError('maxlength')">*Maximum
+                                            of 250 characters only.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-20 pl-15 d-flex flex-column">
+                                <label class="fs-14 text-safari" for="company_name">Shipping Address</label>
+                                <div class="row pl-15 pr-15">
+                                    <div class="col-md-5 pl-0 mb-15">
+                                        <button (click)="addNewAddressesModal()"
+                                            class="btn_shipping d-flex flex-column justify-content-center align-items-center">
+                                            <img src="/assets/images/delivery_icon.svg" class="mb-15">
+                                            <span class="fs-14 text-pink" style="color:#C70039;">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M11.25 6.75H6.75V11.25H5.25V6.75H0.75V5.25H5.25V0.75H6.75V5.25H11.25V6.75Z"
+                                                        fill="#C0024A" />
+                                                </svg>
+                                                Add new address
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <ng-container *ngIf="company_address">
+                                        <div class="col-md-5 pl-0 mb-15 d-flex bg-address"
+                                            *ngFor="let address of company_address">
+                                            <div class="bg-detail p-15 w-100-per">
+                                                <p class="fs-16 text-safari" style="color: #1E2631;">
+                                                    {{address.company_address_label}}</p>
+                                                <p class="fs-14 text-secondary">{{address.company_address}}</p>
+                                                <p class="fs-14 text-secondary"><span
+                                                        class="fs-14 text-detail mr-5">Contact
+                                                        Person:</span>{{address.company_address_person_firstname}}
+                                                    {{address.company_address_person_lastname}}</p>
+                                                <p class="fs-14 text-secondary"><span
+                                                        class="fs-14 text-detail mr-5">Mobile.No:</span>{{address.company_address_contact}}
+                                                </p>
+                                                <span class="text-blue fs-12"
+                                                    *ngIf='address.company_address_default==1'>
+                                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M6.5 0C2.91014 0 0 2.91014 0 6.5C0 10.0899 2.91014 13 6.5 13C10.0899 13 13 10.0899 13 6.5C13 2.91014 10.0899 0 6.5 0ZM6.5 1.25806C9.39701 1.25806 11.7419 3.60255 11.7419 6.5C11.7419 9.39701 9.39745 11.7419 6.5 11.7419C3.60299 11.7419 1.25806 9.39745 1.25806 6.5C1.25806 3.60299 3.60255 1.25806 6.5 1.25806ZM10.1747 4.67232L9.58404 4.07689C9.46172 3.95357 9.26258 3.95276 9.13926 4.07511L5.43447 7.75012L3.86734 6.17028C3.74502 6.04697 3.54588 6.04615 3.42256 6.16847L2.82711 6.75913C2.70379 6.88146 2.70298 7.0806 2.82532 7.20394L5.20467 9.60254C5.32699 9.72586 5.52613 9.72667 5.64944 9.60433L10.1729 5.11713C10.2962 4.99478 10.297 4.79564 10.1747 4.67232V4.67232Z"
+                                                            fill="#005DAB" />
+                                                    </svg>
+                                                    Default Address
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr style="margin: 30px 0px!important; border-top: 2px solid #eee !important;">
+                <div class="row p-20 m-0 d-flex flex-column">
+                    <div>
+                        <p class="fs-16 fw-700 text-header text-safari">Account Owner</p>
+                    </div>
+                    <div class="d-flex">
+                        <form [formGroup]="userForm" class="w-100-per">
+                            <p class="fs-14 fw-400 mt-10" style="color: #2C2C39;">Profile photo</p>
+                            <div class="mt-15">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-2 p-0">
+                                            <ng-container *ngIf="!cprofilePhoto">
+                                                <img *ngIf="croppedImg" class="h-circle w-100 circle"
+                                                    [src]="croppedImg" />
+                                                <img *ngIf="!croppedImg" class="cirlce"
+                                                    src="/assets/images/avatar_placeholder.svg">
+                                            </ng-container>
+                                            <ng-container *ngIf="cProfilePhoto">
+                                                <img class="h-100 w-100 circle" [src]="cProfilePhoto" />
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            <div class="form-group inline-grid w-500 p-0 m-0 button-wrap">
+                                                <label class="fs-14 fw-700 text-safari" style="color: #252836;"
+                                                    for="userrole">Upload photo <span
+                                                        class="required ml-5">*</span></label>
+                                                <div class="flex ai-center" style="position: relative;">
+                                                    <!-- <input type="file" (click)="onChanges($event)"
+                                                        (change)="userAvatarChange($event)"
+                                                        accept="image/jpeg, image/png" formControlName="user_picture"
+                                                        class="form-control" id="profile_photo" style="display: none;"
+                                                        #hiddenFileInputs /> -->
+                                                        <mat-form-field>
+                                                            <button 
+                                                                class="button-upload upload fw-500"
+                                                                (click)="userClick(hiddenFileInputs)" 
+                                                                for="profile_photo">
+                                                                <svg style="vertical-align: middle;" width="18" height="18"
+                                                                viewBox="0 0 18 18" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M11.25 12.375V7.875H14.25L9 2.625L3.75 7.875H6.75V12.375H11.25ZM9 4.7475L10.6275 6.375H9.75V10.875H8.25V6.375H7.3725L9 4.7475ZM14.25 15.375V13.875H3.75V15.375H14.25Z"
+                                                                    fill="#C0024A" />
+                                                                </svg>
+                                                                Choose a file
+                                                            </button>
+                                                            <ngx-mat-file-input 
+                                                                (click)="onChanges($event)"
+                                                                (change)="userAvatarChange($event)" 
+                                                                formControlName="user_picture" 
+                                                                class="form-control" 
+                                                                accept="image/jpeg, image/png" 
+                                                                #hiddenFileInputs 
+                                                                style="display: none;"
+                                                                id="profile_photo">
+                                                            </ngx-mat-file-input>
+                                                        </mat-form-field>
+
+
+                                                        
+                                                    <!-- <ng-container *ngIf="userAvatar; else noImage">
+                                                                <span class="italic">{{userAvatar}}</span>
+                                                            </ng-container>
+                                                            <ng-template #noImage> 
+                                                                <span class="italic">No file choosen</span>
+                                                            </ng-template> -->
+                                                </div>
+                                            </div>
+
+                                            <div class="text-secondary fs-12 mt-15">
+                                                <p class="m-0 text-grey fs-12" style="position: absolute; top: 90px">Maximum image file size is 1MB. Try
+                                                    rezising it to atleast 500x500 px in resolution.</p>
+                                                <input type="hidden" name="hidden_user_picture"
+                                                    formControlName="hidden_user_picture" />
+                                            </div>
+                                            <div class="form-validator"
+                                                *ngIf="userForm.controls.hidden_user_picture.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.hidden_user_picture.hasError('required')">
+                                                    *Profile photo is required</p>
+                                            </div>
+                                            <ngx-smart-modal #cropperviewer2 identifier="cropperviewer2"
+                                                closable="false" [customClass]="'modal-cropper-class p-30'">
+                                                <div class="card-body">
+                                                    <p style="font-weight: 500; font-size: 16px;">Crop image</p>
+                                                    <hr style="background-color: #e0dbdb;">
+                                                    <div id="cropper-container">
+                                                        <image-cropper [imageChangedEvent]="imgChangedEvent"
+                                                            [maintainAspectRatio]="true" [aspectRatio]="5 / 5"
+                                                            format="png,jpg,jpeg,ico" alignImage="center"
+                                                            imageQuality="50" (imageCropped)="imgCropped($event)"
+                                                            (imageLoaded)="imageLoaded()"
+                                                            (cropperReady)="cropperReady()"
+                                                            (loadImageFailed)="loadImageFailed()">
+                                                        </image-cropper>
+                                                        <hr class="mt-10" style="background-color: #e0dbdb;">
+                                                        <div style="text-align: right;">
+                                                            <button id="crop-photo-action"
+                                                                class="button-red-rounded mt-10 ml-20"
+                                                                (click)="dismisscropperModal()"
+                                                                style="height:35px;padding:0px 27px">Done</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ngx-smart-modal>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group mt-15">
+                                            <label class="fs-14 text-safari" for="first_name">First Name<span
+                                                    class="required ml-5">*</span></label>
+                                            <input type="text" autocomplete="off" formControlName="first_name"
+                                                class="form-control" id="first_name" maxlength="70"
+                                                placeholder="ex: Juan"
+                                                [ngClass]="{'is-invalid':userForm.controls.first_name.touched&&userForm.controls.first_name.hasError('required')}" />
+                                            <div class="form-validator" *ngIf="userForm.controls.first_name.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.first_name.hasError('required')">*This
+                                                    field is required</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 pr-0">
+                                        <div class="form-group mt-15">
+                                            <label class="fs-14 text-safari" for="last_name">Last Name<span
+                                                    class="required ml-5">*</span></label>
+                                            <input type="text" 
+                                                autocomplete="off" 
+                                                formControlName="last_name"
+                                                class="form-control" 
+                                                id="last_name" 
+                                                maxlength="70"
+                                                style="width: 120%;"
+                                                placeholder="ex: Dela Cruz"
+                                                [ngClass]="{'is-invalid':userForm.controls.last_name.touched&&userForm.controls.last_name.hasError('required')}" />
+                                            <div class="form-validator" *ngIf="userForm.controls.last_name.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.last_name.hasError('required')">*This field
+                                                    is required</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-20">
+                                <div class="row">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group">
+                                            <label class="fs-14 text-safari" for="phone">Mobile Number<span
+                                                    class="required ml-5">*</span></label>
+                                            <input type="text" autocomplete="off" formControlName="phone"
+                                                class="form-control" maxlength="11" id="phone"
+                                                (keypress)="keyPressNumbers($event)" placeholder="ex: 09123456789"
+                                                [ngClass]="{'is-invalid':userForm.controls.phone.touched&&userForm.controls.phone.hasError('required')}" />
+                                            <div class="form-validator" *ngIf="userForm.controls.phone.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.phone.hasError('required')">*This field is
+                                                    required</p>
+                                                    <p class="mb-0" style="color: red" *ngIf="userForm.controls.phone.hasError('minlength')">*Minimum of 11 characters.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 pr-0">
+                                        <div class="form-group">
+                                            <label class="fs-14 text-safari" for="email">Email Address<span
+                                                    class="required ml-5">*</span></label>
+                                            <input 
+                                                type="text" 
+                                                autocomplete="off" 
+                                                formControlName="email"
+                                                class="form-control" 
+                                                id="email" 
+                                                maxlength="50"
+                                                style="width: 120%;"
+                                                placeholder="ex: yourname@domain.com"
+                                                [ngClass]="{'is-invalid':userForm.controls.email.touched&&(userForm.controls.email.hasError('required')||userForm.controls.email.hasError('email'))}" />
+                                            <div class="form-validator" *ngIf="userForm.controls.email.touched">
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.email.hasError('required')">*This field is
+                                                    required</p>
+                                                <p class="mb-0" style="color: red"
+                                                    *ngIf="userForm.controls.email.hasError('pattern')">*Invalid Email
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="isloading">
+                                        <div style="position: relative;">
+                                            <ngx-ui-loader style="font-size: 13px; text-align: center;"
+                                                textPosition="center-center" fgsSize="80" pbColor="white"
+                                                fgsColor="#5c9af7" overlayColor="#fcfcfc" textColor="#8f8b89"
+                                                fgsSize="60" text="Just a moment We are preparing our quotation for you"
+                                                [loaderId]="'loader-01'"></ngx-ui-loader>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr style="margin: 20px 0px!important; border-top: 2px solid #eee !important;">
+                <div class="col-md-6 offset-6 d-flex justify-content-end pb-20">
+                    <button class="btn-cancel" routerLink="/admin/partners-list">Cancel</button>
+                    <button class="bttn btn-primary-pink d-flex align-items-center" (click)="proceedPriceList()">
+                        Proceed to Price List
+                        <svg class="ml-5" width="24" height="22" viewBox="0 0 24 22" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.01 10.0834H4V11.9167H16.01V14.6667L20 11L16.01 7.33337V10.0834Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+</div>
+
+<!-- Add-Partners Second Form -->
+<ng-container *ngIf="show">
+    <div class="container mb-50" style="background-color: #fff; width:65% !important;">
+        <div class="row m-0 p-20 d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                <span class="fs-20 fw-700 text-header text-safari">Price List</span>
+                <div class="btn-group h-42" dropdown>
+                    <button id="button-basic" dropdownToggle type="button" class="btn-upload ml-20 d-flex align-items-center justify-content-between"
+                     aria-controls="dropdown-basic"> 
+                        <svg class="mr-5" width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.25 5.125H8.25V0.625H3.75V5.125H0.75L6 10.375L11.25 5.125ZM5.25 6.625V2.125H6.75V6.625H7.6275L6 8.2525L4.3725 6.625H5.25ZM11.25 13.375V11.875H0.75V13.375H11.25Z" fill="#C0024A"/>
+                        </svg>
+                        Import CSV instead
+                    </button>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic" style="width: 180% !important;">
+                        <div class="container">
+                            <div class="step completed">
+                                <div class="v-stepper">
+                                    <div class="circle" style="color: #ffffff;">1</div>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="content">
+                                    <p class="text-header fs-16 fw-700 text-safari">Download the .CSV file</p>
+                                    <button class="bttn btn-primary-pink d-flex align-items-center" (click)="exportCsv();">
+                                        <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4173 8.70833H13.7507V3.20833H8.25065V8.70833H4.58398L11.0007 15.125L17.4173 8.70833ZM10.084 10.5417V5.04167H11.9173V10.5417H12.9898L11.0007 12.5308L9.01149 10.5417H10.084ZM17.4173 18.7917V16.9583H4.58398V18.7917H17.4173Z" fill="white"/>
+                                            </svg>
+                                        Download CSV                                            
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="step completed">
+                                <div class="v-stepper">
+                                    <div class="circle" style="color: #ffffff;">2</div>
+                                    <div class="line"></div>
+                                </div>
+                            
+                                <div class="content">
+                                    <p class="text-header fs-16 fw-700 text-safari">Edit the .CSV file</p>
+                                    <p class="text-secondary fs-14">Make the changes to the file you downloaded. Do not delete any columns.</p>
+                                </div>
+                            </div>
+                            <div class="step completed">
+                                <div class="v-stepper">
+                                    <div class="circle" style="color: #ffffff;">3</div>
+                                </div>
+    
+                                <div class="content">
+                                    <p class="text-header fs-16 fw-700 text-safari">Upload the .CSV file</p>
+                                    <div class="dropzone d-flex align-items-center">
+                                        <input type="file" #fileDropRef id="fileDropRef" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="fileBrowseHandler($event)"/>
+                                        <div class="mr-2 mt-5">
+                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.7493 26.125V16.625H30.0827L18.9993 5.54167L7.91602 16.625H14.2493V26.125H23.7493ZM18.9993 10.0225L22.4352 13.4583H20.5827V22.9583H17.416V13.4583H15.5635L18.9993 10.0225ZM30.0827 32.4583V29.2917H7.91602V32.4583H30.0827Z" fill="#C0024A"/>
+                                                </svg>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <span class="text-header fs-14 fw-700 text-safari">Drag & Drop or Browse</span>
+                                            <span class="text-secondary fs-12 tL">Upload the edited .CSV file</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="ml-auto">
+                <div class="w3-light-grey">
+                    <div class="w3-container w3-green w3-center w-100-per h-10" style="background: linear-gradient(47.56deg, #FF6600 -21.35%, #FFFF00 143.78%) !important;"></div>
+                </div>
+                <span class="fs-12 text-secondary">Submit and you're done!</span>
+            </div>
+        </div>
+        <hr class="mt-10 mr--15 ml--15">
+        <form [formGroup]="productForm" class="w-100-per"> 
+            <table class="table mt-20 w-100-per">
+                <thead>
+                <tr>
+                    <th class="body-small-txt text-safari w-17-per">Machine Print</th>
+                    <th class="body-small-txt text-safari w-20-per">Media</th>
+                    <th class="body-small-txt text-safari w-25-per">Specs/Description</th>
+                    <th class="body-small-txt text-safari w-21-per">Price per square <p>inch (Php)</p></th>
+                    <th class="body-small-txt text-safari w-18-per">Price per square <p>feet (Php)</p></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let products of product_list; index as idx" class="table-dashboard pt-20 pb-20">
+                        <td class="fs-16">
+                            <div class="d-flex align-items-center justify-content-start">
+                                {{products.machine_print}}
+                            </div>
+                        </td>
+                        <td class="fs-16">
+                            <div class="d-flex align-items-center">
+                                {{products.product_media}} 
+                            </div>
+                        </td>
+                        <td class="fs-16">
+                            <div class="d-flex align-items-center">
+                                {{products.product_description}}
+                            </div>
+                        </td>
+                        <td class="fs-16"  formArrayName="sqm">
+                            <div class="d-flex align-items-center">
+                                <!-- <input type="text" class="price_input form-control" [formControlName]="idx" (keypress)="keyPressNumbers($event)" name="price_sqm" placeholder="0.00"> -->
+                                <input type="number" min="0" class="price_input form-control" [formControlName]="idx"  name="price_sqm" placeholder="0.00">
+                            </div>
+                        </td>
+                        <td class="fs-16"  formArrayName="sqf">
+                            <div class="d-flex align-items-center">
+                                <!-- <input type="text" class="price_input form-control" [formControlName]="idx" name="price_sqf" (keypress)="keyPressNumbers($event)"  placeholder="0.00"> -->
+                                <input type="number" min="0" class="price_input form-control" [formControlName]="idx" name="price_sqf"   placeholder="0.00">
+                            </div> 
+                        </td>
+                    </tr>               
+                </tbody>
+            </table>
+        </form>
+        <hr class="mt-10 mr--15 ml--15">
+        <div class="col-md-12 d-flex align-items-center mb-50">
+            <span class="fs-16 text-secondary d-flex align-items-center justify-content-start c-pointer" (click)="viewProfile()">
+                <svg class="mr-5" width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.99 3.08337H16V4.91671H3.99V7.66671L0 4.00004L3.99 0.333374V3.08337Z" fill="#9199A4"/>
+                </svg>
+                Go Back    
+            </span>
+            <button class="bttn btn-primary-pink ml-auto" (click)="createPartner()">
+                Add Partner Account
+            </button>
+        </div>
+    </div>
+</ng-container>
+
+<!-- Modal Form -->
+
+
+
+
+<!-- addPartnerModal -->
+<ngx-smart-modal #addpartner identifier="addpartner"  [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body" style="width: 300px;">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#049561"/>
+                <path d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z" fill="#00A651"/>
+            </svg> 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center text-center">
+            <p class="fs-20 fw-700 text-header">Partner successfully added!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-30 pr-30">A confirmation link with the portal’s access has been sent to the email provided.</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="closeModal()" >Go to Partners Page</button>
+        </div>     
+    </div>
+</ngx-smart-modal>
+
+
+<!-- PriceAddModal -->
+<ngx-smart-modal #priceadd identifier="priceadd" [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+            </svg>  
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Unable to add new Partner!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-100 pr-100">Please fill up all the price fields.</p>
+        </div>
+    </div>
+</ngx-smart-modal>
+
+<ngx-smart-modal #errorEmail identifier="errorEmail" [customClass]="'modal-checkin-class nsm-centered'">
+        <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+            </svg>   
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Email address already exist!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-100 pr-100">Please try a different email address.</p>
+        </div>
+    </div>
+</ngx-smart-modal>
+
+<!-- ShippingAddress Modal -->
+<ngx-smart-modal #addnewaddress identifier="addnewaddress" [customClass]="'modal-checkin-class'" [formGroup]="addressForm" [closable]="false" [dismissable] = "false">
+    <div class="card-body">
+        <p style="font-weight: 500; font-size: 16px;">New Shipping Address</p>
+    <hr style="background-color: #e0dbdb;">
+        <div class="form-group">
+            <p class="fs-13">Label</p>
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="E.g Home, Work, Main Office" 
+                formControlName="company_address_label"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address_label.touched&&addressForm.controls.company_address_label.hasError('required')}"
+            >
+            <div class="form-validator" *ngIf="addressForm.controls.company_address_label.touched">
+                <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_label.hasError('required')">*This field is required</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="fs-13">Address</p>
+            <textarea 
+                type="text" 
+                class="form-control" 
+                placeholder="E.g Home, Work, Main Office" 
+                formControlName="company_address"
+                style="height: 100px !important;"
+                placeholder="9999 Sgt. Yabut Circle, Guadalupe Nuevo, Makati City"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address.touched&&addressForm.controls.company_address.hasError('required')}"
+            ></textarea>
+            <div class="form-validator" *ngIf="addressForm.controls.company_address.touched">
+                <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address.hasError('required')">*This field is required</p>
+            </div>
+        </div>
+        <div class="row mt-25">
+            <div class="ml-15">
+                <label class="switch">
+                    <input type="checkbox" name="company_address_default" checked formControlName="company_address_default">
+                    <span class="slider round"></span>
+                </label>
+            </div>    
+            <div class="col-md-6">
+                 <p class="fs-14">Set as Default shipping address</p>
+            </div>
+        </div>
+        <p class="fs-15 mt-15" style="font-weight: 500;">Contact Person</p>
+        <div class="row">
+            <div class="col md-6">
+                <div class="form-group">
+                    <p class="fs-13">First Name</p>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="company_address_person_firstname"
+                        placeholder="ex: Juan"
+                        maxlength="70"
+                        [ngClass]="{'is-invalid':addressForm.controls.company_address_person_firstname.touched&&addressForm.controls.company_address_person_firstname.hasError('required')}"
+                    >
+                    <div class="form-validator" *ngIf="addressForm.controls.company_address_person_firstname.touched">
+                        <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_person_firstname.hasError('required')">*This field is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col md-6">
+                <div class="form-group">
+                    <p class="fs-13">Last Name</p>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="company_address_person_lastname"
+                        placeholder="ex: Dela Cruz"
+                        maxlength="70"
+                        [ngClass]="{'is-invalid':addressForm.controls.company_address_person_lastname.touched&&addressForm.controls.company_address_person_lastname.hasError('required')}"
+                    >
+                    <div class="form-validator" *ngIf="addressForm.controls.company_address_person_lastname.touched">
+                        <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_person_lastname.hasError('required')">*This field is required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="fs-13">Mobile Number</p>
+            <input 
+                type="text" 
+                class="form-control" 
+                maxlength = "11"
+                formControlName="company_address_contact" 
+                placeholder="ex: 09123456789"
+                (keypress)="keyPressNumbers($event)"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address_contact.touched&&addressForm.controls.company_address_contact.hasError('required')}"
+            >
+            <div class="form-validator" *ngIf="addressForm.controls.company_address_contact.touched">
+                <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_contact.hasError('required')">*This field is required</p>
+            </div>
+        </div>
+        <hr class="mt-10" style="background-color: #e0dbdb;">
+        <div style="text-align: right;">
+            <button class="button text-secondary font-weight-bold mt-10" style="background-color: transparent !important; border: 0px; font-size: 16px;" (click)="closeNewAddressesModal()">Cancel</button>
+            <button (click)="addAddress()" class="button-red-rounded mt-10 ml-20">Save Address</button>
+        </div>
+    </div>
+</ngx-smart-modal>
+<!-- End of Modal Form -->
+
+
+<!-- invalid_format -->
+<ngx-smart-modal #invalid identifier="invalid" [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+            </svg>   
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Invalid type format of company logo</p>
+        </div>
+
+        <div style="text-align: center;">
+            <button id="crop-photo-action" class="button-red-rounded mt-10 ml-20"
+            (click)="invalidFormat()" style="height:35px;padding:0px 27px">Dismiss</button>
+        </div>
+    </div>
+</ngx-smart-modal>
+<!-- end invalid format -->
+
+<!-- invalid_format_user -->
+<ngx-smart-modal #invalid_user identifier="invalid_user" [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+            </svg>   
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Invalid type format of profile photo</p>
+        </div>
+
+        <div style="text-align: center;">
+            <button id="crop-photo-action" class="button-red-rounded mt-10 ml-20"
+            (click)="invalidFormatUser()" style="height:35px;padding:0px 27px">Dismiss</button>
+        </div>
+    </div>
+</ngx-smart-modal>
+<!-- end invalid format user-->
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

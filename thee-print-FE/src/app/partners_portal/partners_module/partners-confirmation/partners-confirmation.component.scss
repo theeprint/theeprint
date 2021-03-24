@@ -1,0 +1,28 @@
+.card {
+   box-shadow: none;
+   width: 400px !important;
+}
+
+.button-purple{
+    border-radius: 6px;
+    background-color: #C0024A;
+    border: 0px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px;
+  }
+
+  .button-purple:hover {background-color: #e21f6a}
+
+  .button-purple:active {
+      background-color: #e1e3ed;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+  }
+.decline-msg-container{
+    background: #FFF6F5;
+    border-radius: 5px;
+    border: 1px solid #DD1003;
+    padding: 15px;
+}

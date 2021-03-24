@@ -1,0 +1,117 @@
+<div class="container pt-40 pb-40">
+    <div class="row d-flex flex-column">
+        <span class="back-page">
+            <a class="c-pointer text-black" routerLink = "/admin/job-order-list" style="text-decoration: none;">
+                <svg width="18" height="12" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039" stroke="#C70039" stroke-width="0"/>
+                </svg>
+                <span class="mr-15 ml-10 fs-16" style="color:#C70039;">Back to Job Orders List</span>
+            </a>    
+        </span>
+        <div class="mt-30">
+            <p class="fs-24 fw-700 text-header text-safari">Drafts</p>
+            <p class="fs-16 fw-400">You have <span class="body-small-txt text-safari fw-700">{{total}} draft</span> registered partners.</p>
+        </div>
+    </div>
+    <div class="container mt-20 p-20 bg-white">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="search" [formGroup]="searchForm" (keydown)="keyDownFunction($event)">
+                    <input type="text" placeHolder="Search" formControlName="search" class="input" (keyup)="searchKey($event)">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+                    </svg>            
+                </div>
+            </div>
+            <div *ngIf="isEmpty" class="col-md-12 mh-600 d-flex flex-column align-items-center justify-content-center">
+                <img src="/assets/images/draft_empty.svg">
+                <p class="text-secondary fs-16 tC mt-20">Your drafts is empty.</p>    
+            </div>
+            <div *ngIf="!isEmpty" class="p-10 w-100-per">
+                <table class="table mt-20 w-100-per">
+                    <thead>
+                        <tr>
+                            <th class="body-small-txt text-safari w-25-per" (click)="sortList('job_order_project_name', sort_type)">Project Name
+                                <i [ngClass]="(sort_column=='job_order_project_name'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"></i>
+                            </th>
+                            <th class="body-small-txt text-safari w-35-per" (click)="sortList('partner_company', sort_type)">Client
+                                <i [ngClass]="(sort_column=='partner_company'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"></i>
+                            </th>
+                            <th class="body-small-txt text-safari w-35-per" (click)="sortList('created_at', sort_type)">Date Created
+                                <i [ngClass]="(sort_column=='created_at'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"></i>
+                            </th>
+                            <th class="body-small-txt text-safari w-15-per tC" (click)="sortList('job_order_total', sort_type)" style="text-align: right">Total Amount
+                                <i [ngClass]="(sort_column=='job_order_total'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let skeleton of skeleton_loader">
+                        <tr *ngIf="isLoaded">
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr *ngFor="let job_order of job_order_list" class="table-dashboard c-pointer" routerLink='/admin/admin-partners-dratfs-details/{{job_order.job_order_request_id}}'>
+                            <td class="fs-16 pt-20 pb-20">{{job_order.job_order_project_name}}</td>
+                            <td class="fs-16 pt-20 pb-20">
+                                 <img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/company_logo/{{job_order.partner_logo}}">
+                                {{job_order.partner_company}}
+                            </td>
+                            <td class="fs-16 pt-20 pb-20">{{job_order.created_at |  transformDate: '': 'lll'}}</td>
+                            <td class="fs-16 pt-20 pb-20 text-left">{{job_order.job_order_total | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+     </div>
+
+         <!--pagination-->
+
+    <div class="row pt-30 pb-30 d-flex align-items-center">
+        <div class="col-md-5 d-flex align-items-center">
+            <span class="text-secondary fs-16">Showing</span> 
+            <div class="btn-group h-50 ml-10 mr-10" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn-limit filterShow text-left d-flex justify-content-between align-items-center"
+                 aria-controls="dropdown-basic"> 
+                    <span class="fs-16">{{ limit }}</span>
+                    <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                     <li role="menuitem">
+                         <button class="dropdown-item" *ngFor="let item of limits" (click)="setLimit(item)">{{ item }}</button>
+                    </li>
+                </ul>
+            </div>
+           <span class="text-secondary fs-16">of {{total}} entries</span>
+        </div>
+        <div class="col-md-6 ml-70 d-flex align-items-center justify-content-end">
+            <div class="pr-3 d-flex justify-content-end align-items-center" style="text-align: right;">
+                <button class="mr-5 page-btn" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 5L3.83 5L7.41 1.41L6 1.04907e-06L-1.04907e-06 6L6 12L7.41 10.59L3.83 7L18 7L18 5Z" fill="#626172"/>
+                        </svg>                        
+                </button>                                
+                <button class="page-btn text-secondary fs-14" style="white-space: nowrap;" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    Prev 
+                </button> 
+                <ng-container *ngFor="let item of pages_array | slice:0:3; let i= index;">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(item)" [ngClass]="{'active': current_page == item}">{{ item }}</span>
+                </ng-container>
+                <ng-container *ngIf="total_pages>3">...</ng-container>
+                <ng-container *ngIf="total_pages>3">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(total_pages)" [ngClass]="{'active': current_page == item}">{{ total_pages }}</span>
+                </ng-container>
+                <button class="page-btn text-secondary fs-14" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">Next</button>
+                <button class="ml-5 page-btn" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 7L14.17 7L10.59 10.59L12 12L18 6L12 0L10.59 1.41L14.17 5L0 5V7Z" fill="#626172"/>
+                        </svg>                        
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+table{
+    thead{
+        tr{
+            th{
+                vertical-align: text-top;
+                background-color: #fff !important;
+                padding-bottom: 15px;
+                &:last-child{
+                    border-top-right-radius: 0px !important;
+                    border-bottom-right-radius: 0px !important;
+                    overflow: hidden;
+                }
+                &:first-child{
+                    border-top-left-radius: 0px !important;
+                    border-bottom-left-radius: 0px !important;
+                    overflow: hidden;
+                } 
+            }
+        }
+    }
+    tbody{
+        tr{
+            td{
+                vertical-align: middle;
+                padding: 20px 8px !important;
+            }
+        }
+    }
+}
+
+::ng-deep .nsm-content{
+    min-width: 600px !important;
+    border-radius: 8px;
+}
+
+#dropdown-basic{
+    min-width: 75px !important;
+  }
+  
+  .dropdown-menu{
+    font-size: 14px !important;
+    right: -3px !important;
+    left: unset !important; 
+    // border-radius: 13px;
+    box-shadow: 0px 4px 40pxrgba(0, 0, 0, 0.05);
+    // border: 1px solid #626172;
+    // margin-top: 10px;
+    &::before{
+        content: "";
+        width: 15px;
+        height: 30px;
+        border-bottom: solid 10px #a8a8a8;
+        border-left: solid 8px transparent;
+        border-right: solid 8px transparent;
+        position: absolute;
+        top: -30px;
+        right: 16px;
+    }
+    &::after{
+        content: "";
+        width: 15px;
+        height: 30px;
+        border-bottom: solid 10px#fff;
+        border-left: solid 8px transparent;
+        border-right: solid 8px transparent;
+        position: absolute;
+        top: -30px;
+        right: 16px;
+    }
+}
+.sortup{
+    position: absolute;
+    padding-top: 6px;
+}

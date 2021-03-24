@@ -1,0 +1,56 @@
+<div class="row p-20 d-flex align-items-center">
+    <div class="search">
+        <input type="text" placeHolder="Search" class="input">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+        </svg>            
+    </div>
+    <div class="d-flex ml-auto">
+        <button class="btn-upload d-flex align-items-center mr-15" routerLink="/admin/partners-details/{{partner_details.partner_id}}/edit-price-list">
+            <svg class="mr-5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8372 1.01583L16.9822 3.16083C17.3397 3.51833 17.3397 4.09583 16.9822 4.45333L15.3047 6.13083L11.8672 2.69333L13.5447 1.01583C13.7189 0.841667 13.948 0.75 14.1864 0.75C14.4247 0.75 14.6539 0.8325 14.8372 1.01583ZM0.748047 13.8125V17.25H4.18555L14.3239 7.11167L10.8864 3.67417L0.748047 13.8125ZM3.42471 15.4167H2.58138V14.5733L10.8864 6.26833L11.7297 7.11167L3.42471 15.4167Z" fill="#C0024A"/>
+            </svg>
+           Update Price List   
+        </button>
+    </div>
+    <table class="table mt-20 w-100-per">
+        <thead>
+          <tr>
+            <th class="text-dark w-12-per">Machine Print</th>
+            <th class="text-dark w-30-per">Media</th>
+            <th class="text-dark w-34-per">Specs/Description</th>
+            <th class="text-dark w-12-per">Price per square inch (Php)</th>
+            <th class="text-dark w-12-per">Price per square feet (Php)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let products of product_prices" class="table-dashboard c-pointer pt-20 pb-20">
+            <td class="fs-16">
+                <div class="d-flex align-items-center justify-content-start">
+                    {{products.machine_print}}
+                </div>
+            </td>
+            <td class="fs-16">
+                <div class="d-flex align-items-center">
+                    {{products.product_media}} 
+                </div>
+            </td>
+            <td class="fs-16">
+                <div class="d-flex align-items-center">
+                    {{products.product_description}}
+                </div>
+            </td>
+            <td class="fs-16">
+                <div class="d-flex align-items-center">
+                    {{products.product_price_sqm}}
+                </div>
+            </td>
+            <td class="fs-16">
+                <div class="d-flex align-items-center">
+                    {{products.product_pricce_sqf}}
+                </div>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>

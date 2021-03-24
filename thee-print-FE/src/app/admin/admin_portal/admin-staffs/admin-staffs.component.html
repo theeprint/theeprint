@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="row mt-20 pl-20 pr-20 d-flex align-items-center">
+        <div>
+            <p class="fs-24 fw-700 text-header text-safari">Staffs</p>
+            <p class="fs-16 fw-400">You have <span class="fs-14 fw-700 text-safari">{{total}}</span> registered admin account(s).</p>
+        </div>
+        <div class="ml-auto">
+            <button class="bttn btn-primary-pink d-flex align-items-center" routerLink='/admin/add-staff'>
+                  <svg class="mr-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="white" />
+                  </svg>
+            Add Staff</button>
+        </div>
+    </div>
+    <div class="container mt-20 p-20" style="background-color: #fff;">
+        <div class="search" [formGroup]="searchForm" (keydown)="keyDownFunction($event)">
+            <input type="text" placeHolder="Search"  formControlName="search" class="input" (keyup)="searchKey($event)">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon c-pointer" (click)="searchList();">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+            </svg>            
+        </div>
+        <div *ngIf="isEmpty" class="col-md-12 mh-600 d-flex flex-column align-items-center justify-content-center">
+            <img src="/assets/images/staff_empty.svg">
+            <p class="text-secondary fs-16 tC mt-20">No staff yet.</p>    
+        </div>
+        <table *ngIf="!isEmpty" class="table mt-20 w-100-per">
+            <thead>
+              <tr>
+                <th class="text-dark w-50-per c-pointer text-safari" (click)="sortList('user_profile_first_name', sort_type)">Name
+                    <i 
+                        [ngClass]="(sort_column=='user_profile_first_name'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-20-per c-pointer text-safari" (click)="sortList('created_at', sort_type)">Date Added
+                    <i 
+                        [ngClass]="(sort_column=='created_at'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-20-per text-safari">Last Login</th>
+                <th class="text-dark w-20-per text-safari">Status</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let skeleton of skeleton_loader">
+                <tr *ngIf="isLoaded">
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!isLoaded">
+              <tr *ngFor="let staffs of staffs_list; let idx = index" class="table-dashboard c-pointer pt-15 pb-15" (click)="openViewProfile(idx)"> 
+                <td class="v-mid pt-15 pb-15 fs-16">
+                    <div class="d-flex align-items-center justify-content-start">
+                        <img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/user_avatar/{{staffs.user_profile_avatar}}">
+                       {{staffs.user_profile_first_name}} {{staffs.user_profile_last_name}}
+                    </div>
+                </td>
+                <td class="v-mid pt-15 pb-15 fs-16">
+                    <div class="d-flex align-items-center">
+                        {{staffs.created_at | transformDate: '': 'L'}}
+                    </div>
+                </td>
+                <td class="v-mid pt-15 pb-15 fs-16">
+                    <div class="d-flex align-items-center" *ngIf="staffs.user_last_login">
+                        {{staffs.user_last_login | transformDate: '': 'lll'}}
+                    </div>
+                    <div class="d-flex align-items-center" *ngIf="!staffs.user_last_login">
+                        - -
+                    </div>
+                </td>
+                <td class="v-mid pt-15 pb-15 fs-16">
+                    <div>
+                        <span *ngIf="staffs.user_status == 0" class="badge_disable">Deactivated</span>
+                        <span *ngIf="staffs.user_status == 1" class="badge_enable" style="padding: 4px 20px !important;">Activated</span>
+                    </div> 
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--pagination-->
+
+    <div class="row pt-30 pb-30 d-flex align-items-center">
+        <div class="col-md-5 d-flex align-items-center">
+            <span class="text-secondary fs-16">Showing</span> 
+            <div class="btn-group h-50 ml-10 mr-10" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn-limit filterShow text-left d-flex justify-content-between align-items-center"
+                 aria-controls="dropdown-basic"> 
+                    <span class="fs-16">{{ limit }}</span>
+                    <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem">
+                        <button class="dropdown-item" *ngFor="let item of limits" (click)="setLimit(item)">{{ item }}</button>
+                   </li>
+               </ul>
+            </div>
+           <span class="text-secondary fs-16">of {{total}} entries</span>
+        </div>
+        <div class="col-md-6 ml-70 d-flex align-items-center justify-content-end">
+            <div class="pr-3 d-flex justify-content-end align-items-center" style="text-align: right;">
+                <button class="mr-5 page-btn" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 5L3.83 5L7.41 1.41L6 1.04907e-06L-1.04907e-06 6L6 12L7.41 10.59L3.83 7L18 7L18 5Z" fill="#626172"/>
+                        </svg>                        
+                </button>                                
+                <button class="page-btn text-secondary fs-14" style="white-space: nowrap;" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    Prev 
+                </button> 
+                <ng-container *ngFor="let item of pages_array | slice:0:3; let i= index;">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(item)" [ngClass]="{'active': current_page == item}">{{ item }}</span>
+                </ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">...</ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(total_pages)" [ngClass]="{'active': current_page == item}">{{ total_pages }}</span>
+                </ng-container>
+                <button class="page-btn text-secondary fs-14" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">Next</button>
+                <button class="ml-5 page-btn" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 7L14.17 7L10.59 10.59L12 12L18 6L12 0L10.59 1.41L14.17 5L0 5V7Z" fill="#626172"/>
+                        </svg>                        
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-smart-modal #viewProfile identifier="viewProfile" [customClass]="'modal-checkin-class nsm-centered'">
+    <ng-container *ngIf="staffs_details">
+        <div class="card-body pt-30 pb-30">
+            <div class="row">
+                <div class="col-md-2 d-flex justify-content-center">
+                    <img class="w-90 h-90 rounded-circle object-fit-cover" src="{{userService.image_path}}/user_avatar/{{staffs_details.user_profile_avatar}}">
+                </div>
+                <div class="col-md-5">
+                <p class="text-header fs-24 fw-700 mb-29">{{staffs_details.user_profile_first_name}} {{staffs_details.user_profile_last_name}}</p>
+                <p class="text-secondary fs-14">Contact Number</p>
+                <p class="text-detail fs-16">{{staffs_details.user_profile_phone}}</p>
+                <p class="text-secondary fs-14">Date Added</p>
+                <p class="text-detail fs-16">{{staffs_details.created_at | transformDate: '': 'L'}}</p>
+                </div>
+                <div class="col-md-4">
+                <button class="btn-upload d-flex align-items-center mb-20" (click)="editBtn(staffs_details.user_id)" >
+                        <svg class="mr-5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.245 2.25C13.0575 2.25 12.8625 2.325 12.72 2.4675L11.3475 3.84L14.16 6.6525L15.5325 5.28C15.825 4.9875 15.825 4.515 15.5325 4.2225L13.7775 2.4675C13.6275 2.3175 13.44 2.25 13.245 2.25ZM10.545 6.765L11.235 7.455L4.44 14.25H3.75V13.56L10.545 6.765ZM2.25 12.9375L10.545 4.6425L13.3575 7.455L5.0625 15.75H2.25V12.9375Z" fill="#C0024A"/>
+                        </svg>
+                        Edit Profile                
+                </button>
+                <p class="text-secondary fs-14">Email Address</p>
+                <p class="text-detail fs-16" style="line-break: anywhere;">{{staffs_details.user_email}}</p>
+                <p class="text-secondary fs-14">Last Login</p>
+                <p class="text-detail fs-16">{{staffs_details.user_last_login | transformDate: '': 'lll'}}</p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ngx-smart-modal>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

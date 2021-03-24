@@ -1,0 +1,832 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('~bootstrap/dist/css/bootstrap');
+@import "./styles/theme";
+@import "./styles/mixin";
+@import '~ngx-toastr/toastr';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+// @import url('https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
+@font-face {
+    font-family: "Manrope";
+    src: local("Manrope"), url(./assets/fonts/Manrope-VariableFont_wght.ttf) format("truetype");
+}
+@font-face {
+    font-family: "Epilogue";
+    src: local("Epilogue"), url(./assets/fonts/Epilogue-VariableFont_wght.ttf) format("truetype");
+}
+/* Roboto */
+
+/* ckeditor minimum height */
+.ck-editor__editable_inline {
+    min-height: 300px;
+}
+
+@include loop(8, 30, 1, ".fs-", "", "font-size", "px", "!important");
+@include loop(1, 900, 100, ".fw-", "", "font-weight", "", "!important");
+@include loop(1, 50, 1, ".lh-", "", "line-height", "px", "!important");
+@include loop(1, 1500, 1, ".h-", "", "height", "px", "!important");
+@include loop(1, 1500, 1, ".w-", "", "width", "px", "!important");
+@include loop(1, 100, 1, ".h-", "-per", "height", "%", "!important");
+@include loop(0, 100, 1, ".w-", "-per", "width", "%", "");
+@include loop(0, 100, 1, ".mw-", "-per", "max-width", "%", "");
+@include loop(0, 100, 1, ".mnw-", "-per", "min-width", "%", "");
+@include loop(0, 250, 50, ".mnw-", "", "min-width", "px", "");
+@include loop(0, 1000, 1, ".mh-", "", "min-height", "px", "!important");
+@include loop(0, 1000, 1, ".mxh-", "", "max-height", "px", "!important");
+
+@include loop(0, 100, 1, ".p-", "", "padding", "px", "!important");
+@include loop(0, 100, 1, ".pt-", "", "padding-top", "px", "!important");
+@include loop(0, 100, 1, ".pr-", "", "padding-right", "px", "!important");
+@include loop(0, 100, 1, ".pl-", "", "padding-left", "px", "!important");
+@include loop(0, 100, 1, ".pb-", "", "padding-bottom", "px", "!important");
+
+@include loop(0, 100, 1, ".m-", "", "margin", "px", "!important");
+@include loop(0, 200, 1, ".mt-", "", "margin-top", "px", "!important");
+@include loop(0, 100, 1, ".mr-", "", "margin-right", "px", "!important");
+@include loop(0, 100, 1, ".ml-", "", "margin-left", "px", "!important");
+@include loop(0, 100, 1, ".mb-", "", "margin-bottom", "px", "!important");
+
+@include loop(-100, 0, 1, ".m-", "", "margin", "px", "!important");
+@include loop(-100, 0, 1, ".mt-", "", "margin-top", "px", "!important");
+@include loop(-100, 0, 1, ".mr-", "", "margin-right", "px", "!important");
+@include loop(-100, 0, 1, ".ml-", "", "margin-left", "px", "!important");
+@include loop(-100, 0, 1, ".mb-", "", "margin-bottom", "px", "!important");
+
+@include loop(-100, 0, 1, ".t-", "", "top", "px", "!important");
+@include loop(-100, 0, 1, ".b-", "", "bottom", "px", "!important");
+@include loop(-100, 0, 1, ".r-", "", "right", "px", "!important");
+@include loop(-100, 0, 1, ".l-", "", "left", "px", "!important");
+
+.nsm-content{
+    border-radius: 8px !important;
+ 
+}
+
+.owl-theme .owl-nav [class*=owl-]{
+    color: #C0024A !important;
+    font-size: 21px !important;
+    margin: 5px !important;
+    padding: 4px 6px !important;
+    font-weight: bolder !important;
+    background: #FFFFFF !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+    border-radius: 28px !important;
+}
+
+.owl-theme .owl-dots, .owl-theme .owl-nav {
+    text-align: right;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    display: none;
+}
+
+.owl-theme .owl-dots .owl-dot {
+    display: none;
+}
+
+.nsm-dialog-btn-close{
+    visibility: hidden;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+}
+
+@media (max-width:575.98px){
+    .pic1{
+        margin-top: -100px !important;
+        width: 258px !important;
+    }
+
+    .pic2{
+        width: 250px !important;
+        margin-top: 40px;
+        margin-left: 50px;
+    }
+
+    .about-text{
+        font-size: 32px !important;
+        color: #0A0929 !important;
+        font-family: Epilogue;
+        line-height: 46px;
+        font-style: normal;
+        margin-top: 45px;
+        font-weight: 700 !important;
+    }
+
+    .thee-text1{
+        font-size: 32px !important;
+        color: #255DAC !important;
+        font-family: Epilogue;
+        line-height: 25px !important;
+        font-style: normal;
+        margin-top: 0px !important;
+        font-weight: 700 !important;
+    }
+
+    .thee-print-text{
+        font-size: 32px !important;
+        color: #005DAB !important;
+        font-family: Epilogue;
+        line-height: 46px;
+        font-style: normal;
+        font-weight: 700 !important;
+    }
+
+    .about-thee-print-descript{
+        color: #2C2C39;
+        font-family: Manrope;
+        font-style: normal;
+        line-height: 30px;
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .misstop{
+        margin-top: 40px !important;
+    }
+
+    .mission-head-text{
+        text-align: left !important;
+        font-family: Epilogue;
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 24px !important;
+        line-height: 34px;
+        color: #0A0929 !important;
+    }
+
+    .vission-head-text{
+        text-align: left !important;
+        font-family: Epilogue;
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 24px !important;
+        line-height: 34px;
+        color: #0A0929 !important;
+    }
+
+    .mission-text{
+        text-align: left;
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 24px;
+        color: #2C2C39;
+    }
+
+    .vission-text{
+        text-align: left;
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 24px;
+        color: #2C2C39;
+    }
+
+    .our-services-head{
+        font-size: 32px !important;
+        color: #0A0929 !important;
+        margin-top: 665px !important;
+        // margin-left: 45px;
+        font-family: Epilogue;
+        font-weight: 700 !important;
+        line-height: 46px;
+    }
+
+    .ours-top{
+        margin-top: 0px !important;
+    }
+
+    .large-format-text{
+        font-family: Epilogue;
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 24px !important;
+        line-height: 34px;
+        color: #005DAB !important;
+        margin-top: 40px !important;
+    }
+
+    .large-format-descrip{
+        font-family: Manrope;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        line-height: 24px;
+        color: #2C2C39;
+    }
+
+    .largebg{
+        width: 325px !important;
+        height: 336px !important;
+    }
+    
+    .digital-offset-text{
+        font-family: Epilogue;
+        font-weight: 700 !important;
+        font-size: 24px !important;
+        line-height: 34px;
+        font-style: normal;
+        color: #C0024A !important;
+        margin-top: -380px;
+    }
+
+    .digital-offset-descrip{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 24px;
+        color: #2C2C39 !important;
+    }
+
+    .digibg{
+        width: 345px !important;
+        height: 336px !important;
+        margin-left: -56px;
+        // top: 450px;
+        // position: absolute;
+    }
+
+    .digital-bg{
+        width: 298px !important;
+        height: 294px !important;
+        margin-left: 20px;
+        top: 460px;
+        position: absolute;
+    }
+
+    .installation-top{
+        margin-top: 420px !important;
+    }
+    
+    .installation-text{
+        font-size: 24px !important;
+        color: #FFB100 !important;
+        font-weight: 700 !important;
+        line-height: 34px !important;
+        font-style: normal;
+        font-family: Epilogue;
+    }
+
+    .installation-description{
+        font-family: Manrope;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #2C2C39;
+        text-align: justify;
+    }
+
+    .installation-bg{
+        width: 325px !important;
+        height: 336px !important;
+        margin-left: -8px;
+    }
+
+    .installbg{
+        width: 325px !important;
+        height: 325px !important;
+        margin-left: 20px;
+    }
+
+    .whyprint{
+        font-size: 32px !important;
+        color: #0A0929 !important;
+        font-weight: 700 !important;
+        font-style: normal;
+        font-family: Epilogue;
+        text-align: center;
+        line-height: 46px;
+    }
+
+    .corebg{
+        margin-top: -1350px !important;
+        height: 1000px !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .core-col{
+        margin-left: 0 !important
+    }
+
+    .innovative-text{
+        color: #0A0929 !important;
+        font-size: 20px !important;
+        font-style: normal;
+        line-height: 30px;
+        font-weight: 700 !important;
+        font-family: Manrope;
+        margin-left: 100px !important;
+    }
+
+    .innovative-description{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        color: #626172 !important;
+        text-align: justify !important;
+        margin-left: 100px !important;
+    }
+
+    .innovative-icon{
+        position: absolute !important;
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        top: 110px !important;
+        left: 10px !important;
+    }
+
+    .malasakit-text{
+        color: #0A0929 !important;
+        font-size: 20px !important;
+        font-style: normal;
+        line-height: 30px;
+        font-weight: 700 !important;
+        font-family: Manrope;
+        margin-left: 100px !important;
+    }
+
+    .malasakit-description{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        color: #626172 !important;
+        text-align: justify !important;
+        margin-left: 100px !important;
+    }
+
+    .malasakit-icon{
+        position: absolute !important;
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        top: 275px !important;
+        left: 10px !important;
+    }
+
+    .professionalism-text{
+        color: #0A0929 !important;
+        font-size: 20px !important;
+        font-style: normal;
+        line-height: 30px;
+        font-weight: 700 !important;
+        font-family: Manrope;
+        margin-left: 100px !important;
+    }
+
+    .professionalism-description{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        color: #626172 !important;
+        text-align: justify !important;
+        margin-left: 100px !important;
+    }
+
+    .professionalism-icon{
+        position: absolute !important;
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        top: 445px !important;
+        left: 10px !important;
+    }
+
+    .client-focus-text{
+        color: #0A0929 !important;
+        font-size: 20px !important;
+        font-style: normal;
+        line-height: 30px;
+        font-weight: 700 !important;
+        font-family: Manrope;
+        margin-left: 100px !important;
+    }
+
+    .client-focus-description{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        color: #626172 !important;
+        text-align: justify !important;
+        margin-left: 100px !important;
+    }
+
+    .client-focus-icon{
+        position: absolute !important;
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        top: 615px !important;
+        left: 10px !important;
+    }
+
+    .trusted-text{
+        font-family: Manrope;
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        color: #626172 !important;
+    }
+
+    .trusted-bg{
+        width: 350px !important;
+        height: 250px !important;
+    }
+
+    .trusted-sec{
+        height: 300px !important;
+        margin-top: -100px !important;
+    }
+
+    .allow-text{
+        font-family: Epilogue;
+        font-style: normal;
+        font-size: 32px !important;
+        line-height: 42px !important;
+        font-weight: 700 !important;
+        margin-left: 45px !important;
+    }
+
+    .allow-bg{
+        height: 900px !important;
+        width: 375 !important;
+    }
+
+    .contact-align{
+        padding-left: 54px !important;
+        padding-right: 54px !important;
+        margin-left: 70px !important;
+    }
+
+    .contact-left{
+        margin-left: 70px !important;
+    }
+
+    .login-left{
+        margin-left: 70px !important;
+    }
+
+    .contact-top{
+        padding-top: 20px !important;
+    }
+
+  
+
+    .footer-top{
+        margin-top: -446px !important;
+        height: 850px !important;
+    }
+
+    .address-top{
+        margin-top: 0px !important;
+    }
+
+    .contactus-top{
+        margin-top: 20px !important;
+    }
+
+    .fb-icon-align{
+        padding-left: 10px !important;
+        // padding-right: 180px  !important;
+    }
+
+    .legal-top{
+        margin-top: 30px !important;
+    }
+
+    .address-text{
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        font-family: Manrope;
+        color: #626172;
+    }
+
+    .address-body{
+        font-family: Manrope;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        line-height: 24px;
+        color: #0A0929 !important;
+        margin-top: 20px !important;
+    }
+
+    .contact-text{
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        font-family: Manrope;
+        color: #626172;
+    }
+
+    .contact-body{
+        font-family: Manrope;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        line-height: 24px;
+        color: #0A0929 !important;
+        margin-top: 20px !important;
+    }
+
+    .legal-text{
+        font-weight: 700 !important;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 21px;
+        font-family: Manrope;
+        color: #626172;
+    }
+
+    .legal-body{
+        font-family: Manrope;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        line-height: 24px;
+        color: #0A0929 !important;
+        margin-top: 20px !important;
+    }
+
+    .copyright-text{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        font-style: normal;
+        line-height: 21px;
+        color: #626172 !important;
+    }
+
+    .copy-center{
+        text-align: center !important;
+    }
+
+    .leentech-text{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        font-style: normal;
+        line-height: 21px;
+        color: #0A0929 !important;
+    }
+
+    .leentech-center{
+        text-align: center !important;
+    }
+
+    .product-invisible{
+        visibility: hidden !important;
+    }
+
+    .line{
+        left: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .partners-contact-text{
+        font-family: Epilogue;
+        font-style: normal;
+        font-weight: 700 !important;
+        font-size: 40px !important;
+        line-height: 50px;
+        color: #FFFFFF;
+    }
+
+    .partners-contact-content{
+        font-family: Manrope;
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 24px;
+        font-weight: 400 !important;
+        color: #FFFFFF;
+    }
+
+    .send-mssge-text{
+        font-family: Manrope;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        line-height: 30px;
+        font-style: normal;
+        color: #0A0929 !important;
+    }
+
+    .send-text{
+        font-weight: 400 !important;
+        font-family: Manrope;
+        font-size: 14px !important;
+        line-height: 21px;
+        font-style: normal;
+    }
+
+    .send-body{
+        font-family: Manrope;
+        font-weight: 400 !important;
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 24px;
+        color: #626172;
+    }
+
+    .footer-contact{
+        height: 850px !important;
+    }
+
+    .msg-bg{
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100px !important;
+        margin-top: 600px !important;
+    }
+
+    .menu-color{
+        color: #ffffff;
+    }
+
+    .container-padding{
+        padding: 0px 50px !important;
+    }
+
+    .tprint-logo{
+        width: 280px !important;
+        height: 100px !important;
+    }
+
+    .back-logo{
+        height: 10px !important;
+        width: 14px !important;
+    }
+
+    .back-to-website{
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        font-family: Epilogue !important;
+        font-style: normal !important;
+    }
+
+    .card-width{
+        width: 300px !important;
+    }
+
+    .login-title{
+        font-style: normal;
+        font-size: 16px !important;
+        line-height: 18px !important;
+        color: #0A0929 !important;
+        font-family: Manrope;
+        font-weight: 700 !important;
+    }
+
+    .login-body{
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        font-style: normal;
+        line-height: 10px !important;
+        color: #2C2C39;
+        font-family: Epilogue;
+    }
+
+    .error-msg-bg{
+        background: #FFF6F5;
+        border-radius: 5px;
+        border: 1px solid #DD1003;
+        padding: 2px !important;
+        margin-top: 0 !important;
+    }
+
+    .error-msg{
+        font-size: 10px !important;
+        font-style: normal;
+        font-family: Manrope;
+        font-weight: 400;
+    }
+
+    .error-logo{
+        height: 25px !important;
+        width: 25px !important;
+    }
+
+    .email-text{
+        font-size: 12px !important;
+        line-height: 12px !important;    
+    }
+
+    .email-top{
+        margin-top: 0 !important;
+    }
+
+    .pass-mb{
+        margin-bottom: 5px !important;
+    }
+
+    .pass-text{
+        font-size: 12px !important;
+        line-height: 12px !important;
+    }
+
+    .input-text-height{
+        height: 35px !important;
+    }
+
+    .forgot-align{
+        text-align: center !important;
+        font-size: 12px !important;
+        margin-top: 50px !important;
+        position: absolute !important;
+        margin-left: 100px;
+    }
+
+    .signin-btn{
+        box-shadow: -10px 10px 20px #f7c7d9 !important;
+        width: 60% !important;
+        font-family: Epilogue;
+        height: 35px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        margin-left: 60px;
+    }
+
+    .termsmodal{
+        width: 300px !important;
+    }   
+
+    .services-top{
+        margin-top: -100px !important;
+    }
+
+    .button-contact-m{
+        border-radius: 6px !important;
+        background-color: transparent !important;
+        border: 1px solid #fff !important;
+        color: #fff !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        padding: 12px !important;
+        width: 192px !important;
+        position: absolute !important;
+        left: 136px !important;
+    } 
+
+    .theeLogo{
+        margin-top: 30px !important;
+    }
+
+    .footer-leen{
+        margin-top: -200px !important;
+    }
+
+    .our-services-line{
+        margin-left: 118px !important;
+    }
+}
+
+.login-text{
+    color: #0A0929;
+}
+
+ 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@-moz-document url-prefix() {
+    @media (max-width:575.98px){
+      .mozila-scroll-top{
+        top: 40px !important;
+        left: 245px !important;
+        position: absolute !important; 
+      }
+    }
+}
+
+@media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+      .text-safari {
+        font-weight: 400 !important;
+      }
+      .text-total_safari {
+          font-size: 20px !important;
+      }
+    }
+  }

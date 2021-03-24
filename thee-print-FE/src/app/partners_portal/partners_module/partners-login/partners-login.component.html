@@ -1,0 +1,210 @@
+
+<div class="container-fluid container-padding bg-white" style="display: flex; padding: 0px 100px;height: 100vh; background-image: url(assets/images/bgthumb.png);  background-repeat: no-repeat; background-position: bottom;">
+    <div class="row justify-content-center ">
+        <!-- <div class="col-sm-4"> -->
+            <div class="d-flex">
+            <div class="card card-width" style="z-index:1; border-radius: 0px !important; box-shadow: white !important; width: 600px; background-image: url(assets/images/bgthumb.png); background-repeat: no-repeat; background-position: bottom;">
+                <span class="back-page mt-35">
+                    <a class="c-pointer text-black d-flex align-items-center" [routerLink]="['/']" style="text-decoration: none;">
+                        <svg width="18" height="12" class="back-logo" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039" stroke="#C70039" stroke-width="0"/>
+                        </svg>
+                        <span class="mr-15 ml-3 back-to-web back-to-website">Back to Website</span>
+                    </a>    
+                </span>
+                <!-- <svg width="200" height="150" style="margin-left: -32px;" class="tprint-logo" viewBox="0 0 939 516" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M546.318 169.492L470.608 245.203H473.666C498.436 245.203 516.864 239.555 528.948 228.257C541.033 216.96 547.052 201.264 547.052 181.17C547.052 177.083 546.806 173.191 546.318 169.492ZM435.311 280.5L396.805 319.006H435.311V280.5Z" fill="url(#paint0_linear)"/>
+                    <path d="M508.305 109.128L475.91 141.735H510.755V179.609H484.409V224.592H484.409L552.359 156.429C550.52 142.486 545.216 131.307 536.47 122.964C529.379 116.169 519.986 111.561 508.305 109.128ZM438.037 179.609L386.642 230.791V305.943H402.846L453.854 255.147V224.592H453.854V179.609H438.037Z" fill="url(#paint1_linear)"/>
+                    <path d="M393.918 215.857L430.701 179.074H425.279V141.201H468.574L508.73 101.044C502.184 99.6808 494.919 99 486.938 99H393.918V215.857Z" fill="url(#paint2_linear)"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M432.785 141.201H468.574L508.73 101.044C502.183 99.6804 494.92 99.0002 486.938 99.0002H421.806C422.884 114.006 426.712 128.243 432.785 141.201ZM546.318 169.492L510.036 205.774C519.526 208.251 529.475 209.573 539.731 209.573C540.462 209.573 541.19 209.559 541.917 209.545C545.343 201.335 547.052 191.877 547.052 181.17C547.052 177.083 546.807 173.191 546.318 169.492ZM508.304 109.127L475.91 141.736H510.755V179.608H484.409V195.72C490.843 199.164 497.626 202.031 504.695 204.244L552.359 156.429C550.52 142.486 545.216 131.308 536.471 122.964C529.379 116.169 519.986 111.561 508.304 109.127Z" fill="url(#paint3_linear)" fill-opacity="0.4"/>
+                    <path d="M751.274 354.424V347.163H748.562V346.192H755.087V347.163H752.364V354.424H751.274Z" fill="#1B1918"/>
+                    <path d="M756.176 354.424V346.192H757.816L759.764 352.02C759.944 352.563 760.075 352.969 760.157 353.239C760.251 352.939 760.397 352.499 760.595 351.919L762.566 346.192H764.032V354.424H762.982V347.534L760.59 354.424H759.607L757.226 347.416V354.424H756.176Z" fill="#1B1918"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M152.827 350.722H214.415V366.92H193.743V416.295H173.483V366.92H152.827V350.722ZM223.667 350.722H243.927V373.668H266.079V350.722H286.431V416.295H266.079V389.776H243.927V416.295H223.667V350.722ZM299.851 350.722H354.141V364.722H320.156V375.15H351.683V388.524H320.156V401.44H355.133V416.295H299.851V350.722ZM366.004 350.722H420.294V364.722H386.309V375.15H417.837V388.524H386.309V401.44H421.286V416.295H366.004V350.722Z" fill="#1B1918"/>
+                    <path d="M432.111 350.722H465.791C473.118 350.722 478.615 352.463 482.264 355.959C485.913 359.44 487.745 364.416 487.745 370.844C487.745 377.47 485.76 382.646 481.776 386.371C477.791 390.096 471.714 391.959 463.547 391.959H452.462V416.295H432.111V350.722ZM452.462 378.676H457.424C461.332 378.676 464.065 378.005 465.653 376.646C467.226 375.287 468.02 373.546 468.02 371.44C468.02 369.379 467.332 367.623 465.958 366.203C464.6 364.768 462.019 364.05 458.234 364.05H452.462V378.676ZM498.615 416.295V350.722H532.387C538.646 350.722 543.44 351.256 546.738 352.341C550.051 353.409 552.722 355.394 554.753 358.31C556.783 361.211 557.791 364.753 557.791 368.92C557.791 372.57 557.013 375.699 555.47 378.341C553.913 380.982 551.775 383.119 549.074 384.768C547.334 385.806 544.966 386.676 541.959 387.348C544.371 388.157 546.127 388.966 547.241 389.776C547.974 390.31 549.058 391.456 550.478 393.211C551.898 394.982 552.844 396.326 553.318 397.287L563.12 416.295H540.218L529.394 396.249C528.02 393.669 526.798 391.974 525.715 391.196C524.264 390.188 522.6 389.684 520.753 389.684H518.967V416.295H498.615ZM518.967 377.287H527.516C528.432 377.287 530.219 376.997 532.875 376.401C534.219 376.127 535.318 375.44 536.173 374.34C537.013 373.241 537.44 371.974 537.44 370.539C537.44 368.416 536.768 366.798 535.424 365.668C534.081 364.524 531.562 363.959 527.867 363.959H518.967V377.287ZM590.707 367.019V416.295H570.402V374.54L590.707 367.019ZM605.38 350.722H624.311L648.998 386.997V350.722H668.098V416.295H648.998L624.433 380.294V416.295H605.38V350.722ZM676.953 350.722H738.541V366.92H717.869V416.295H697.609V366.92H676.953V350.722Z" fill="#C4C4C4"/>
+                    <path d="M432.111 350.722H465.791C473.118 350.722 478.615 352.463 482.264 355.959C485.913 359.44 487.745 364.416 487.745 370.844C487.745 377.47 485.76 382.646 481.776 386.371C477.791 390.096 471.714 391.959 463.547 391.959H452.462V416.295H432.111V350.722ZM452.462 378.676H457.424C461.332 378.676 464.065 378.005 465.653 376.646C467.226 375.287 468.02 373.546 468.02 371.44C468.02 369.379 467.332 367.623 465.958 366.203C464.6 364.768 462.019 364.05 458.234 364.05H452.462V378.676ZM498.615 416.295V350.722H532.387C538.646 350.722 543.44 351.256 546.738 352.341C550.051 353.409 552.722 355.394 554.753 358.31C556.783 361.211 557.791 364.753 557.791 368.92C557.791 372.57 557.013 375.699 555.47 378.341C553.913 380.982 551.775 383.119 549.074 384.768C547.334 385.806 544.966 386.676 541.959 387.348C544.371 388.157 546.127 388.966 547.241 389.776C547.974 390.31 549.058 391.456 550.478 393.211C551.898 394.982 552.844 396.326 553.318 397.287L563.12 416.295H540.218L529.394 396.249C528.02 393.669 526.798 391.974 525.715 391.196C524.264 390.188 522.6 389.684 520.753 389.684H518.967V416.295H498.615ZM518.967 377.287H527.516C528.432 377.287 530.219 376.997 532.875 376.401C534.219 376.127 535.318 375.44 536.173 374.34C537.013 373.241 537.44 371.974 537.44 370.539C537.44 368.416 536.768 366.798 535.424 365.668C534.081 364.524 531.562 363.959 527.867 363.959H518.967V377.287ZM590.707 367.019V416.295H570.402V374.54L590.707 367.019ZM605.38 350.722H624.311L648.998 386.997V350.722H668.098V416.295H648.998L624.433 380.294V416.295H605.38V350.722ZM676.953 350.722H738.541V366.92H717.869V416.295H697.609V366.92H676.953V350.722Z" fill="url(#paint4_linear)"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M570.403 350.722H590.708V361.551L570.403 369.073V350.722Z" fill="#1B1918"/>
+                    <defs>
+                    <linearGradient id="paint0_linear" x1="354.077" y1="372.094" x2="643.977" y2="77.3148" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF6600"/>
+                    <stop offset="1" stop-color="#FFFF00"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="552.468" y1="109.282" x2="269.402" y2="354.281" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF0066"/>
+                    <stop offset="1" stop-color="#280000"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear" x1="310.641" y1="243.25" x2="520.501" y2="51.2042" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#000066"/>
+                    <stop offset="1" stop-color="#00CCFF"/>
+                    </linearGradient>
+                    <linearGradient id="paint3_linear" x1="467.06" y1="183.953" x2="570.525" y2="79.9988" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="white" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="paint4_linear" x1="669.842" y1="485.321" x2="674.723" y2="274.973" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#000066"/>
+                    <stop offset="1" stop-color="#00CCFF"/>
+                    </linearGradient>
+                    </defs>
+                </svg> -->
+                <img  src="assets/images/loginAdmin.png" style="width: 235px; height: 120px; margin-left: -32px;">
+                    
+                <h4 class="big-body-bold login-title text-safari">Thee Print's Partners Portal</h4>
+                <ng-container *ngIf="!show">
+                    <p class="body-text-login login-body">Welcome! Login now to get started.</p>
+                    <div *ngIf="errorMessage" class="decline-msg-container error-msg-bg d-flex align-items-center" style="padding: 8px !important; margin-top: -8px !important;">
+                        <div class="d-flex align-items-center">
+                            <svg width="25" height="25" class="error-logo" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+                            </svg>                     
+                        </div>
+                        <div class="col-md-10 d-flex align-items-center" *ngIf="errorMessage">
+                            <p class="m-0 error-msg">{{errorMessage}}.</p>
+                        </div>
+                    </div>           
+                    <div *ngIf="is_locked && seconds" class="decline-msg-container d-flex align-items-center" style="padding: 8px !important; margin-top: 0px !important; width: 450px !important;">
+                        <p class="m-0 fs-12">Too many unsuccessful login attempts.
+                        Please try again after 
+                        <countdown *ngIf="seconds" [config]="{leftTime: seconds, format: 'mm:ss' }" (event)="handleEvent($event)"></countdown> 
+                        seconds.</p>
+                    </div>         
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="mt-10 email-top">
+                            <div class="form-group pass-mb mb-10">
+                                <label for="inputEmail" class="body-small-email email-text">Email</label>
+                                <input 
+                                    type="email" 
+                                    class="form-control input-text-height" 
+                                    id="inputEmail"  
+                                    maxlength="70"
+                                    formControlName="username"
+                                    placeholder="Enter email" 
+                                    [ngClass]="{'is-invalid':loginForm.controls.username.touched &&loginForm.controls.username.hasError('required')}"
+
+                                />
+                                <div class="form-validator" *ngIf="loginForm.controls.username.touched || loginForm.controls.username.dirty">
+                                    <p class="mb-0" style="color: red" *ngIf="loginForm.controls.username.hasError('required')">*This email is required.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="loginForm.controls.username.hasError('minlength')">*Minumim of 5 characters only.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="loginForm.controls.username.hasError('maxlength')">*Maximum of 70 characters only.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="loginForm.controls.username.hasError('pattern')">*Invalid Email.</p>
+                                </div>
+                            </div>
+                            <div class="form-group mb-10">
+                                <label for="inputPassword" class="body-small-password pass-text">Password</label> 
+                                <div id="password" class="password-form-control  p-relative">
+                                    <input 
+                                        type="{{passType}}"
+                                        name="password"
+                                        maxlength="30"
+                                        class="form-control input-text-height border-0 pr-38" 
+                                        id="inputPassword" 
+                                        formControlName="password"
+                                        placeholder="Password"
+                                        [ngClass]="{'is-invalid': inCorrectPassword || loginForm.controls.password.touched &&loginForm.controls.password.hasError('required')}">
+                                        <label *ngIf="!showPassword" (click)="showPass()" class="c-pointer hov-bold" style="position: absolute;margin-top:-33px;right: 15px;">
+                                            <svg width="22" height="20" viewBox="0 0 22 20" fill="#8D8F93">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.69 4.5248L1.01 1.8448L2.42 0.424805L20.15 18.1648L18.74 19.5748L15.32 16.1548C13.98 16.6848 12.52 16.9748 11 16.9748C6 16.9748 1.73 13.8648 0 9.4748C0.77 7.5048 2.06 5.8048 3.69 4.5248ZM11 3.9748C14.79 3.9748 18.17 6.1048 19.82 9.4748C19.23 10.6948 18.4 11.7448 17.41 12.5948L18.82 14.0048C20.21 12.7748 21.31 11.2348 22 9.4748C20.27 5.0848 16 1.9748 11 1.9748C9.73 1.9748 8.51 2.1748 7.36 2.5448L9.01 4.1948C9.66 4.0648 10.32 3.9748 11 3.9748ZM9.93 5.1148L12 7.1848C12.57 7.4348 13.03 7.8948 13.28 8.4648L15.35 10.5348C15.43 10.1948 15.49 9.8348 15.49 9.4648C15.5 6.9848 13.48 4.9748 11 4.9748C10.63 4.9748 10.28 5.02481 9.93 5.1148ZM8.51 9.3448L11.12 11.9548C11.08 11.9648 11.04 11.9748 11 11.9748C9.62 11.9748 8.5 10.8548 8.5 9.4748C8.5 9.44981 8.5025 9.42982 8.505 9.40982L8.505 9.40981L8.505 9.40979C8.5075 9.38979 8.51 9.3698 8.51 9.3448ZM6.86 7.6948L5.11 5.9448C3.9 6.8648 2.88 8.0448 2.18 9.4748C3.83 12.8448 7.21 14.9748 11 14.9748C11.95 14.9748 12.87 14.8348 13.75 14.5948L12.77 13.6148C12.23 13.8448 11.63 13.9748 11 13.9748C8.52 13.9748 6.5 11.9548 6.5 9.4748C6.5 8.8448 6.63 8.2448 6.86 7.6948Z"/>
+                                            </svg>
+                                        </label>
+                                        <label *ngIf="showPassword" (click)="hidePass()" class="c-pointer hov-bold" style="position: absolute;margin-top:-33px;right: 15px;">
+                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="#8D8F93">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C1.73 3.61 6 0.5 11 0.5C16 0.5 20.27 3.61 22 8C20.27 12.39 16 15.5 11 15.5C6 15.5 1.73 12.39 0 8ZM19.82 8C18.17 4.63 14.79 2.5 11 2.5C7.21 2.5 3.83 4.63 2.18 8C3.83 11.37 7.21 13.5 11 13.5C14.79 13.5 18.17 11.37 19.82 8ZM11 5.5C12.38 5.5 13.5 6.62 13.5 8C13.5 9.38 12.38 10.5 11 10.5C9.62 10.5 8.5 9.38 8.5 8C8.5 6.62 9.62 5.5 11 5.5ZM6.5 8C6.5 5.52 8.52 3.5 11 3.5C13.48 3.5 15.5 5.52 15.5 8C15.5 10.48 13.48 12.5 11 12.5C8.52 12.5 6.5 10.48 6.5 8Z"/>
+                                            </svg>
+                                        </label>
+                                        <div class="form-validator" *ngIf="loginForm.controls.password.touched || loginForm.controls.password.dirty">
+                                            <p class="mb-0" style="color: red" *ngIf="loginForm.controls.password.hasError('required')">*This password is required.</p>
+                                            <p class="mb-0" style="color: red" *ngIf="loginForm.controls.password.hasError('minlength')">*Minimum of 8 characters only.</p>
+                                            <p class="mb-0" style="color: red" *ngIf="loginForm.controls.password.hasError('maxlength')">*Maximum of 30 characters only.</p>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="col-row ">
+                                <div class="col-6">
+                                    <button type="submit" [disabled]="is_locked && seconds" class="button-red-rounded  signin-btn w-100-per fs-16 lh-24 h-46 fw-500" style="box-shadow: -10px 10px 20px #f7c7d9; width: 45%; font-family: Epilogue; margin-top: 25px !important; position: absolute; margin-left: -13px !important;"  (click)="login">Sign in</button>
+                                </div>
+
+                                <div class="col-6">
+                                    <span>
+                                        <button (click)="showForgotPass()"  class=" btn c-pointer text-right forgot-align body-small-forgot-pass forgot-moz text-safari" style="margin-left: 220px; position: absolute; width: 100%;">Forgot Password?</button>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </ng-container>
+
+
+                <!-- ForgotPassword Form -->
+                <ng-container *ngIf="show">
+                    <!-- <p class="text-secondary">Forgot Password</p> -->
+                    <!-- <div *ngIf="errorMessage" class="decline-msg-container mt-15 d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <svg width="30" height="30" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+                                </svg>                     
+                        </div>
+                        <div class="col-md-10 d-flex align-items-center">
+                            <p class="m-0">{{errorMessage}}</p>
+                        </div>
+                    </div>                     -->
+                    <form [formGroup]="forgotPasswordForm">
+                        <div class="mt-10">
+                            <div class="form-group mb-25">
+                                <label for="inputEmail" class="text-secondary">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    class="form-control" 
+                                    id="inputEmail"  
+                                    formControlName="email"
+                                    placeholder="Enter email"
+                                    [ngClass]="{'is-invalid':forgotPasswordForm.controls.email.touched &&forgotPasswordForm.controls.email.hasError('required')}">
+                                <div class="form-validator" *ngIf="forgotPasswordForm.controls.email.touched">
+                                    <p class="mb-0" style="color: red" *ngIf="forgotPasswordForm.controls.email.hasError('pattern')">*Invalid Email.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="forgotPasswordForm.controls.email.hasError('required')">*This email is required.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="forgotPasswordForm.controls.email.hasError('maxLength')">*Maximum of 70 characters only.</p>
+                                    <p class="mb-0" style="color: red" *ngIf="invalidEmail">*Email doesn't exist.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="c-pointer" (click)="backToLoginForm()">
+                                    <p class="fs-16 lh-24 mb-0  text-right text-primary">Cancel</p>
+                                </span>
+                                <button type="submit" class="button-red-rounded fs-16 lh-24 h-46 fw-400 mt-4" style="box-shadow: 0px 1px 5px #C0024A; padding: 10px 14px;" (click)="forgotPassword()">Send me the link</button>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
+                
+            </div>
+          
+                <div class="imgbox">
+                   <img class="loginimg" src="assets/images/bglogin.png">
+                </div>
+        </div>
+    </div>
+</div>
+<ngx-smart-modal #success identifier="success" [customClass]="'modal-checkin-class nsm-centered'" closable="false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#049561"/>
+                <path d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z" fill="#00A651"/>
+            </svg> 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Password Reset Sent!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-70 pr-70">An email with the password resent link has been sent to you email address.</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="closeModal()">Dismiss</button>
+        </div>     
+    </div>
+</ngx-smart-modal>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

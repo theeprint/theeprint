@@ -1,0 +1,208 @@
+<div class="container">
+    <div id="contentToConvert">
+    <div class="row mt-20 ml-20">
+        <div class="col-6">
+            <p class="fw-500 fs-18 text-header">
+                <svg xmlns="http://www.w3.org/2000/svg" style="background-color: #f03255 !important;" width="15" height="16" fill="#f03255" class="bi bi-file"  viewBox="0 0 16 16">
+                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                </svg>
+                 No. of pending J.O Request: 
+                 <span class="fw-700">{{pending_jo_request}}</span>
+            </p>
+        </div>
+        
+        <div class="col-6">
+            <p class="fw-500 fs-18 text-header">
+                <svg xmlns="http://www.w3.org/2000/svg" style="background-color: #22ba00 !important;" width="15" height="16" fill="#22ba00" class="bi bi-file"  viewBox="0 0 16 16">
+                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                </svg>
+                 No. of registered partners: 
+                 <span class="fw-700">{{registered_partners}}</span>
+            </p>
+        </div>
+        
+        <div class="col-6"> 
+            <p class="fw-500 fs-18 text-header">
+                <svg xmlns="http://www.w3.org/2000/svg" style="background-color: #33a7ff !important;" width="15" height="16" fill="#33a7ff" class="bi bi-file"  viewBox="0 0 16 16">
+                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                </svg>
+                No. of price checks up to date 
+                 <span class="fw-700">{{price_checks_up_to_date}}</span>
+            </p>
+        </div>
+        
+        <div class="col-6">
+            <p class="fw-500 fs-18 text-header">
+                <svg xmlns="http://www.w3.org/2000/svg" style="background-color: #010a3d !important;" width="15" height="16" fill="#010a3d" class="bi bi-file"  viewBox="0 0 16 16">
+                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                </svg>
+                Total sales up to date
+                 <span class="fw-700">{{total_sales | currency}}</span>
+            </p>
+        </div>
+
+    </div>
+    <div class="row bg-white p-20">
+        <div class="col-md-6 d-flex align-items-center">
+            <p class="text-header fs-20 fw-700">Total Earnings</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end flex-column">
+            <p class="text-secondary tR fs-12 fw-400">Amount earned for the month of 
+                <span *ngIf="month == 1" class="text-header fs-12 fw-500">January</span>
+                <span *ngIf="month == 2" class="text-header fs-12 fw-500">February</span>
+                <span *ngIf="month == 3" class="text-header fs-12 fw-500">March</span>
+                <span *ngIf="month == 4" class="text-header fs-12 fw-500">April</span>
+                <span *ngIf="month == 5" class="text-header fs-12 fw-500">May</span>
+                <span *ngIf="month == 6" class="text-header fs-12 fw-500">June</span>
+                <span *ngIf="month == 7" class="text-header fs-12 fw-500">July</span>
+                <span *ngIf="month == 8" class="text-header fs-12 fw-500">August</span>
+                <span *ngIf="month == 9" class="text-header fs-12 fw-500">September</span>
+                <span *ngIf="month == 10" class="text-header fs-12 fw-500">October</span>
+                <span *ngIf="month == 11" class="text-header fs-12 fw-500">November</span>
+                <span *ngIf="month == 12" class="text-header fs-12 fw-500">December</span>
+
+
+            </p>
+            <p class="text-header tR fs-24 fw-700">{{totalE | currency}}</p>
+        </div>
+        <div class="col-md-12 pb-20 pt-20" id="graph-container">
+            <canvas id="myChart"  height="150" width="400"></canvas>
+        </div>
+        <div class="col-md-12">
+            <div class="pr-3 d-flex justify-content-center align-items-center" style="text-align: right;">
+                <button class="mr-5 page-btn" (click) ="prevPage()">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.3763 2.90251L12.0413 1.57501L4.62378 9.00001L12.0488 16.425L13.3763 15.0975L7.27878 9.00001L13.3763 2.90251Z" fill="#505664"/>
+                        </svg>                                              
+                </button>                                 
+                <span class="text-secondary fs-12 tC">Year {{year}}</span>
+                <button class="ml-5 page-btn" (click) ="nextPage()">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.62372 2.90251L5.95872 1.57501L13.3762 9.00001L5.95122 16.425L4.62372 15.0975L10.7212 9.00001L4.62372 2.90251Z" fill="#505664"/>
+                        </svg>                                               
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-90">
+        <div class="col-md-6 pl-0">
+            <div class="card" style="height:540px !important">
+                <div class="card-header pb-10" style="border-bottom: 1px solid #C2CBD7;">
+                    <p class="most">Most number of completed job orders</p>
+                </div>
+                <div class="card-body">
+                    <table class="w-100-per">
+                        <thead>
+                            <th class="partners-tb w-50-per">Partners</th>
+                            <th class="partners-tb w-50-per tC">No. of Completed J.O</th>
+                        </thead>
+                        <tbody *ngFor="let skeleton of skeleton_loader">
+                            <tr *ngIf="isLoaded">
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngFor="let item of most_complete_jo; let i = index">
+                            <tr [ngClass]="{'border-bottom': i < most_complete_jo.length-1}">
+                                <td class="fs-16">
+                                    <div class="d-flex ml-16">
+                                        {{item.partner_company}}
+                                    </div>
+                                </td>
+                                <td class="fs-16 tC">
+                                    {{item.completed_jo}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pr-0">
+            <div class="card" style="height:540px !important">
+                <div class="card-header pb-10" style="border-bottom: 1px solid #C2CBD7;">
+                    <p class="most">Most number of price checks</p>
+                </div>
+                <div class="card-body">
+                    <table class="w-100-per">
+                        <thead>
+                            <th class="partners-tb w-50-per">Partners</th>
+                            <th class="partners-tb w-50-per tC">No. of Price Checks</th>
+                        </thead>
+                        <tbody *ngFor="let skeleton of skeleton_loader">
+                            <tr *ngIf="isLoaded">
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngFor="let item of most_price_checks; let i = index">
+                            <tr [ngClass]="{'border-bottom': i < most_price_checks.length-1}" *ngIf="!isLoaded">
+                                <td class="fs-16">
+                                    <div class="d-flex ml-16">
+                                        {{item.partner_company}}
+                                    </div>
+                                </td>
+                                <td class="fs-16 tC">
+                                    {{item.price_checks}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 250px !important;">
+        <div class="col-md-12 p-0">
+            <div class="card">
+                <div class="ml-25">
+                    <p class="most">Recently paid job orders</p>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="partners-tb mnw-100">J.O No</th>
+                                <th class="partners-tb mnw-200">Project Name</th>
+                                <th class="partners-tb mnw-150">Client</th>
+                                <th class="partners-tb mnw-150 text-center">Order Status</th>
+                                <th class="partners-tb mnw-150 text-center">Payment Status</th>
+                                <th class="partners-tb mnw-80 tR">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let skeleton of skeleton_loader">
+                            <tr *ngIf="isLoaded">
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                                <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="!isLoaded">
+                            <tr [ngClass]="{'border-bottom': i < job_order_list.length-1}" *ngFor="let job_order of job_order_list; let i = index;">
+                                <td class="text-id fs-16" style="position: absolute; left: 30px;">{{job_order.job_order_quote_num}}</td>
+                                <td class="fs-16 text-detail" style="padding-left: 8px !important;">{{job_order.job_order_project_name}}</td>
+                                <td class="fs-16 text-detail" style="padding-left: 8px !important;">
+                                    <img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/company_logo/{{job_order.partner_logo}}">
+                                    {{job_order.partner_company}}
+                                </td>
+                                <td class="fs-16 text-center" style="padding-left: 8px !important;">
+                                    <span *ngIf="job_order.job_order_status == 3" class="badge_processed">Processed</span>
+                                    <span *ngIf="job_order.job_order_status == 4" class="badge_delivered">Delivered</span>
+                                </td>
+                                <td class="fs-16 text-center">
+                                    <span *ngIf="job_order.job_order_payment_status == 0" class="text-pending fw-700 fs-14">Pending</span>
+                                    <span *ngIf="job_order.job_order_payment_status == 1" class="text-paid fw-700 fs-14">Paid</span>
+                                </td>
+                                <td class="fs-16 text-center text-detail">{{job_order.job_order_total_amount | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

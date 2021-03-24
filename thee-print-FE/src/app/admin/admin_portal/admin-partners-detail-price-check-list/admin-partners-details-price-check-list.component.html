@@ -1,0 +1,143 @@
+<ng-container *ngIf="!showingDetails">
+    <div class="row p-20 d-flex align-items-center">
+        <div class="search">
+            <input type="text" placeHolder="Search" class="input">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+            </svg>            
+        </div>
+        <div class="d-flex ml-auto">
+            <div class="d-flex flex-column justify-content-end">
+                <p class="fs-14 text-secondary">Total number of price checks</p>
+                <span class="fs-24 text-id tR">36</span>
+            </div>
+        </div>
+        <table class="table mt-20 w-100-per">
+            <thead>
+              <tr>
+                <th class="text-dark w-20-per">Date & Time<i class="fas fa-sort-down ml-10 c-pointer v-top"></i></th>
+                <th class="text-dark w-60">Project Name<i class="fas fa-sort-down ml-10 c-pointer v-top"></i></th>
+                <th class="text-dark w-20-per text-center">Total Amount<i class="fas fa-sort-down ml-10 c-pointer v-top"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let job_order of job_order_list" (click)='viewDetails(jobOrder)' class="table-dashboard c-pointer py-10">
+                <td class="fs-16">
+                    <div class="d-flex align-items-center justify-content-start">
+                        {{job_order.job_order_created_at  | date: 'M/d/yy  h:mm a' }}
+                    </div>
+                </td>
+                <td class="fs-16">
+                    <div class="d-flex align-items-center">
+                        {{job_order.job_order_project_name}}
+                    </div>
+                </td>
+                <td class="fs-16">
+                    <div class="d-flex align-items-center justify-content-end">
+                        {{job_order.job_order_total_amount | currency}}
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+<ng-container *ngIf="showingDetails">
+    <div class="row d-flex flex-column p-30">
+        <span class="back-page">
+            <a class="c-pointer text-black" (click)="viewList()" style="text-decoration: none;">
+                <svg width="18" height="12" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039" stroke="#C70039" stroke-width="0"/>
+                </svg>
+                <span class="mr-15 ml-10 fs-16" style="color:#C70039;">Back to List</span>
+            </a>    
+        </span>
+    </div>
+    <div class="p-20">
+        <div class="row d-flex flex-column" style="padding: 20px 15px !important;">
+            <div>
+                <p class="fs-16 fw-700">General Details</p>
+            </div>
+            <div class="d-flex">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <div>
+                        <p class="fs-14 fw-400 text-secondary">Payment Status</p>
+                        <span *ngIf="job_order_details.job_order_payment_status == 0" class="badge_pending">Pending</span>
+                        <span *ngIf="job_order_details.job_order_payment_status == 1" class="badge_paid">Paid</span>
+                    </div>
+                    <div class="mt-30">
+                        <p class="fs-14 fw-400 text-secondary">Contact Person</p>
+                        <span class="fs-16">{{job_order_details.company_address_person}}</span>
+                    </div>
+                    <div class="mt-35">
+                        <p class="fs-14 fw-400 text-secondary">Due Date</p>
+                        <span class="fs-16">{{job_order_details.job_order_due_date |  date: 'M/d/yyyy' }}</span>
+                    </div>
+                </div>
+                <div class="col-md-5 d-flex flex-column">
+                    <div>
+                        <p class="fs-14 fw-400 text-secondary">Project Name</p>
+                        <span class="fs-16">{{job_order_details.job_order_project_name}}</span>
+                    </div>
+                    <div class="mt-30">
+                        <p class="fs-14 fw-400 text-secondary">Contact Number</p>
+                        <span class="fs-16">{{job_order_details.company_address_contact}}</span>
+                    </div>
+                    <div class="mt-35">
+                        <p class="fs-14 fw-400 text-secondary">Shipping Address</p>
+                        <p class="fs-16 fw-700">{{job_order_details.company_address_label}}</p>
+                        <span class="fs-16">{{job_order_details.company_address}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ml--20 mr--20">
+            <hr>
+            <div style="padding: 20px 15px 10px 15px !important; width: 100%;">
+                <p class="fs-16 fw-700">Qutation Details</p>
+                <table class="table table-borderless w-100-per">
+                    <thead>
+                        <tr>
+                          <th class="text-secondary w-30-per">Item</th>
+                          <th class="text-secondary w-15-per">Dimensions</th>
+                          <th class="text-secondary w-10-per text-center">Qty</th>
+                          <th class="text-secondary w-20-per text-center">Unit Price</th>
+                          <th class="text-secondary w-25-per text-center">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let job_order of job_order_details.job_order_item_list">
+                            <td class="fs-16">{{job_order.job_order_item_product_id}}</td>
+                            <td class="fs-16">
+                                <span class="fs-16" *ngIf="job_order.job_order_item_unit == 0">{{job_order.job_order_item_width}} in x {{job_order.job_order_item_length}} in</span>
+                                <span class="fs-16" *ngIf="job_order.job_order_item_unit == 1">{{job_order.job_order_item_width}} ft x {{job_order.job_order_item_length}} ft</span>
+                            </td>
+                            <td class="fs-16 text-center">{{job_order.job_order_item_qty}}</td>
+                            <td class="fs-16 text-right">{{job_order.job_order_item_price | currency }}</td>
+                            <td class="fs-16 text-right">{{job_order.total_amount | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="mb-0" style="border: 2px dashed #C2CBD7 !important; border-top: none !important;">
+                <div class="col-md-5 pr-0" style="float: right;">
+                    <div class="paper_rip">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <span class="fs-16 fw-700 text-secondary">Subtotal</span>
+                                <span class="fs-16 fw-700 ml-auto" style="color: #0A0929;">{{sub_total | currency}}</span>
+                            </div>
+                            <div class="d-flex mt-15">
+                                <span class="fs-16 fw-700 text-secondary">VAT(12%)</span>
+                                <span class="fs-16 fw-700 ml-auto" style="color: #0A0929;">{{vat | currency}}</span>
+                            </div>
+                            <div class="d-flex mt-25">
+                                <span class="fs-16 fw-700 text-secondary">Total</span>
+                                <span class="fs-24 fw-700 text-primary ml-auto">{{total | currency}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

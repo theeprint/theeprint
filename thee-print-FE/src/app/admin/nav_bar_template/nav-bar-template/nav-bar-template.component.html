@@ -1,0 +1,254 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<section class="section" style="top: 0; z-index: 3 !important; position: sticky;"> 
+    <div id="navbar_container" class="container">
+        <div class="d-flex justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <!-- <svg width="187" height="48" viewBox="0 0 187 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30.4131 19.3434L21.364 28.2673H21.7295C24.6901 28.2673 26.8926 27.6015 28.3369 26.2699C29.7813 24.9383 30.5007 23.0883 30.5007 20.7198C30.5007 20.2381 30.4714 19.7793 30.4131 19.3434ZM17.1453 32.4277L12.543 36.9664H17.1453V32.4277Z" fill="url(#paint0_linear)"/>
+                    <path d="M25.8695 12.2282L21.9976 16.0716H26.1623V20.5357H23.0135V25.8378H23.0135L31.135 17.8036C30.9151 16.1601 30.2813 14.8425 29.2359 13.8591C28.3883 13.0582 27.2657 12.515 25.8695 12.2282ZM17.4709 20.5357L11.3281 26.5685V35.4266H13.2648L19.3614 29.4394V25.8378H19.3615V20.5357H17.4709Z" fill="url(#paint1_linear)"/>
+                    <path d="M12.1973 24.8083L16.5936 20.4727H15.9456V16.0086H21.1203L25.9198 11.2755C25.1374 11.1147 24.2691 11.0345 23.3152 11.0345H12.1973V24.8083Z" fill="url(#paint2_linear)"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.8435 16.0087H21.121L25.9206 11.2754C25.1381 11.1147 24.2699 11.0345 23.3159 11.0345H15.5312C15.66 12.8033 16.1176 14.4813 16.8435 16.0087ZM30.4131 19.3433L26.0767 23.6198C27.2109 23.9118 28.4001 24.0676 29.6259 24.0676C29.7132 24.0676 29.8002 24.0659 29.8872 24.0642C30.2965 23.0966 30.5008 21.9818 30.5008 20.7197C30.5008 20.2381 30.4715 19.7793 30.4131 19.3433ZM25.8697 12.2282L21.9978 16.0717H26.1626V20.5357H23.0136V22.4347C23.7826 22.8407 24.5934 23.1786 25.4382 23.4394L31.1352 17.8036C30.9153 16.1601 30.2815 14.8426 29.2362 13.859C28.3885 13.0582 27.2659 12.515 25.8697 12.2282Z" fill="url(#paint3_linear)" fill-opacity="0.4"/>
+                    <path d="M173.731 17.6552V16.6537H173.352V16.5197H174.264V16.6537H173.883V17.6552H173.731Z" fill="#1B1918"/>
+                    <path d="M174.417 17.6552V16.5197H174.646L174.918 17.3237C174.944 17.3986 174.962 17.4546 174.973 17.4918C174.986 17.4504 175.007 17.3898 175.035 17.3097L175.31 16.5197H175.515V17.6552H175.368V16.7048L175.034 17.6552H174.896L174.563 16.6886V17.6552H174.417Z" fill="#1B1918"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M42.5176 17.6401H56.0457V21.149H51.505V31.8443H47.0548V21.149H42.5176V17.6401ZM58.0778 17.6401H62.528V22.6107H67.3938V17.6401H71.864V31.8443H67.3938V26.0998H62.528V31.8443H58.0778V17.6401ZM74.8118 17.6401H86.7368V20.6729H79.2719V22.9316H86.197V25.8286H79.2719V28.6265H86.9548V31.8443H74.8118V17.6401ZM89.3426 17.6401H101.268V20.6729H93.8027V22.9316H100.728V25.8286H93.8027V28.6265H101.486V31.8443H89.3426V17.6401Z" fill="#081633"/>
+                    <path d="M103.863 17.6401H111.261C112.871 17.6401 114.078 18.0172 114.88 18.7746C115.681 19.5287 116.084 20.6066 116.084 21.999C116.084 23.4343 115.648 24.5554 114.772 25.3623C113.897 26.1693 112.562 26.5727 110.768 26.5727H108.333V31.8443H103.863V17.6401ZM108.333 23.6955H109.423C110.282 23.6955 110.882 23.5501 111.231 23.2557C111.576 22.9615 111.751 22.5843 111.751 22.128C111.751 21.6816 111.6 21.3012 111.298 20.9936C111 20.6827 110.433 20.5273 109.601 20.5273H108.333V23.6955ZM118.471 31.8443V17.6401H125.889C127.264 17.6401 128.317 17.7559 129.042 17.9908C129.769 18.2221 130.356 18.6522 130.802 19.2839C131.248 19.9122 131.469 20.6795 131.469 21.5822C131.469 22.3728 131.298 23.0506 130.96 23.6228C130.618 24.195 130.148 24.6579 129.555 25.015C129.172 25.24 128.652 25.4284 127.992 25.574C128.522 25.7493 128.907 25.9245 129.152 26.0998C129.313 26.2156 129.551 26.4637 129.863 26.8439C130.175 27.2277 130.383 27.5187 130.487 27.727L132.64 31.8443H127.609L125.232 27.502C124.93 26.9432 124.662 26.5761 124.424 26.4074C124.105 26.1891 123.74 26.08 123.334 26.08H122.941V31.8443H118.471ZM122.941 23.3947H124.819C125.021 23.3947 125.413 23.3318 125.996 23.2028C126.292 23.1433 126.533 22.9945 126.721 22.7563C126.905 22.5182 126.999 22.2438 126.999 21.933C126.999 21.4731 126.851 21.1226 126.556 20.8778C126.261 20.6298 125.708 20.5075 124.896 20.5075H122.941V23.3947ZM138.699 21.1703V31.8443H134.239V22.7996L138.699 21.1703ZM141.922 17.6401H146.081L151.503 25.4979V17.6401H155.698V31.8443H151.503L146.108 24.046V31.8443H141.922V17.6401ZM157.644 17.6401H171.172V21.149H166.631V31.8443H162.181V21.149H157.644V17.6401Z" fill="#C4C4C4"/>
+                    <path d="M103.863 17.6401H111.261C112.871 17.6401 114.078 18.0172 114.88 18.7746C115.681 19.5287 116.084 20.6066 116.084 21.999C116.084 23.4343 115.648 24.5554 114.772 25.3623C113.897 26.1693 112.562 26.5727 110.768 26.5727H108.333V31.8443H103.863V17.6401ZM108.333 23.6955H109.423C110.282 23.6955 110.882 23.5501 111.231 23.2557C111.576 22.9615 111.751 22.5843 111.751 22.128C111.751 21.6816 111.6 21.3012 111.298 20.9936C111 20.6827 110.433 20.5273 109.601 20.5273H108.333V23.6955ZM118.471 31.8443V17.6401H125.889C127.264 17.6401 128.317 17.7559 129.042 17.9908C129.769 18.2221 130.356 18.6522 130.802 19.2839C131.248 19.9122 131.469 20.6795 131.469 21.5822C131.469 22.3728 131.298 23.0506 130.96 23.6228C130.618 24.195 130.148 24.6579 129.555 25.015C129.172 25.24 128.652 25.4284 127.992 25.574C128.522 25.7493 128.907 25.9245 129.152 26.0998C129.313 26.2156 129.551 26.4637 129.863 26.8439C130.175 27.2277 130.383 27.5187 130.487 27.727L132.64 31.8443H127.609L125.232 27.502C124.93 26.9432 124.662 26.5761 124.424 26.4074C124.105 26.1891 123.74 26.08 123.334 26.08H122.941V31.8443H118.471ZM122.941 23.3947H124.819C125.021 23.3947 125.413 23.3318 125.996 23.2028C126.292 23.1433 126.533 22.9945 126.721 22.7563C126.905 22.5182 126.999 22.2438 126.999 21.933C126.999 21.4731 126.851 21.1226 126.556 20.8778C126.261 20.6298 125.708 20.5075 124.896 20.5075H122.941V23.3947ZM138.699 21.1703V31.8443H134.239V22.7996L138.699 21.1703ZM141.922 17.6401H146.081L151.503 25.4979V17.6401H155.698V31.8443H151.503L146.108 24.046V31.8443H141.922V17.6401ZM157.644 17.6401H171.172V21.149H166.631V31.8443H162.181V21.149H157.644V17.6401Z" fill="url(#paint4_linear)"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M134.24 17.6401H138.7V19.9859L134.24 21.6153V17.6401Z" fill="#081633"/>
+                    <defs>
+                    <linearGradient id="paint0_linear" x1="7.43603" y1="43.2238" x2="41.5949" y2="8.00282" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF6600"/>
+                    <stop offset="1" stop-color="#FFFF00"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="31.148" y1="12.2464" x2="-2.28029" y2="41.5849" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF0066"/>
+                    <stop offset="1" stop-color="#280000"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear" x1="2.24389" y1="28.0371" x2="27.0079" y2="5.05732" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#000066"/>
+                    <stop offset="1" stop-color="#00CCFF"/>
+                    </linearGradient>
+                    <linearGradient id="paint3_linear" x1="20.94" y1="21.0478" x2="33.1334" y2="8.62502" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="white" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="paint4_linear" x1="156.082" y1="46.7964" x2="157.124" y2="1.23114" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#000066"/>
+                    <stop offset="1" stop-color="#00CCFF"/>
+                    </linearGradient>
+                    </defs>
+                </svg> -->
+                   <img src="assets/images/adminThee.png" style="width: 200px; height: 50px;">
+                <span class="fs-14 fw-400">Admin Dashboard</span>
+            </div>
+            <div class="nav-icon mt-25">
+                <ul class="right-menu flex item-center">
+                        <li dropdown >
+                            <div  dropdownToggle>
+                                <i-feather name="bell" class="text-default"></i-feather>
+                                <span class="notif-count-badge" *ngIf="notification_total>0">{{notification_total}}</span>
+                            </div>
+                            <div id="dropdown-notification" class="dropdown-menu dropdown-notification c-default" *dropdownMenu  role="menu" aria-labelledby="dropdown-notification" style="width:370px!important;box-shadow: #dee2e6 0px 0px 3px;height:350px">
+                                <div class="notification-header d-flex align-items-center justify-content-between">
+                                    <span class="text-header fs-16 fw-700 text-safari">Notifications</span>
+                                    <span class="text-pink fs-12 c-pointer" (click)="markRead()">Mark all as read</span>
+                                </div>
+                                <div *ngIf="isNotifEmpty" class="col-md-12 mh-350 d-flex flex-column align-items-center justify-content-center">
+                                    <img src="/assets/images/notif_empty.svg">
+                                    <p class="text-secondary fs-16 tC mt-20">Your notification is empty.</p>    
+                                </div>
+                                <div class="notification-body mh-350" 
+                                *ngIf="!isNotifEmpty"
+                                infiniteScroll
+                                [infiniteScrollDistance]="2"
+                                [infiniteScrollThrottle]="50"
+                                (scrolled)="onScrollBottom()"
+                                [scrollWindow]="false"
+                                 id='conversationScrollContainer'
+                                style="overflow-y: scroll;"
+                                >
+                                    <ul *ngIf="!isEmpty">
+                                        <ng-container *ngIf="notification_list">
+                                            <li class="new-notif" *ngFor="let notifications of notification_list">
+                                                <div class="media" *ngIf="notifications.notification_type=='3'"  (click)="seeNotificationNewLogin(notifications.notification_link,notifications.notification_id)">
+                                                    <div class="media-left">
+                                                        <span class="notification-image">
+                                                            <img class="h-35 w-35 circle" src="{{userService.image_path}}/company_logo/{{notifications.partner_logo}}" >    
+                                                        </span>
+                                                    </div>
+                                                    <div class="media-body d-flex flex-column">
+                                                    <p class="text-detail fs-14">Let's welcome, <span class="text-detail fs-14 fw-700 text-safari">{{notifications.partner_company}}!</span> They just logged in their account.</p>
+                                                    <span class="text-secondary fs-12">{{notifications.created_at | transformDate: '': 'L'}}</span> 
+                                                    </div>
+                                                    <div class="media-right d-flex pl-40">
+                                                        <span class="mr-5" *ngIf="notifications.notification_read=='0'">
+                                                            <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="4.5" cy="4.5" r="4.5" fill="#FFB100"/>
+                                                            </svg>                                                            
+                                                        </span>
+                                                        <div class=" h-42" dropdown>
+                                                            <span id="button-basic" dropdownToggle [matMenuTriggerFor]="menu" (click)="toggleDropdown($event)" type="button" class="c-pointer d-flex align-items-center justify-content-between"
+                                                            aria-controls="dropdown-basic" style="border: none;"> 
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="background-color: #F5F9FF !important;">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99967 6.66634C10.9163 6.66634 11.6663 5.91634 11.6663 4.99967C11.6663 4.08301 10.9163 3.33301 9.99967 3.33301C9.08301 3.33301 8.33301 4.08301 8.33301 4.99967C8.33301 5.91634 9.08301 6.66634 9.99967 6.66634ZM9.99967 8.33301C9.08301 8.33301 8.33301 9.08301 8.33301 9.99967C8.33301 10.9163 9.08301 11.6663 9.99967 11.6663C10.9163 11.6663 11.6663 10.9163 11.6663 9.99967C11.6663 9.08301 10.9163 8.33301 9.99967 8.33301ZM8.33301 14.9997C8.33301 14.083 9.08301 13.333 9.99967 13.333C10.9163 13.333 11.6663 14.083 11.6663 14.9997C11.6663 15.9163 10.9163 16.6663 9.99967 16.6663C9.08301 16.6663 8.33301 15.9163 8.33301 14.9997Z" fill="#626172"/>
+                                                                </svg>                                                      
+                                                            </span>
+                                                            <mat-menu #menu="matMenu" id="toggleDropdown" >
+                                                                <span mat-menu-item (click)="deleteNotification($event, notifications.notification_id)">   
+                                                                    <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                   </svg>        
+                                                                   Delete
+                                                               </span>
+                                                            </mat-menu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media" *ngIf="notifications.notification_type=='2'" (click)="seeNotificationNewJobOrder(notifications.notification_link,notifications.notification_id)">
+                                                    <div class="media-left">
+                                                        <span class="notification-image">
+                                                            <img src="/assets/images/Time.svg">    
+                                                        </span>
+                                                    </div>
+                                                    <div class="media-body d-flex flex-column">
+                                                    <p class="text-detail fs-14 text-safari">You have a new <span class="text-detail fs-14 fw-700">job order request</span> from {{notifications.partner_company}}!</p>
+                                                    <span class="text-secondary fs-12">{{notifications.created_at | transformDate: '': 'L'}}</span> 
+                                                    </div>
+                                                    <div class="media-right d-flex pl-40">
+                                                        <span class="mr-5" *ngIf="notifications.notification_read=='0'"  >
+                                                            <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="4.5" cy="4.5" r="4.5" fill="#FFB100"/>
+                                                            </svg>                    
+                                                        </span>
+                                                        <div class=" h-42" dropdown>
+                                                            <span id="button-basic" [matMenuTriggerFor]="menu" (click)="toggleDropdown($event)" type="button" class="c-pointer d-flex align-items-center justify-content-between"
+                                                            aria-controls="dropdown-basic" style="border: none;"> 
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="background-color: #F5F9FF !important;">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99967 6.66634C10.9163 6.66634 11.6663 5.91634 11.6663 4.99967C11.6663 4.08301 10.9163 3.33301 9.99967 3.33301C9.08301 3.33301 8.33301 4.08301 8.33301 4.99967C8.33301 5.91634 9.08301 6.66634 9.99967 6.66634ZM9.99967 8.33301C9.08301 8.33301 8.33301 9.08301 8.33301 9.99967C8.33301 10.9163 9.08301 11.6663 9.99967 11.6663C10.9163 11.6663 11.6663 10.9163 11.6663 9.99967C11.6663 9.08301 10.9163 8.33301 9.99967 8.33301ZM8.33301 14.9997C8.33301 14.083 9.08301 13.333 9.99967 13.333C10.9163 13.333 11.6663 14.083 11.6663 14.9997C11.6663 15.9163 10.9163 16.6663 9.99967 16.6663C9.08301 16.6663 8.33301 15.9163 8.33301 14.9997Z" fill="#626172"/>
+                                                                </svg>                                                            
+                                                            </span>
+                                                            <mat-menu #menu="matMenu" id="toggleDropdown" >
+                                                                <span mat-menu-item (click)="deleteNotification($event, notifications.notification_id)">   
+                                                                    <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                   </svg>        
+                                                                   Delete
+                                                               </span>
+                                                            </mat-menu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media" *ngIf="notifications.notification_type=='1'"  (click)="seeNotificationNewPriceCheck(notifications.notification_link,notifications.notification_id)">
+                                                    <div class="media-left">
+                                                        <span class="notification-image">
+                                                            <img src="/assets/images/Check.svg">                                     
+                                                        </span>
+                                                    </div>
+                                                    <div class="media-body d-flex flex-column">
+                                                    <p class="text-detail fs-14">1 new <span class="text-detail fs-14 fw-700 text-safari">price check</span> from {{notifications.partner_company}}!</p>
+                                                    <span class="text-secondary fs-12">{{notifications.created_at | transformDate: '': 'L'}}</span> 
+                                                    </div>
+                                                    <div class="media-right d-flex pl-40">
+                                                        <span class="mr-5" *ngIf="notifications.notification_read=='0'"  >
+                                                            <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="4.5" cy="4.5" r="4.5" fill="#FFB100"/>
+                                                            </svg>                    
+                                                        </span>
+                                                        <div class=" h-42" dropdown>
+                                                            <span id="button-basic" [matMenuTriggerFor]="menu" (click)="toggleDropdown($event)" type="button" class="c-pointer d-flex align-items-center justify-content-between"
+                                                            aria-controls="dropdown-basic" style="border: none;"> 
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="background-color: #F5F9FF !important;">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99967 6.66634C10.9163 6.66634 11.6663 5.91634 11.6663 4.99967C11.6663 4.08301 10.9163 3.33301 9.99967 3.33301C9.08301 3.33301 8.33301 4.08301 8.33301 4.99967C8.33301 5.91634 9.08301 6.66634 9.99967 6.66634ZM9.99967 8.33301C9.08301 8.33301 8.33301 9.08301 8.33301 9.99967C8.33301 10.9163 9.08301 11.6663 9.99967 11.6663C10.9163 11.6663 11.6663 10.9163 11.6663 9.99967C11.6663 9.08301 10.9163 8.33301 9.99967 8.33301ZM8.33301 14.9997C8.33301 14.083 9.08301 13.333 9.99967 13.333C10.9163 13.333 11.6663 14.083 11.6663 14.9997C11.6663 15.9163 10.9163 16.6663 9.99967 16.6663C9.08301 16.6663 8.33301 15.9163 8.33301 14.9997Z" fill="#626172"/>
+                                                                </svg>                                                            
+                                                            </span>
+                                                            <mat-menu #menu="matMenu" id="toggleDropdown">
+                                                                <span mat-menu-item (click)="deleteNotification($event, notifications.notification_id)">   
+                                                                    <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                   </svg>        
+                                                                   Delete
+                                                               </span>
+                                                              </mat-menu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ng-container>
+                                    </ul>
+                                    <div *ngIf="isEmpty" class="col-md-12 mh-350 d-flex flex-column align-items-center justify-content-center">
+                                        <img src="/assets/images/notif_empty.svg">
+                                        <p class="text-secondary fs-16 tC mt-20">Your archive is empty.</p>    
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div routerLink="/admin/messages" class="message c-pointer">
+                                <i-feather name="mail" class="text-default"></i-feather>
+                                <span *ngIf='unseen_count>0' class="notif-count-badge-msg">{{unseen_count}}</span>
+                            </div>
+                        </li>
+                        <li dropdown>
+                            <div class="user-profile-settings" *ngIf="user_profile" dropdownToggle >
+                                <img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/user_avatar/{{user_profile[0].user_profile_avatar}}">
+                                <span class="fs-14 fw-700 ml-10 text-safari" style="color: #0A0929;">{{user_profile[0].user_profile_first_name}} {{user_profile[0].user_profile_last_name}}</span>
+                                <span><i class="fa fa-sort-down"></i></span>
+                            </div>
+                            <ul id="dropdown" *dropdownMenu class="dropdown-menu dropdown-md" role="menu" aria-labelledby="dropdown" style="box-shadow: #dee2e6 0px 0px 3px;">
+                                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/admin/account-profile']"  >Account Profile</a></li>
+                                <li role="menuitem" class="has-divider pb-2"><a class="dropdown-item " [routerLink]="['/admin/notification-settings']">Notification Settings</a></li>
+                                <li role="menuitem"><a class="dropdown-item "  (click)="logout()"><span class="logout">Logout</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <hr>
+        <ul class="nav nav-tabs align-items-center justify-content-between" style="border-bottom: none;">
+              <li><a class="dashboard-nav btn d-flex fs-16 pt-15 pl-0" [routerLink]="['/admin/dashboard']" routerLinkActive="router-active" ><i routerLinkActive="active-i" class="dashboard"></i>Dashboard</a></li>
+              <li><a class="job-orders-nav btn d-flex fs-16 pt-15 pl-0" [routerLink]="['/admin/job-order-list']" routerLinkActive="router-active"><i routerLinkActive="active-i" class="job-orders"></i>Job Orders</a></li>
+              <li><a class="partners-nav d-flex pt-15 pl-0" [routerLink]="['/admin/partners-list']"  routerLinkActive="router-active"><i routerLinkActive="active-i" class="partners"></i>Partners</a></li>
+              <li><a class="price-checks-nav d-flex pt-15 pl-0" [routerLink]="['/admin/price-checks-list']" routerLinkActive="router-active"><i routerLinkActive="active-i" class="price-checks"></i>Price Checks</a></li>
+              <li><a class="products-nav d-flex pt-15 pl-0" [routerLink]="['/admin/products-list']" routerLinkActive="router-active"><i routerLinkActive="active-i" class="products"></i>Products</a></li>
+              <li><a class="staffs-nav d-flex pt-15 pl-0" [routerLink]="['/admin/staff-list']" routerLinkActive="router-active"><i routerLinkActive="active-i" class="staffs"></i>Staffs</a></li>
+              <li><a class="cms-nav d-flex pt-15 pl-0" [routerLink]="['/admin/admin_cms']" routerLinkActive="router-active"><i routerLinkActive="active-i" class="website-cms"></i>Website CMS</a></li>
+        </ul>
+    </div>
+</section>
+<ngx-smart-modal #wrong identifier="wrong" [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body d-flex flex-column justify-content-center">
+       <div class="col-md-10 offset-1 d-flex flex-column justify-content-center">
+        <span class="d-flex justify-content-center mb-20">
+            <!-- <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#FFC000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0833 19.125H43.9167C45.475 19.125 46.75 20.4 46.75 21.9583V41.7917C46.75 43.35 45.475 44.625 43.9167 44.625H38.25L34 48.875L29.75 44.625H24.0833C22.5108 44.625 21.25 43.35 21.25 41.7917V21.9583C21.25 20.4 22.5108 19.125 24.0833 19.125ZM37.0742 41.7917H43.9167V21.9583H24.0833V41.7917H30.9258L31.7475 42.6133L34 44.8658L36.2383 42.6275L37.0742 41.7917ZM32.5833 40.375V37.5417H35.4167V40.375H32.5833ZM36.8333 29.0417C36.8333 27.4833 35.5583 26.2083 34 26.2083C32.4417 26.2083 31.1667 27.4833 31.1667 29.0417H28.3333C28.3333 25.9108 30.8692 23.375 34 23.375C37.1308 23.375 39.6667 25.9108 39.6667 29.0417C39.6667 30.8591 38.5475 31.8372 37.4577 32.7895C36.4239 33.693 35.4167 34.5732 35.4167 36.125H32.5833C32.5833 33.5449 33.918 32.5218 35.0915 31.6224C36.012 30.9168 36.8333 30.2872 36.8333 29.0417Z" fill="#FFB100"/>
+                </svg>             -->
+           </span>
+           <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 50px !important; margin-bottom: 10px !important;" width="60" height="60" fill="none" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+                <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z" fill="#FFC000"/>
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" fill="#FFB100"/>
+          </svg>
+           <p class="text-header fs-16 fw-700" style="width: 200px;">Deleted successfully.</p>
+         
+           <button class="bttn btn-primary-red mb-10" (click)="closeWrong()">Dismiss</button>
+       </div> 
+    </div>
+</ngx-smart-modal>
+
+<ngx-smart-modal #expired identifier="expired" [customClass]="'modal-checkin-class nsm-centered'" [closable]="false" [dismissable] = "false">
+    <div class="card-body d-flex flex-column justify-content-center">
+       <div class="col-md-10 offset-1 d-flex flex-column justify-content-center">
+        <span class="d-flex justify-content-center mb-20">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#FFC000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0833 19.125H43.9167C45.475 19.125 46.75 20.4 46.75 21.9583V41.7917C46.75 43.35 45.475 44.625 43.9167 44.625H38.25L34 48.875L29.75 44.625H24.0833C22.5108 44.625 21.25 43.35 21.25 41.7917V21.9583C21.25 20.4 22.5108 19.125 24.0833 19.125ZM37.0742 41.7917H43.9167V21.9583H24.0833V41.7917H30.9258L31.7475 42.6133L34 44.8658L36.2383 42.6275L37.0742 41.7917ZM32.5833 40.375V37.5417H35.4167V40.375H32.5833ZM36.8333 29.0417C36.8333 27.4833 35.5583 26.2083 34 26.2083C32.4417 26.2083 31.1667 27.4833 31.1667 29.0417H28.3333C28.3333 25.9108 30.8692 23.375 34 23.375C37.1308 23.375 39.6667 25.9108 39.6667 29.0417C39.6667 30.8591 38.5475 31.8372 37.4577 32.7895C36.4239 33.693 35.4167 34.5732 35.4167 36.125H32.5833C32.5833 33.5449 33.918 32.5218 35.0915 31.6224C36.012 30.9168 36.8333 30.2872 36.8333 29.0417Z" fill="#FFB100"/>
+                </svg>            
+           </span>
+           <p class="text-header fs-20 fw-700 tC">Your token has expired</p>
+           <p class="text-detail fs-14 tC mb-30">Please try logging in again</p>
+           <button class="bttn btn-primary-red mb-10" (click)="logout()">Go back to Login Page</button>
+       </div> 
+    </div>
+</ngx-smart-modal>
+<router-outlet></router-outlet>           
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

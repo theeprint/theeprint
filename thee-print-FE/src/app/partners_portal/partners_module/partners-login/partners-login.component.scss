@@ -1,0 +1,74 @@
+.card-body{
+    width: 100%;
+}
+.decline-msg-container{
+    background: #FFF6F5;
+    border-radius: 5px;
+    border: 1px solid #DD1003;
+    padding: 15px;
+}
+
+.body-text-login{
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    color: #2C2C39;
+    font-family: Epilogue;
+   
+}
+
+.big-body-bold{
+    font-style: normal;
+    font-size: 20px;
+    line-height: 30px;
+    color: #0A0929;
+    font-family: Manrope;
+    font-weight: 700;
+}
+
+.body-small-email{
+    font-family: Manrope;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2C2C39;
+}
+
+.body-small-password{
+    font-family: Manrope;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #2C2C39;
+}
+
+.body-small-forgot-pass{
+    font-family: Manrope;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #005DAB;
+}
+
+.back-to-web{
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 16.4px;
+    font-family: Epilogue;
+    color: #C0024A;
+}
+
+
+@-moz-document url-prefix() {
+    .forgot-moz{
+        margin-left: 222px !important;
+        position: absolute !important;
+        width: 100%;
+    }
+}
+

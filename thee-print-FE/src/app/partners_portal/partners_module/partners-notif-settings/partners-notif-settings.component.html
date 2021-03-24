@@ -1,0 +1,62 @@
+<div class="container mt-25">
+<h3 class="text-header fs-24 fw-700 text-safari">Notification Settings</h3>
+
+<div class="card mt-40">
+    <div class="card-body" [formGroup]="updateNotificationForm">
+            <div class="d-flex align-items-center" style="padding: 20px 0px;">    
+                <div class="col-md-6">
+                    <p class="text-header fs-16 fw-700 mb-20 text-safari">Web Notifications</p>
+                    <span class="text-secondary fs-16">We will actively notify you on your desktop whenever Thee Print’s portal is open on your browser.</span>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <label class="switch">
+                        <input type="checkbox" formControlName="webNotification">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <hr style="margin: 20px -25px;">
+            <div class="d-flex align-items-center" style="padding: 20px 0px;">    
+                <div class="col-md-6">
+                    <p class="text-header fs-16 fw-700 mb-20 text-safari">Email Notifications</p>
+                    <span class="text-secondary fs-16">We will reach you through your emails whenever you have a new notification regarding your orders or new messages.</span>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <label class="switch">
+                        <input type="checkbox" formControlName="emailNotification">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>  
+            <div class="d-flex justify-content-end mt-100">
+                <button class="bttn btn-primary-pink d-flex align-items-center" (click)="updatePartner();">
+                    <svg class="mr-5" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.58333 2.75H15.5833L19.25 6.41667V17.4167C19.25 18.425 18.425 19.25 17.4167 19.25H4.58333C3.56583 19.25 2.75 18.425 2.75 17.4167V4.58333C2.75 3.575 3.56583 2.75 4.58333 2.75ZM17.4167 17.4167V7.1775L14.8225 4.58333H4.58333V17.4167H17.4167ZM11 11C9.47833 11 8.25 12.2283 8.25 13.75C8.25 15.2717 9.47833 16.5 11 16.5C12.5217 16.5 13.75 15.2717 13.75 13.75C13.75 12.2283 12.5217 11 11 11ZM13.75 5.5H5.5V9.16667H13.75V5.5Z" fill="white"/>
+                        </svg>
+                    Save Changes                        
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-smart-modal #success identifier="success" [customClass]="'modal-checkin-class nsm-centered'" closable="false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#049561"/>
+                <path d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z" fill="#00A651"/>
+            </svg> 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Notification settings successfully Updated!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-100 pr-100">All changes has been saved.</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="closeModal()" routerLink="/partners/partners_dashboard">Go back to Dashboard</button>
+        </div>     
+    </div>
+</ngx-smart-modal>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

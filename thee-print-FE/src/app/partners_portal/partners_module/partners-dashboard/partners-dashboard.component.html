@@ -1,0 +1,261 @@
+<div class="container">
+    <h3 class="font-weight-bold mt-50 text-safari" style="color: #000a38;" *ngIf="user_profile">Hi There, {{user_profile.partner_company}}!</h3>
+    <h5 class="text-safari">Here's the summary of your job orders as of {{today | date:   'MM/d/yyyy'}}</h5>
+
+    <div class="row mt-30">
+        <!-- <div class="col-lg-3 col-md-6 col-sm-12"> -->
+            <div class="card" style="background-image: url(assets/images/dash1.png);">
+                <div class="card-body">
+                    <div class="media item-center">
+                        
+                        <div class="media-body pl-3 ml-78">
+                            <h5 class="mb-1">Allow us to make a difference for your marketing</h5>
+                            <button [routerLink]="['../partners_create_job_order']" class="button-light-rounded-inline text-safari text-primary fw-700 mt-10 d-flex align-items-center justify-content-center">
+                                <svg class="mr-2" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.25 9.75H9.75V14.25H8.25V9.75H3.75V8.25H8.25V3.75H9.75V8.25H14.25V9.75Z" fill="#005DAB"/>
+                                    </svg>                                    
+                                Create Job Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="cards bg-white" style="background-image: url(assets/images/dash2.png); background-repeat: no-repeat;">
+                <div class="cards-body">
+                    <div class="media item-center">
+                        <div class="media-body pl-3 ml-60">
+                            <h5 class="mb-1 pending">No. of Pending Job Orders</h5>
+                            <p class="pending-orders m-0 text-safari">{{pending_job_orders}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="cards bg-white" style="background-image: url(assets/images/dash3.png);">
+                <div class="cards-body">
+                    <div class="media item-center">
+                        <div class="media-body pl-3 ml-52">
+                            <h5 class="mb-1  process">No. of Processing Job Orders</h5>
+                            <p class="process-orders m-0 text-safari">{{processing_job_orders}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="cards bg-white" style="border: 1px solid; background-color: rgb(255 245 245) !important; border-color: red; background-image: url(assets/images/dash4.png);">
+                <div class="cards-body">
+                    <div class="media item-center">
+                        <div class="media-body pl-3 ml-55">
+                            <h5 class="mb-1 pending-payment">No. of Pending Payment Orders</h5>
+                            <p class="pending-payment-orders m-0 text-safari">{{pending_payment_job_orders}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-20 p-20" style="background-color: #fff;">
+   <div class="row">
+        <div class="col-md-7">
+            <div class="search c-pointer" [formGroup]="searchForm" (keydown)="keyDownFunction($event)">
+                <input type="text" placeHolder="Search" formControlName="search" class="input" (keyup)="searchKey($event)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon" (click)="searchList();">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+                </svg>              
+             </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <p class="filter-by">Filter by</p>
+
+            <form [formGroup]="statusFilterForm">
+                <mat-form-field appearance="fill" class="input" style="width: 200px;">
+                    <mat-label disbled selected>Select Status</mat-label>
+                    <mat-select formControlName="filter_status" (selectionChange)="filterStatus()">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="2">Submitted</mat-option>
+                    <mat-option value="3">Processed</mat-option>
+                    <mat-option value="4">Delivered</mat-option>
+                    <mat-option value="5">Declined</mat-option>
+                    <mat-option value="7">Canceled</mat-option>
+                    </mat-select>   
+                </mat-form-field>
+            </form>
+    
+                <!-- <form [formGroup]="statusFilterForm"> 
+                    <select class="dropdown-sort w-166 h-50 p-5" formControlName="filter_status" (change)="filterStatus()">
+                        <option value="" disabled selected>Select Status</option>
+                        <option value="">All</option>
+                        <option value="2">Submitted</option>
+                        <option value="3">Processed</option>
+                        <option value="4">Delivered</option>
+                        <option value="5">Declined</option>
+                        <option value="7">Canceled</option>
+                    </select>
+                </form> -->
+          
+  
+
+         
+
+            <div class="d-flex align-items-baseline ml-10">
+               
+                    <!-- <input data-date-format="MM/DD/YYYY" type="date" formControlName="created_at" (change)="filterDate()" class="calendar pr-10"> -->
+                <form [formGroup]="dateFilterForm"> 
+                    <div class="date-input">
+                        <input 
+                            (dateChange)="filterDate()" 
+                            formControlName="created_at"
+                            placeholder="Date Created"
+                            matInput [matDatepicker]="picker" 
+                            class="w-full date-input-i" 
+                            (click)="picker.open()"
+                            style="width: 140px;"
+                        >
+                        <mat-icon matDatepickerToggleIcon class="c-pointer" (click)="removeDateFilter($event)">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 17px" width="22" height="21" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </mat-icon>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="isEmpty" class="col-md-12 mh-600 d-flex flex-column align-items-center justify-content-center">
+            <img src="/assets/images/partner_dashboard_empty.svg">
+            <p class="text-secondary fs-16 tC mt-20">You have no job orders yet.</p>    
+        </div>
+        <table *ngIf="!isEmpty" class="table mt-20 w-100-per">
+            <thead>
+              <tr>
+                <th class="text-dark w-10-per c-pointer text-safari" (click)="sortList('job_order_quote_num', sort_type)">J.O No
+                    <i 
+                        [ngClass]="(sort_column=='job_order_quote_num'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-22-per c-pointer text-safari" (click)="sortList('job_order_project_name', sort_type)">Project Name
+                    <i 
+                        [ngClass]="(sort_column=='job_order_project_name'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-15-per c-pointer text-safari" (click)="sortList('created_at', sort_type)">Date Created
+                    <i 
+                        [ngClass]="(sort_column=='created_at'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-12-per c-pointer text-safari" (click)="sortList('job_order_due_date', sort_type)">Due Date
+                    <i 
+                        [ngClass]="(sort_column=='job_order_due_date'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+                <th class="text-dark w-10-per text-center text-safari">Order Status</th>
+                <th class="text-dark w-15-per text-center text-safari">Payment Status</th>
+                <th class="text-dark w-15-per text-center c-pointer text-safari" (click)="sortList('job_order_total', sort_type)">Total Amount
+                    <i 
+                        [ngClass]="(sort_column=='job_order_total'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                        >
+                    </i>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let skeleton of skeleton_loader">
+                <tr *ngIf="isLoaded">
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                    <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="!isLoaded">
+              <tr *ngFor="let job_order of job_order_list" class="table-dashboard c-pointer" routerLink='../../partners/partners_job_order_details/{{job_order.job_order_request_id}}'>
+                <td class="text-id fs-16 pt-20 pb-20">{{job_order.job_order_quote_num}}</td>
+                <td class="fs-16 pt-20 pb-20">{{job_order.job_order_project_name}}</td>
+                <td class="fs-16 pt-20 pb-20">{{job_order.created_at | transformDate: '': 'L'}}</td>
+                <td class="fs-16 pt-20 pb-20">{{job_order.job_order_due_date | transformDate: '': 'L'}}</td>
+                <td class="fs-16 pt-20 pb-20 text-center">
+                    <span *ngIf="job_order.job_order_status == 0" class="badge_checkedprice">Checked Price</span>
+                    <span *ngIf="job_order.job_order_status == 1" class="badge_draft">Draft</span>
+                    <span *ngIf="job_order.job_order_status == 2" class="badge_submitted">Submitted</span>
+                    <span *ngIf="job_order.job_order_status == 3" class="badge_processed">Processed</span>
+                    <span *ngIf="job_order.job_order_status == 4" class="badge_delivered">Delivered</span>
+                    <span *ngIf="job_order.job_order_status == 5" class="badge_declined">Declined</span>
+                    <span *ngIf="job_order.job_order_status == 6" class="badge_archived">Archived</span>
+                    <span *ngIf="job_order.job_order_status == 7" class="badge_canceled">Canceled</span>
+                </td>
+                <td class="fs-16 pt-20 pb-20 text-center">
+                    <span *ngIf="job_order.job_order_payment_status == 0 &&job_order.job_order_status != 5 &&job_order.job_order_status != 7" class="text-pending fw-700 fs-14">Pending</span>
+                    <span *ngIf="job_order.job_order_payment_status == 1 &&job_order.job_order_status != 5 &&job_order.job_order_status != 7" class="text-paid fw-700 fs-14">Paid</span>
+                    <span *ngIf="job_order.job_order_status == 5" class="fw-700 fs-14">- -</span>
+                    <span *ngIf="job_order.job_order_status == 7" class="fw-700 fs-14">- -</span>
+                    <!-- <span *ngIf="job_order.job_order_payment_status == ' '" class="text-paid fw-700 fs-14">--</span> -->
+                </td>
+                <td class="fs-16 pt-20 pb-20 pr-30" style="text-align:end">{{job_order.job_order_total | currency}}</td>
+              </tr>
+            </tbody>
+        </table>   
+   </div>
+</div>
+
+<div class="container">
+    <div class="row pt-30 pb-30 d-flex">
+        <div class="col-md-5 d-flex align-items-center">
+            <span class="text-secondary fs-16">Showing</span> 
+            <div class="btn-group h-50 ml-10 mr-10" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn-limit text-left d-flex justify-content-between align-items-center"
+                 aria-controls="dropdown-basic"> 
+                    <span class="fs-16">{{ limit }}</span>
+                    <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                     <li role="menuitem">
+                         <button class="dropdown-item" *ngFor="let item of limits" (click)="setLimit(item)">{{ item }}</button>
+                    </li>
+                </ul>
+            </div>
+           <span class="text-secondary fs-16">of {{total}} entries</span>
+        </div>
+      <div class="col-md-6 ml-70">
+          <div class="pr-3 d-flex justify-content-end align-items-center" style="text-align: right;">
+              <button class="mr-5 page-btn" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 5L3.83 5L7.41 1.41L6 1.04907e-06L-1.04907e-06 6L6 12L7.41 10.59L3.83 7L18 7L18 5Z" fill="#626172"/>
+                      </svg>                        
+              </button>                                
+              <button class="page-btn text-secondary" style="white-space: nowrap;" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                  Prev 
+              </button> 
+                <ng-container *ngFor="let item of pages_array | slice:0:3; let i= index;">
+                <span class="pink-square page c-pointer page-number" (click) = "setPage(item)" [ngClass]="{'active': current_page == item}">{{ item }}</span>
+                </ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">...</ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(total_pages)" [ngClass]="{'active': current_page == item}">{{ total_pages }}</span>
+                </ng-container>
+              <button class="page-btn text-secondary" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">Next</button>
+              <button class="ml-5 page-btn" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">
+                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 7L14.17 7L10.59 10.59L12 12L18 6L12 0L10.59 1.41L14.17 5L0 5V7Z" fill="#626172"/>
+                      </svg>                        
+              </button>
+          </div>
+      </div>
+    </div>
+</div>

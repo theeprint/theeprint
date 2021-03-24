@@ -1,0 +1,28 @@
+table{
+    thead{
+        tr{
+            th{
+                vertical-align: text-top;
+                background-color: #fff !important;
+                padding-bottom: 15px;
+                &:last-child{
+                    border-top-right-radius: 0px !important;
+                    border-bottom-right-radius: 0px !important;
+                    overflow: hidden;
+                }
+                &:first-child{
+                    border-top-left-radius: 0px !important;
+                    border-bottom-left-radius: 0px !important;
+                    overflow: hidden;
+                } 
+            }
+        }
+    }
+    tbody{
+        tr{
+            td{
+                vertical-align: middle;
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+<div class="container mt-15 mb-50" >
+    <h3 class="text-header mb-10 fs-24 fw-700 text-safari">Messages</h3>
+    <div class="card mt-40 pb-60" style="box-shadow: 0px 1px 5px 0px #dfdfdf;">
+        <div class="card-header d-flex">
+            <img src="/assets/images/theeprint.svg" class="w-50 h-50 rounded-circle object-fit-cover mr-20">
+            <div class="d-flex flex-column justify-content-center">
+                <span class="text-header fs-16 fw-700 text-safari">Send us a message</span>
+                <span class="text-secondary fs-14">Ask anything, we’re happy to assist.</span>
+            </div>
+        </div>
+        <div class="card-body bg-message h-425" style="overflow-y: scroll;" infiniteScroll
+        [infiniteScrollDistance]="0"
+        [infiniteScrollThrottle]="50"
+        (scrolledUp)="onScrollUp()"
+        [scrollWindow]="false" id='scrollContainer'>
+            <ngx-spinner [fullScreen]="false" bdColor ="rgba(0, 0, 0, 0)" color ="#007bff" type ="ball-spin" size="small">
+            </ngx-spinner>
+            <ng-container *ngIf="!isEmpty">
+                <ul class="d-flex flex-column pl-0" *ngFor="let chats of chat">
+                        <ng-container *ngIf='chats.user_role_id=="2"'>
+                            <li class="partner-chat d-flex justify-content-end">
+                                <div class="col-md-6 offset-5 d-flex flex-column pr-0">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="btn-group mr-10" dropdown *ngIf="!chats.deleted_by.includes(','+user_id+',')">
+                                                <button id="button-basic" dropdownToggle type="button" class="text-detail d-flex justify-content-between align-items-center" style="border: none; background: transparent;"
+                                                aria-controls="dropdown-basic"> 
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00065 8.33325C4.08398 8.33325 3.33398 9.08325 3.33398 9.99992C3.33398 10.9166 4.08398 11.6666 5.00065 11.6666C5.91732 11.6666 6.66732 10.9166 6.66732 9.99992C6.66732 9.08325 5.91732 8.33325 5.00065 8.33325ZM15.0007 8.33325C14.084 8.33325 13.334 9.08325 13.334 9.99992C13.334 10.9166 14.084 11.6666 15.0007 11.6666C15.9173 11.6666 16.6673 10.9166 16.6673 9.99992C16.6673 9.08325 15.9173 8.33325 15.0007 8.33325ZM8.33398 9.99992C8.33398 9.08325 9.08398 8.33325 10.0007 8.33325C10.9173 8.33325 11.6673 9.08325 11.6673 9.99992C11.6673 10.9166 10.9173 11.6666 10.0007 11.6666C9.08398 11.6666 8.33398 10.9166 8.33398 9.99992Z" fill="#9199A4"/>
+                                                        </svg>                            
+                                                </button>
+                                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                                    <li role="menuitem">
+                                                        <button class="dropdown-item d-flex align-items-center justify-content-center fs-12" style="color: #ffffff;" (click)="deleteMsg(chats.id, chats.deleted_by)">  
+                                                            <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                </svg>                                                
+                                                            Delete message
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="partner-message" *ngIf="!chats.deleted_by.includes(','+user_id+',')">{{chats.message}}</span>
+                                            <span class="partner-message" style="font-style: italic;" *ngIf="chats.deleted_by.includes(','+user_id+',')">You removed a message</span>
+                                        </div>
+                                        <div class="d-flex justify-content-end mt-10">
+                                            <span class="text-secondary fs-12">{{chats.update_at | date:'short'}}</span>
+                                        </div>
+                                </div>
+                                <div class="d-flex align-items-center p-0">
+                                        <img src="{{userService.image_path}}/company_logo/{{user_profile[0].partner_logo}}" class="h-35 w-35 rounded-circle object-fit-cover ml-10">
+                                </div>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf='chats.user_role_id!="2"'>
+                            <li class="admin-chat d-flex justify-content-start">
+                                <div class="d-flex align-items-center p-0">
+                                    <img src="/assets/images/theeprint.svg" class="h-35 w-35 rounded-circle object-fit-cover mr-10">
+                                </div>
+                                <div class="col-md-6 d-flex flex-column pl-0 mb-10">
+                                    <div class="d-flex align-items-center">
+                                        <span class="admin-message" *ngIf="chats.deleted_by.includes(','+user_id+',')" style="font-style: italic;">You removed a message</span>
+                                        <span class="admin-message" *ngIf="!chats.deleted_by.includes(','+user_id+',')">{{chats.message}}</span>
+                                        <div class="btn-group ml-10" dropdown *ngIf="!chats.deleted_by.includes(','+user_id+',')">
+                                            <button id="button-basic" dropdownToggle type="button" class="text-detail d-flex justify-content-between align-items-center" style="border: none; background: transparent;"
+                                            aria-controls="dropdown-basic"> 
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00065 8.33325C4.08398 8.33325 3.33398 9.08325 3.33398 9.99992C3.33398 10.9166 4.08398 11.6666 5.00065 11.6666C5.91732 11.6666 6.66732 10.9166 6.66732 9.99992C6.66732 9.08325 5.91732 8.33325 5.00065 8.33325ZM15.0007 8.33325C14.084 8.33325 13.334 9.08325 13.334 9.99992C13.334 10.9166 14.084 11.6666 15.0007 11.6666C15.9173 11.6666 16.6673 10.9166 16.6673 9.99992C16.6673 9.08325 15.9173 8.33325 15.0007 8.33325ZM8.33398 9.99992C8.33398 9.08325 9.08398 8.33325 10.0007 8.33325C10.9173 8.33325 11.6673 9.08325 11.6673 9.99992C11.6673 10.9166 10.9173 11.6666 10.0007 11.6666C9.08398 11.6666 8.33398 10.9166 8.33398 9.99992Z" fill="#9199A4"/>
+                                            </svg>                          
+                                            </button>
+                                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                                <li role="menuitem">
+                                                    <button class="dropdown-item d-flex align-items-center justify-content-center fs-12" style="color: #ffffff;" (click)="deleteMsg(chats.id, chats.deleted_by)">
+                                                        <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                        </svg>      
+                                                        Delete message
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-start mt-10">
+                                        <span class="text-secondary fs-12">{{chats.update_at | date:'short'}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-container>
+                </ul>
+            </ng-container>
+            <div *ngIf="isEmpty" class="col-md-12 mh-400 d-flex flex-column align-items-center justify-content-center">
+                <img src="/assets/images/waving 1.svg">
+                <p class="text-secondary fs-16 tC mt-20">Say hi and start a conversation with Thee Print.</p>    
+            </div>
+        </div>
+        <div class="card-footer bg-white d-flex align-items-center p-10" [formGroup]="sendMessageForm" (keydown)="keyDownFunction($event)">
+            <textarea 
+            (keydown.enter)="onKeydown($event)"
+            name="" 
+            id="" 
+            cols="15" 
+            rows="1"
+            placeholder="Send a message"
+            class="col-md-9 w-100-per h-100-per"
+            formControlName="message" 
+            ></textarea>
+           <div class="col-md-1 offset-2 d-flex justify-content-end">
+               <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="sendMsg()">Send</button>
+           </div>
+        </div>
+    </div>
+</div>
+    

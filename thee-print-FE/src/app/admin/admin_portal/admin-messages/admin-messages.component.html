@@ -1,0 +1,351 @@
+<div class="container" style="margin-bottom: 150px !important; min-height: 995px;" >
+    <div class="row mt-20 pl-20 pr-20 d-flex align-items-center">
+        <div>
+            <p class="fs-24 fw-700 text-header text-safari">Messages</p>
+            <p class="fs-16 fw-400">You have <span class="fs-14 fw-700 text-safari">0</span> unread messages.</p>
+        </div>
+        <div class="ml-auto">
+            <button class="bttn btn-primary-pink d-flex align-items-center" (click)='newMessage()'>
+                <svg class="mr-5 text-safari" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.9842 3.70523C19.3417 3.34776 19.3417 2.77032 18.9842 2.41286L16.8392 0.268084C16.6679 0.0964535 16.4354 0 16.1929 0C15.9504 0 15.7179 0.0964535 15.5467 0.268084L13.75 2.06456L17.1875 5.50171L18.9842 3.70523ZM3.66667 12.1469L12.8333 2.98114L16.2708 6.41828L7.10417 15.584H3.66667V12.1469ZM5.5 13.7509H6.34333L13.6767 6.41828L12.8333 5.57503L5.5 12.9076V13.7509ZM22 18.3337H0V22H22V18.3337Z" fill="white"/>
+                    </svg>                    
+                New Message
+            </button>
+        </div>
+    </div>
+    <div class="row mt-40 mh-720 mxh-780 mb-40" style=" box-shadow: 0px 1px 5px 0px #dfdfdd;">
+        <div class="col-md-4 p-0 mh-670 mxh-670">
+            <div class="card p-0 mh-710 mxh-650">
+                <div class="card-header d-flex" style="border-radius: 16px 0px !important;">
+                    <div class="search" [formGroup]="searchForm" (keydown)="searchkeyDownFunction($event)">
+                        <input type="text" placeHolder="Search"  formControlName="search" class="input" (keyup)="searchKey($event)">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon c-pointer" (click)="searchList();">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+                        </svg>            
+                    </div>
+                </div>
+                <div class="card-body p-0"
+                infiniteScroll
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="50"
+                (scrolled)="onScrollBottom()"
+                [scrollWindow]="false" 
+                id='conversationScrollContainer' 
+                style="overflow-y: scroll;">
+                    <ul *ngIf="!conversationEmpty" class="pl-0" style="overflow-y: scroll;">
+                        <ng-container *ngFor="let conversation of conversations; let i of idx">
+                            <li class="message-list d-flex flex-column" (click)="getChatMessage(conversation.id, i, conversation.seen_by)">
+                                <span class="text-date fs-12 d-flex justify-content-end">{{conversation.update_at | transformDate: '': 'L'}}</span>
+                                <div class="media mt-0">
+                                    <div class="media-left">
+                                        <img src="{{userService.image_path}}/company_logo/{{conversation.partner_logo}}" class="message-image">
+                                    </div>
+                                    <div class="media-body d-flex flex-column p-relative">
+                                        <p class="text-header fs-16 fw-700 text-safari">{{conversation.partner_company}}</p>
+                                        <span class="message-box text-secondary fs-12">{{conversation.last_sent_message}}</span>
+                                        <ng-container *ngIf="!conversation.seen_by.includes(','+user_id+',')">
+                                            <span class="p-absolute" style="top:10px; right: 0;">
+                                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="4.5" cy="4.5" r="4.5" fill="#FFB100"/>
+                                                    </svg>          
+                                            </span> 
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ul>
+                    <div *ngIf="conversationEmpty" class="col-md-12 mh-400 d-flex flex-column align-items-center justify-content-center">
+                        <img src="/assets/images/message_empty.svg">
+                        <p class="text-secondary fs-16 tC mt-20">No messages yet.</p>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 pl-0 mh-670 mxh-670">
+            <div class="card pb-160" style="width: 117%;">
+                <div *ngIf="!showNewMessage" class="card-header d-flex align-items-center" style="border-radius: 0px 16px 0px 0px !important;">
+                    <ng-container *ngIf='currentConversation'>
+                        <img src="{{userService.image_path}}/company_logo/{{currentConversation.partner_logo}}" class="w-50 h-50 rounded-circle object-fit-cover mr-20">
+                        <div class="d-flex flex-column justify-content-center">
+                            <span class="text-header fs-16 fw-700 text-safari">{{currentConversation.partner_company}}</span>
+                            <span class="text-light fs-14">Account owner: <span class="text-light fs-14">{{currentConversation.user_profile_first_name}} {{currentConversation.user_profile_last_name}}</span></span>
+                        </div>
+                        <div *ngIf="!isEmpty" class="d-flex align-items-center ml-auto">
+                            <span class="text-red fs-14 fw-700 d-flex align-items-center ml-20 c-pointer text-safari" (click)="deleteModal(currentConversation.id)">
+                                <svg class="mr-3" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.875 2.25H7.125L6.375 3H3.75V4.5H14.25V3H11.625L10.875 2.25ZM12 6.75V14.25H6V6.75H12ZM4.5 5.25H13.5V14.25C13.5 15.075 12.825 15.75 12 15.75H6C5.175 15.75 4.5 15.075 4.5 14.25V5.25Z" fill="#DD1003"/>
+                                </svg>                            
+                                Delete Conversation
+                            </span>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="showNewMessage" class="card-header d-flex align-items-center" style="border-radius: 0px 16px 0px 0px !important;">
+                    <div class="d-flex flex-column" style="width:100% !important" [formGroup]="searchNewMessageForm">
+                        <span class="text-header fs-16 fw-700 mb-20 text-safari">New Message</span>
+                        <div class="d-flex align-items-center col-md-12 pl-0">
+                            <span class="text-detail fs-16">To: </span>
+                            <input type="text" class="search-message input" placeholder="Type a name or company" formControlName="search_keyword" (keyup)="searchNewKey($event)">
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="partner_list">
+                    <div class="card-body bg-message" *ngFor="let partners of partner_list; let i = index" (click)="checkConversation(partners.partner_user,i)">
+                        <ul class="d-flex flex-column pl-0 mxh-350" style="overflow-y: scroll;" >
+                            <li class="d-flex justify-content-start c-pointer" >
+                                <img src="{{userService.image_path}}/company_logo/{{partners.partner_logo}}" class="w-50 h-50 rounded-circle object-fit-cover mr-20">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <span class="text-header fs-16 fw-700">{{partners.partner_company}}</span>
+                                    <span class="text-secondary fs-14">Account owner: <span class="text-secondary fs-14">{{partners.user_profile_first_name}} {{partners.user_profile_last_name}}</span></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-container>
+                <div *ngIf="!showNewMessage && !messageEmpty" class="card-body bg-message h-450 mxh-450" style="overflow-y:auto;" infiniteScroll
+                [infiniteScrollDistance]="0"
+                [infiniteScrollThrottle]="50"
+                (scrolledUp)="onScrollUp()"
+                [scrollWindow]="false" id='scrollContainer'>
+                    <ngx-spinner [fullScreen]="false" bdColor ="rgba(0, 0, 0, 0)" color ="#007bff" type ="ball-spin" size="small">
+                    </ngx-spinner>
+                    <div  class="d-flex flex-column pl-0">
+                        <div *ngFor="let chats of chat">
+                            <ng-container *ngIf='chats.user_id==user_id&&chats.update_at>currentConversation.date_deleted'>
+                                <div class="admin-chat d-flex justify-content-end mb-10 mt-10">
+                                    <div class="col-md-6 offset-5 d-flex flex-column pr-0">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="btn-group mr-10" dropdown *ngIf="!chats.deleted_by.includes(','+user_id+',')">
+                                                <button id="button-basic" dropdownToggle type="button" class="text-detail d-flex justify-content-between align-items-center" style="border: none; background: transparent;"
+                                                aria-controls="dropdown-basic"> 
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00065 8.33325C4.08398 8.33325 3.33398 9.08325 3.33398 9.99992C3.33398 10.9166 4.08398 11.6666 5.00065 11.6666C5.91732 11.6666 6.66732 10.9166 6.66732 9.99992C6.66732 9.08325 5.91732 8.33325 5.00065 8.33325ZM15.0007 8.33325C14.084 8.33325 13.334 9.08325 13.334 9.99992C13.334 10.9166 14.084 11.6666 15.0007 11.6666C15.9173 11.6666 16.6673 10.9166 16.6673 9.99992C16.6673 9.08325 15.9173 8.33325 15.0007 8.33325ZM8.33398 9.99992C8.33398 9.08325 9.08398 8.33325 10.0007 8.33325C10.9173 8.33325 11.6673 9.08325 11.6673 9.99992C11.6673 10.9166 10.9173 11.6666 10.0007 11.6666C9.08398 11.6666 8.33398 10.9166 8.33398 9.99992Z" fill="#9199A4"/>
+                                                        </svg>                            
+                                                </button>
+                                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                                    <li role="menuitem">
+                                                        <button class="dropdown-item d-flex align-items-center justify-content-center fs-12" style="color: #ffffff;" (click)="deleteMsg(chats.id,chats.deleted_by)">
+                                                            <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                </svg>        
+                                                            Delete message 
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="admin-message" *ngIf="!chats.deleted_by.includes(','+user_id+',')">{{chats.message}}</span>
+                                            <span class="admin-message" style="font-style: italic;" *ngIf="chats.deleted_by.includes(','+user_id+',')">You removed a message</span>
+                                        </div>
+                                        <div class="d-flex justify-content-end mt-10">
+                                            <span class="text-secondary fs-12">Admin - {{chats.user_profile_first_name}} {{chats.user_profile_last_name}} - {{chats.update_at | transformDate: '': 'lll'}} </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center p-0">
+                                        <ng-container *ngIf="chats.user_role_id=='1'">
+                                            <img src="{{userService.image_path}}/user_avatar/{{chats.user_profile_avatar}}" class="h-35 w-35 rounded-circle object-fit-cover ml-10">
+                                        </ng-container>
+                                        <ng-container *ngIf="chats.user_role_id=='2'">
+                                            <img src="{{userService.image_path}}/company_logo/{{chats.partner_logo}}" class="h-35 w-35 rounded-circle object-fit-cover ml-10">
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf='chats.user_id!=user_id&&chats.update_at>currentConversation.date_deleted'>
+                                <div class="admin-chat d-flex justify-content-start">
+                                    <div class="d-flex align-items-center p-0">
+                                        <ng-container *ngIf="chats.user_role_id=='1'">
+                                            <img src="{{userService.image_path}}/user_avatar/{{chats.user_profile_avatar}}" class="h-35 w-35 rounded-circle object-fit-cover mr-10">
+                                        </ng-container>
+                                        <ng-container *ngIf="chats.user_role_id=='2'">
+                                            <img src="{{userService.image_path}}/company_logo/{{chats.partner_logo}}" class="h-35 w-35 rounded-circle object-fit-cover mr-10">
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-md-6 d-flex flex-column pl-0 mb-10">
+                                        <div class="d-flex align-items-center">
+                                            <span class="partner-message" style="font-style: italic;" *ngIf="chats.deleted_by.includes(','+user_id+',')">You removed a message</span>
+                                            <span class="partner-message" *ngIf="!chats.deleted_by.includes(','+user_id+',')">{{chats.message}}</span>
+                                            <div class="btn-group ml-10" dropdown *ngIf="!chats.deleted_by.includes(','+user_id+',')">
+                                                <button id="button-basic" dropdownToggle type="button" class="text-detail d-flex justify-content-between align-items-center justify-content-center" style="border: none; background: transparent;"
+                                                aria-controls="dropdown-basic"> 
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.00065 8.33325C4.08398 8.33325 3.33398 9.08325 3.33398 9.99992C3.33398 10.9166 4.08398 11.6666 5.00065 11.6666C5.91732 11.6666 6.66732 10.9166 6.66732 9.99992C6.66732 9.08325 5.91732 8.33325 5.00065 8.33325ZM15.0007 8.33325C14.084 8.33325 13.334 9.08325 13.334 9.99992C13.334 10.9166 14.084 11.6666 15.0007 11.6666C15.9173 11.6666 16.6673 10.9166 16.6673 9.99992C16.6673 9.08325 15.9173 8.33325 15.0007 8.33325ZM8.33398 9.99992C8.33398 9.08325 9.08398 8.33325 10.0007 8.33325C10.9173 8.33325 11.6673 9.08325 11.6673 9.99992C11.6673 10.9166 10.9173 11.6666 10.0007 11.6666C9.08398 11.6666 8.33398 10.9166 8.33398 9.99992Z" fill="#9199A4"/>
+                                                        </svg>                            
+                                                </button>
+                                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic" >
+                                                    <li role="menuitem">
+                                                        <button class="dropdown-item d-flex align-items-center fs-12" style="color: #ffffff;" (click)="deleteMsg(chats.id,chats.deleted_by)">
+                                                            <svg class="mr-2" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2702 2.125H6.72852L6.02018 2.83333H3.54102V4.25H13.4577V2.83333H10.9785L10.2702 2.125ZM11.3327 6.375V13.4583H5.66602V6.375H11.3327ZM4.24935 4.95833H12.7493V13.4583C12.7493 14.2375 12.1118 14.875 11.3327 14.875H5.66602C4.88685 14.875 4.24935 14.2375 4.24935 13.4583V4.95833Z" fill="white"/>
+                                                                </svg>          
+                                                                Delete message 
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-start">
+                                            <span class="text-secondary fs-12" *ngIf="chats.user_role_id==1">Admin -&nbsp;</span>
+                                            <span class="text-secondary fs-12" *ngIf="chats.user_role_id==2">Partner -&nbsp; </span>
+                                            <span class="text-secondary fs-12"> {{chats.user_profile_first_name}} {{chats.user_profile_last_name}} - {{chats.update_at | transformDate: '': 'lll'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                 </div>
+                <div *ngIf="messageEmpty" class="card-body bg-message d-flex align-items-center h-600 mxh-500">
+                    <div class="col-md-12 d-flex flex-column align-items-center justify-content-center">
+                        <span>
+                            <!-- <svg width="91" height="91" viewBox="0 0 91 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                <path d="M64.1622 25.2228L62.6025 25.749C59.5554 26.7769 57.4167 29.5252 57.169 32.7314L56.8089 37.3893C56.7934 37.5894 56.7927 37.7904 56.8082 37.9905C56.8655 38.7372 56.7083 39.473 56.3721 40.1203C56.3721 40.1203 53.8961 36.3422 53.3739 35.8045L52.283 34.6808C51.1695 33.534 50.321 32.1587 49.7917 30.6503C48.1117 25.8634 44.3249 17.4846 42.5263 15.0051C40.7905 12.612 36.5854 14.6529 37.2578 17.562C37.7369 19.6345 42.2763 28.7962 44.5314 33.9561C44.6434 34.2122 44.2781 34.3996 44.1355 34.1592C40.8495 28.6168 34.67 19.1618 33.0286 17.2819C30.6746 14.5859 26.7587 17.1384 28.1224 20.4798C29.0563 22.7679 34.7106 32.3681 37.8949 37.9151C38.0341 38.1576 37.6911 38.3838 37.5234 38.1599C34.1239 33.6219 27.8382 25.4116 26.1804 24.0592C23.8897 22.1904 20.3474 25.2401 21.7425 27.8801C22.7552 29.7964 29.5599 38.7646 32.9614 43.1194C33.1279 43.3324 32.8427 43.6022 32.639 43.4243C29.1348 40.3612 22.5116 33.686 21.0204 32.8875C18.4143 31.4919 15.5214 35.1634 17.3961 37.4874C18.9006 39.3524 25.1731 45.0987 28.9121 48.3832L30.3452 52.5609C32.3029 58.2677 34.6862 61.3324 39.2746 65.3818C41.1701 67.0547 42.6238 69.2038 43.1607 71.6743L45.2214 75.0313L66.9864 61.6706L64.9255 58.3134C64.915 58.3049 64.9045 58.2963 64.8941 58.2876C63.217 56.9087 62.7041 54.5576 63.6088 52.5838L64.3784 51.373C65.9432 48.9111 66.5228 45.9499 66.0018 43.0796L65.4892 40.2561C64.7921 36.415 64.9481 32.4674 65.9466 28.6933L66.3286 27.249C66.6717 25.9519 65.4338 24.7938 64.1622 25.2228Z" fill="url(#paint0_linear)"/>
+                                <path d="M66.3294 27.2483L65.9469 28.6926C65.1511 31.703 64.8898 34.8234 65.1716 37.912C65.2427 38.6964 65.3486 39.4784 65.4895 40.2562L66.0029 43.0794C66.5232 45.9491 65.9439 48.9107 64.379 51.3724L63.6096 52.5829C62.704 54.557 63.2173 56.9075 64.8949 58.2866C64.9045 58.2951 64.9159 58.3043 64.9255 58.3128L66.9863 61.6698L56.4688 68.126C54.2027 66.8442 52.2125 64.9958 50.735 62.634C45.9989 55.0676 48.2937 45.0938 55.8607 40.3587C56.0191 40.26 56.1788 40.1635 56.3388 40.0697C56.3606 40.1027 56.3726 40.12 56.3726 40.12C56.3892 40.088 56.4059 40.0561 56.4201 40.0226C56.7237 39.3997 56.8636 38.699 56.8084 37.9903C56.7936 37.7891 56.794 37.5887 56.8086 37.3882L57.1691 32.7307C57.4168 29.5245 59.5554 26.7759 62.6023 25.7481L64.1632 25.222C65.4342 24.7929 66.673 25.9511 66.3294 27.2483Z" fill="url(#paint1_linear)"/>
+                                <path d="M71.8969 63.8869L68.8713 58.9582C67.8986 57.3736 65.8253 56.8775 64.2407 57.8503L43.2355 70.7445C41.6509 71.7173 41.1548 73.7905 42.1276 75.3752L45.1531 80.3039C46.1259 81.8885 48.1991 82.3846 49.7837 81.4118L70.7891 68.5175C72.3736 67.5448 72.8696 65.4716 71.8969 63.8869Z" fill="url(#paint2_linear)"/>
+                                <path d="M56.3717 40.1201C56.3717 40.1201 53.8957 36.342 53.3735 35.8042L52.2826 34.6806C51.6148 33.9928 51.0432 33.2223 50.5776 32.3908C48.7055 32.6242 46.6489 33.1948 44.5475 34.093C44.5177 34.2355 44.3401 34.3175 44.2127 34.2388C43.0462 34.7556 41.8683 35.3723 40.7028 36.0878C39.7154 36.6939 38.7876 37.3403 37.9255 38.0139C37.9374 38.1665 37.7774 38.2849 37.637 38.2424C35.7054 39.7923 34.1238 41.478 32.9821 43.1522C33.0737 43.3158 32.926 43.4964 32.7642 43.4806C30.8988 46.3585 30.3518 49.1732 31.5794 51.1731C33.9149 54.9777 41.7863 54.3923 49.1605 49.8656C51.9617 48.146 54.2881 46.1051 55.9683 44.0265C56.8629 42.9201 57.0158 41.3886 56.3717 40.1201Z" fill="url(#paint3_linear)"/>
+                                <path d="M37.8386 38.2009C37.8197 38.2171 37.797 38.2295 37.7744 38.2373C37.7981 38.2289 37.819 38.216 37.8386 38.2009Z" fill="url(#paint4_linear)"/>
+                                <path d="M37.8624 38.1788C37.8769 38.1653 37.8894 38.1485 37.899 38.132C37.889 38.1503 37.8776 38.1664 37.8624 38.1788Z" fill="url(#paint5_linear)"/>
+                                <path d="M37.523 38.1586C37.5558 38.2022 37.5954 38.2295 37.6377 38.2415C35.7058 39.7919 34.1237 41.4768 32.9827 43.1505C32.976 43.1395 32.9692 43.1285 32.9613 43.1181C29.7567 39.0158 23.5323 30.8179 21.9752 28.2812C21.879 28.1246 21.8011 27.9902 21.742 27.8792C20.9448 26.3702 21.7614 24.7271 23.0341 23.9458C23.9881 23.3602 25.1992 23.2576 26.181 24.058C27.8389 25.4106 34.1236 33.6202 37.523 38.1586Z" fill="url(#paint6_linear)"/>
+                                <path d="M44.1353 34.1593C44.157 34.1946 44.1832 34.2225 44.212 34.2397C43.0451 34.7556 41.8684 35.3717 40.7026 36.0873C39.7155 36.6932 38.7872 37.3405 37.9251 38.014C37.9235 37.9816 37.9136 37.9482 37.8944 37.9144C36.3015 35.1415 34.0923 31.3546 32.1637 27.9754C30.2362 24.5955 28.5894 21.6234 28.1215 20.4802C27.4257 18.7753 28.1044 17.2761 29.2481 16.574C30.3465 15.8997 31.8751 15.9605 33.0277 17.2817C34.6695 19.1621 40.8482 28.6165 44.1353 34.1593Z" fill="url(#paint7_linear)"/>
+                                <path d="M49.7909 30.6494C50.0105 31.2768 50.2868 31.8802 50.6126 32.4531C50.6015 32.4325 50.5887 32.4116 50.5776 32.3911C48.7051 32.6233 46.649 33.1946 44.5475 34.0928C44.5573 34.0519 44.5526 34.0046 44.5315 33.9554C43.4034 31.3755 41.7054 27.7956 40.2286 24.6007C38.7517 21.4058 37.4975 18.5981 37.2572 17.5612C36.9513 16.2366 37.6568 15.0928 38.6803 14.4645C39.9034 13.7137 41.5813 13.7012 42.5255 15.0044C44.3241 17.484 48.1115 25.8629 49.7909 30.6494Z" fill="url(#paint8_linear)"/>
+                                <path d="M41.6641 45.8177C37.1307 48.6006 33.8207 52.4869 32.0386 56.6325C33.7333 59.9719 35.9114 62.4125 39.2752 65.3813C41.1707 67.0542 42.6245 69.2032 43.1613 71.6738L45.222 75.0308L66.987 61.6701L64.9263 58.3131C64.9157 58.3046 64.9053 58.296 64.8948 58.2873C63.2177 56.9084 62.7049 54.5573 63.6096 52.5835L64.3792 51.3727C65.327 49.8813 65.9107 48.2064 66.11 46.4798C60.5125 40.9835 50.3065 40.5125 41.6641 45.8177Z" fill="url(#paint9_linear)"/>
+                                <path d="M71.391 48.1921C71.2032 49.5495 70.5998 50.7468 69.727 51.674C69.1081 52.3314 68.0472 52.2766 67.5023 51.5568L67.4253 51.4552C66.9918 50.8825 67.0546 50.0923 67.5403 49.5632C67.9807 49.0835 68.2847 48.4696 68.3808 47.7757C68.4767 47.0817 68.3508 46.4083 68.0572 45.8272C67.7334 45.1861 67.8874 44.4085 68.4602 43.975L68.5618 43.8981C69.2817 43.3532 70.3176 43.5885 70.7347 44.3891C71.323 45.5184 71.5787 46.8347 71.391 48.1921Z" fill="url(#paint10_linear)"/>
+                                <path d="M12.51 36.1083C12.4389 34.7399 12.8064 33.4503 13.4891 32.3755C13.9732 31.6134 15.0255 31.4676 15.6962 32.0721L15.7907 32.1574C16.3242 32.6384 16.4113 33.4262 16.0337 34.0373C15.6915 34.5913 15.5084 35.2514 15.5447 35.951C15.581 36.6506 15.8314 37.2882 16.2292 37.8039C16.6679 38.3726 16.6629 39.1652 16.182 39.6988L16.0967 39.7934C15.4922 40.464 14.4304 40.4278 13.8701 39.7199C13.0798 38.7214 12.5809 37.4768 12.51 36.1083Z" fill="url(#paint11_linear)"/>
+                                <path d="M7.80296 35.9326C7.7319 34.5641 8.09935 33.2746 8.78208 32.1998C9.26618 31.4376 10.3185 31.2919 10.9891 31.8964L11.0837 31.9816C11.6172 32.4626 11.7043 33.2504 11.3267 33.8615C10.9844 34.4155 10.8014 35.0756 10.8377 35.7752C10.874 36.4748 11.1243 37.1124 11.5221 37.6281C11.9608 38.1969 11.9558 38.9894 11.4749 39.523L11.3896 39.6176C10.7851 40.2882 9.72335 40.252 9.16305 39.5441C8.37278 38.5456 7.87401 37.301 7.80296 35.9326Z" fill="url(#paint12_linear)"/>
+                                <path d="M76.2806 49.361C76.0928 50.7184 75.4894 51.9158 74.6166 52.8429C73.9978 53.5004 72.9369 53.4455 72.3919 52.7257L72.315 52.6242C71.8814 52.0515 71.9442 51.2613 72.43 50.7321C72.8703 50.2524 73.1743 49.6385 73.2705 48.9446C73.3666 48.2507 73.2404 47.5773 72.9469 46.9961C72.623 46.355 72.7771 45.5774 73.3498 45.144L73.4514 45.0671C74.1714 44.5221 75.2073 44.7574 75.6244 45.5581C76.2127 46.6874 76.4684 48.0036 76.2806 49.361Z" fill="url(#paint13_linear)"/>
+                                </g>
+                                <defs>
+                                <linearGradient id="paint0_linear" x1="28.1276" y1="33.8035" x2="70.3064" y2="59.171" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE"/>
+                                <stop offset="1" stop-color="#FBA5C2"/>
+                                </linearGradient>
+                                <linearGradient id="paint1_linear" x1="58.8515" y1="47.5007" x2="30.9179" y2="66.0984" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint2_linear" x1="29.0515" y1="97.5815" x2="22.6165" y2="52.8821" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#000066"/>
+                                <stop offset="1" stop-color="#00CCFF"/>
+                                </linearGradient>
+                                <linearGradient id="paint3_linear" x1="41.6395" y1="42.4745" x2="31.3311" y2="30.5193" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint4_linear" x1="37.8038" y1="38.2159" x2="37.798" y2="38.2092" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FBA5C2" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#A34A9E"/>
+                                </linearGradient>
+                                <linearGradient id="paint5_linear" x1="37.8786" y1="38.1529" x2="37.8738" y2="38.1475" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FBA5C2" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#A34A9E"/>
+                                </linearGradient>
+                                <linearGradient id="paint6_linear" x1="30.202" y1="32.1102" x2="37.5663" y2="27.2858" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint7_linear" x1="34.4814" y1="26.9072" x2="47.3455" y2="21.6424" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint8_linear" x1="43.9576" y1="23.6333" x2="52.2682" y2="21.6698" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint9_linear" x1="49.3378" y1="52.3472" x2="41.1111" y2="27.661" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FCCECE" stop-opacity="0"/>
+                                <stop offset="1" stop-color="#BB4966"/>
+                                </linearGradient>
+                                <linearGradient id="paint10_linear" x1="69.7759" y1="44.1457" x2="65.8709" y2="60.235" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF0066"/>
+                                <stop offset="1" stop-color="#280000"/>
+                                </linearGradient>
+                                <linearGradient id="paint11_linear" x1="15.1975" y1="32.2355" x2="9.82507" y2="47.1959" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF0066"/>
+                                <stop offset="1" stop-color="#280000"/>
+                                </linearGradient>
+                                <linearGradient id="paint12_linear" x1="10.4904" y1="32.0597" x2="5.11802" y2="47.0201" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF0066"/>
+                                <stop offset="1" stop-color="#280000"/>
+                                </linearGradient>
+                                <linearGradient id="paint13_linear" x1="74.6655" y1="45.3147" x2="70.7606" y2="61.404" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF0066"/>
+                                <stop offset="1" stop-color="#280000"/>
+                                </linearGradient>
+                                <clipPath id="clip0">
+                                <rect width="66" height="66" fill="white" transform="translate(0 34.5283) rotate(-31.5441)"/>
+                                </clipPath>
+                                </defs>
+                            </svg> -->
+                            <img src="assets/images/wavingAdmin.png">
+                        </span>
+                        <p class="text-secondary fs-16 tC">Say hi and start a conversation</p>    
+                    </div>
+                </div>
+                <div class="card-footer bg-white d-flex align-items-center p-10" [formGroup]="sendMessageForm" (keydown)="keyDownFunction($event)" *ngIf="!showInputMessage && (conversationId||newConvo)" style="min-height: 110px !important">
+                    <textarea 
+                        (keydown.enter)="onKeydown($event)"
+                        name="" 
+                        id="" 
+                        cols="15" 
+                        rows="1"
+                        placeholder="Send a message"
+                        class="col-md-9 w-100-per h-100-per"
+                        formControlName="message" 
+                        >
+                    </textarea>
+                    <div class="col-md-1 offset-2 d-flex justify-content-end">
+                        <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="sendMsg()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-smart-modal #deleteConversationModal identifier="deleteConversationModal" [customClass]="'modal-checkin-class nsm-centered'" [formGroup]="deleteForm">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M28.059 19.0996H40.741L49.7 28.0586V40.7406L40.741 49.6996H28.059L19.1 40.7406V28.0586L28.059 19.0996ZM39.33 46.2996L46.3 39.3296V29.4696L39.33 22.4996H29.47L22.5 29.4696V39.3296L29.47 46.2996H39.33ZM34.4 39.4996C33.4611 39.4996 32.7 40.2607 32.7 41.1996C32.7 42.1385 33.4611 42.8996 34.4 42.8996C35.3389 42.8996 36.1 42.1385 36.1 41.1996C36.1 40.2607 35.3389 39.4996 34.4 39.4996ZM36.1 25.8996H32.7V37.7996H36.1V25.8996Z" fill="#DD1003"/>
+            </svg>                 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Delete conversation</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC">Are you sure you want to delete this conversation? Enter your password to confirm.</p>
+        </div>
+        <div *ngIf="errorMessage" class="decline-msg-container m-20 d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                <svg width="30" height="30" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                    <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+                    </svg>                     
+            </div>
+            <div class="col-md-10 d-flex align-items-center">
+                <p class="m-0">{{errorMessage}}</p>
+            </div>
+        </div>  
+        <div class="form-group">
+            <input type="hidden" class="form-control p-relative" formControlName="id">
+            <input type="{{passType}}" class="form-control p-relative" formControlName="password">
+            <label *ngIf="!showPassword" (click)="showPass()" class="c-pointer hov-bold" style="position: absolute;margin-top:-28px;right: 30px;">
+                <svg width="22" height="20" viewBox="0 0 22 20" fill="#8D8F93">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.69 4.5248L1.01 1.8448L2.42 0.424805L20.15 18.1648L18.74 19.5748L15.32 16.1548C13.98 16.6848 12.52 16.9748 11 16.9748C6 16.9748 1.73 13.8648 0 9.4748C0.77 7.5048 2.06 5.8048 3.69 4.5248ZM11 3.9748C14.79 3.9748 18.17 6.1048 19.82 9.4748C19.23 10.6948 18.4 11.7448 17.41 12.5948L18.82 14.0048C20.21 12.7748 21.31 11.2348 22 9.4748C20.27 5.0848 16 1.9748 11 1.9748C9.73 1.9748 8.51 2.1748 7.36 2.5448L9.01 4.1948C9.66 4.0648 10.32 3.9748 11 3.9748ZM9.93 5.1148L12 7.1848C12.57 7.4348 13.03 7.8948 13.28 8.4648L15.35 10.5348C15.43 10.1948 15.49 9.8348 15.49 9.4648C15.5 6.9848 13.48 4.9748 11 4.9748C10.63 4.9748 10.28 5.02481 9.93 5.1148ZM8.51 9.3448L11.12 11.9548C11.08 11.9648 11.04 11.9748 11 11.9748C9.62 11.9748 8.5 10.8548 8.5 9.4748C8.5 9.44981 8.5025 9.42982 8.505 9.40982L8.505 9.40981L8.505 9.40979C8.5075 9.38979 8.51 9.3698 8.51 9.3448ZM6.86 7.6948L5.11 5.9448C3.9 6.8648 2.88 8.0448 2.18 9.4748C3.83 12.8448 7.21 14.9748 11 14.9748C11.95 14.9748 12.87 14.8348 13.75 14.5948L12.77 13.6148C12.23 13.8448 11.63 13.9748 11 13.9748C8.52 13.9748 6.5 11.9548 6.5 9.4748C6.5 8.8448 6.63 8.2448 6.86 7.6948Z"/>
+                </svg>
+            </label>
+            <label *ngIf="showPassword" (click)="hidePass()" class="c-pointer hov-bold" style="position: absolute;margin-top:-28px;right: 30px;">
+                <svg width="22" height="16" viewBox="0 0 22 16" fill="#8D8F93">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 8C1.73 3.61 6 0.5 11 0.5C16 0.5 20.27 3.61 22 8C20.27 12.39 16 15.5 11 15.5C6 15.5 1.73 12.39 0 8ZM19.82 8C18.17 4.63 14.79 2.5 11 2.5C7.21 2.5 3.83 4.63 2.18 8C3.83 11.37 7.21 13.5 11 13.5C14.79 13.5 18.17 11.37 19.82 8ZM11 5.5C12.38 5.5 13.5 6.62 13.5 8C13.5 9.38 12.38 10.5 11 10.5C9.62 10.5 8.5 9.38 8.5 8C8.5 6.62 9.62 5.5 11 5.5ZM6.5 8C6.5 5.52 8.52 3.5 11 3.5C13.48 3.5 15.5 5.52 15.5 8C15.5 10.48 13.48 12.5 11 12.5C8.52 12.5 6.5 10.48 6.5 8Z"/>
+                </svg>
+            </label>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <button class="btn-delete d-flex align-items-center justify-content-center fs-14" (click)="deleteConversation()">Delete conversation</button>
+        </div>     
+    </div>
+</ngx-smart-modal>
+<ngx-spinner name="newMessage" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

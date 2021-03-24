@@ -1,0 +1,454 @@
+<ng-container *ngIf=(job_order_details)>
+    <div class="container pt-40 pb-40 ">
+        <div class="row d-flex flex-column">
+            <span class="back-page">
+                <a class="c-pointer text-black" routerLink = "/admin/job-order-list" style="text-decoration: none;">
+                    <svg width="18" height="12" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039" stroke="#C70039" stroke-width="0"/>
+                    </svg>
+                    <span class="mr-15 ml-10 fw-600 fs-16 text-safari" style="color:#C70039;">Back to list</span>
+                </a>    
+            </span>
+            <div class="d-flex align-items-center mt-15">
+                <div class="fs-24 fw-800 text-safari">Job Order No: <span class="text-id text-safari fs-24 fw-800">{{job_order_details.job_order_quote_num}}</span></div>
+                <div *ngIf="job_order_details.job_order_status == 3 || job_order_details.job_order_status == 4 || job_order_details.job_order_status == 5 || job_order_details.job_order_status == 7" class="d-flex ml-auto">
+                    <a class="btn-upload d-flex align-items-center" style="justify-content: space-evenly;" href='http://api.theeprint.com.ph/api/public/email/job-order-request.php?id={{job_order_request_id}}' target="_blank">
+                        <svg class="mr-5" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4168 8.70825H13.7502V3.20825H8.25016V8.70825H4.5835L11.0002 15.1249L17.4168 8.70825ZM10.0835 10.5416V5.04159H11.9168V10.5416H12.9893L11.0002 12.5308L9.011 10.5416H10.0835ZM17.4168 18.7916V16.9583H4.5835V18.7916H17.4168Z" fill="#C0024A"/>
+                        </svg>                        
+                        <span class="fs-16 fw-500">Download PDF</span>
+                    </a>
+                    <div class="dropdown ml-15">
+                        <span>
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="25" r="24.5" fill="white" stroke="#D6E3F8"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5007 22.8333C17.309 22.8333 16.334 23.8083 16.334 24.9999C16.334 26.1916 17.309 27.1666 18.5007 27.1666C19.6923 27.1666 20.6673 26.1916 20.6673 24.9999C20.6673 23.8083 19.6923 22.8333 18.5007 22.8333ZM31.5007 22.8333C30.309 22.8333 29.334 23.8083 29.334 24.9999C29.334 26.1916 30.309 27.1666 31.5007 27.1666C32.6923 27.1666 33.6673 26.1916 33.6673 24.9999C33.6673 23.8083 32.6923 22.8333 31.5007 22.8333ZM22.834 24.9999C22.834 23.8083 23.809 22.8333 25.0007 22.8333C26.1923 22.8333 27.1673 23.8083 27.1673 24.9999C27.1673 26.1916 26.1923 27.1666 25.0007 27.1666C23.809 27.1666 22.834 26.1916 22.834 24.9999Z" fill="#2C2C39"/>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content c-pointer">
+                            <a routerLink='/admin/job-orders/edit-job-orders/{{job_order_details.job_order_request_id}}' class="d-flex align-items-center text-detail">
+                                <svg class="mr-10" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.245 2.25C13.0575 2.25 12.8625 2.325 12.72 2.4675L11.3475 3.84L14.16 6.6525L15.5325 5.28C15.825 4.9875 15.825 4.515 15.5325 4.2225L13.7775 2.4675C13.6275 2.3175 13.44 2.25 13.245 2.25ZM10.545 6.765L11.235 7.455L4.44 14.25H3.75V13.56L10.545 6.765ZM2.25 12.9375L10.545 4.6425L13.3575 7.455L5.0625 15.75H2.25V12.9375Z" fill="#626172"/>
+                                    </svg>
+                                Edit Job Order
+                            </a>
+                            <hr style="margin: 10px -15px !important;">
+                            <a (click)="moveToArchived(job_order_details.job_order_request_id)" class="d-flex align-items-center" style="color: #DD1003;">
+                                <svg class="mr-10" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.4982 7.5H15V5.25C15 4.00734 14.3284 3 13.5 3H8.5L6.5 0H1.5C0.671563 0 0 1.00734 0 2.25V15.75C0 16.9927 0.671563 18 1.5 18H14C14.2544 18 14.5046 17.9029 14.7272 17.7179C14.9497 17.5329 15.1372 17.2661 15.272 16.9425L17.7702 10.9425C18.3936 9.44639 17.6753 7.5 16.4982 7.5ZM1.6875 2.25H5.87869L7.87869 5.25H13.3125C13.3622 5.25 13.4099 5.27963 13.4451 5.33238C13.4803 5.38512 13.5 5.45666 13.5 5.53125V7.5H4.75C4.49161 7.5 4.23759 7.60013 4.01258 7.79068C3.78757 7.98122 3.59918 8.25573 3.46569 8.58759L1.5 13.4742V2.53092C1.5 2.494 1.50485 2.45745 1.51428 2.42334C1.5237 2.38924 1.53752 2.35825 1.55493 2.33216C1.57235 2.30607 1.59302 2.28539 1.61576 2.27129C1.63851 2.25719 1.66289 2.24996 1.6875 2.25ZM14 15.75H2.25L4.66357 9.75H16.5L14 15.75Z" fill="#DD1003"/>
+                                    </svg>
+                                Move to Archive
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="job_order_details.job_order_status == 2" class="submitted-form mt-30 d-flex align-items-center">
+                <div class="d-flex align-items-center ml-10">
+                    <svg width="43" height="43" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle opacity="0.2" cx="21.5" cy="21.5" r="21.5" fill="#FFB100"/>
+                        <circle cx="21.7808" cy="21.7812" r="16.7222" fill="#FFB100"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M26.98 25.0833V20.8677C26.98 18.2792 25.6057 16.1124 23.1859 15.539V14.9657C23.1859 14.2659 22.621 13.701 21.9212 13.701C21.2214 13.701 20.6565 14.2659 20.6565 14.9657V15.539C18.2451 16.1124 16.8624 18.2708 16.8624 20.8677V25.0833L15.1761 26.7696V27.6128H28.6663V26.7696L26.98 25.0833ZM21.9212 30.1422C22.8487 30.1422 23.6075 29.3833 23.6075 28.4559H20.2349C20.2349 29.3833 20.9938 30.1422 21.9212 30.1422ZM18.5487 25.9265H25.2938V20.8677C25.2938 18.7767 24.0206 17.0735 21.9212 17.0735C19.8218 17.0735 18.5487 18.7767 18.5487 20.8677V25.9265ZM18.1945 15.0331L16.9889 13.8275C14.9653 15.3704 13.6332 17.748 13.5151 20.4461H15.2014C15.3279 18.2118 16.4745 16.2557 18.1945 15.0331ZM30.3273 20.4461H28.641C28.5145 18.2118 27.3595 16.2557 25.6563 15.0331L26.8536 13.8275C28.8687 15.3704 30.2008 17.748 30.3273 20.4461Z" fill="#2C2C39"/>
+                        </svg>                                         
+                </div>
+                <div class="col-md-11 d-flex align-items-center">
+                    <p class="text-safari fs-16 fw-700 m-0">{{job_order_details.partner_company}} just submitted a job order request.</p>
+                    <div class="ml-auto">
+                        <button class="btn-decline fs-16 mr-10" (click)="declineMessageModal()">Decline</button>
+                        <button class="btn-accept fs-16" (click)="processRequest(job_order_details.job_order_request_id)">Accept</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="job_order_details.job_order_status == 3 || job_order_details.job_order_status == 4" class="update-form mt-30 p-10 d-flex justify-content-center align-items-center" [formGroup]="updateForm">
+                <div class="row d-flex flex-column p-20">
+                    <p class="fs-16 text-header mb-20">Update Status</p>
+                    <div class="d-flex"> 
+                        <div class="d-flex flex-column">
+                            <p class="fs-16 text-detail">Order Status</p>
+                            <!-- <select class="dropdown-sort h-50 p-5 form-control" formControlName='order_status'>
+                                <option value="3">Processed</option>
+                                <option value="4">Delivered</option>
+                            </select> -->
+                            <mat-form-field appearance="fill" class="inputJOUP" style="width: 300px"> 
+                                <!-- <mat-label disbled selected>Select Status</mat-label> -->
+                                <mat-select formControlName="order_status"  [placeholder]="job_order_details.job_order_status == 3 ? 'Processed':'Delivered'">
+                                    <mat-option value="3">Processed</mat-option>
+                                    <mat-option value="4">Delivered</mat-option>
+                                </mat-select>   
+                            </mat-form-field>
+                        </div>
+                        <div class="d-flex flex-column ml-25">
+                            <p class="fs-16 text-detail">Payment Status</p>
+                            <!-- <select class="dropdown-sort h-50 p-5 form-control" formControlName='payment_status'>
+                                <option value="0">Pending</option>
+                                <option value="1">Paid</option>
+                            </select> -->
+                            <mat-form-field appearance="fill" class="inputJOUP" style="width: 300px;">
+                                <!-- <mat-label disbled selected>Select Payment Status</mat-label> -->
+                                <mat-select formControlName="payment_status" [placeholder]="job_order_details.job_order_payment_status== 0 ? 'Pending':'Paid'">
+                                    <mat-option value="0">Pending</mat-option>
+                                    <mat-option value="1">Paid</mat-option>
+                                </mat-select>   
+                            </mat-form-field>
+                        </div>
+                        <div class="ml-25 mt-auto"> 
+                            <button class="bttn btn-primary-pink d-flex align-items-center h-58" (click)="updateRequest(job_order_details.job_order_request_id)">Update Status</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf=(job_order_details)>
+    <div class="container mb-40" style="background-color: #fff; padding: 20px 40px 0px 40px !important;">
+        <div class="status-stepper p-20 mt-25 h-200">
+            <p class="fs-16 fw-700 text-safari">Job Order Status</p>
+            <div class="stepper-container">
+                <ul class="stepper">
+                    <ng-container *ngIf="job_order_details.job_order_status == 2 || job_order_details.job_order_status == 3 || job_order_details.job_order_status == 4">
+                        <li class="step active">
+                            <span class="dot">
+                                <span class="vector" style="color:white;margin-left: 4px;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">J.O Submitted</span>
+                            <span class="lower-text fs-12 fw-400">{{ job_order_submitted | transformDate: '': 'lll'}}
+                            </span>
+                        </li>
+                        <li *ngIf="job_order_details.job_order_status == 2" class="step inactive">
+                            <span class="dot">
+                                <span class="vector"></span>
+                                <div class="current"></div>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">Processed</span>
+                            <span class="lower-text"></span>
+                        </li>
+                        <li *ngIf="job_order_details.job_order_status == 3 || job_order_details.job_order_status == 4" class="step active-limit">
+                            <span class="dot">
+                                <span class="vector" style="color:white;margin-left: 4px;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">Processed</span>
+                            <span class="lower-text">{{ job_order_processed | transformDate: '': 'lll'}}</span>
+                        </li>
+                        <li *ngIf="job_order_details.job_order_status == 3" class="step active-limit">
+                            <span class="dot">
+                                <span class="vector"></span>
+                                <div class="current"></div>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">Delivered</span>
+                            <span class="lower-text"></span>
+                        </li>
+                        <li *ngIf="job_order_details.job_order_status == 4" class="step active-limit">
+                            <span class="dot">
+                                <span class="vector" style="color:white;margin-left: 4px;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">Delivered</span>
+                            <span class="lower-text">{{ job_order_delivered | transformDate: '': 'lll'}}</span>
+                        </li>
+                        <li *ngIf="job_order_details.job_order_status == 2" class="step inactive">
+                            <span class="dot">
+                                <span class="vector"></span>
+                            </span>
+                            <span class="upper-text text-safari text-secondary fs-16">Delivered</span>
+                            <span class="lower-text"></span>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="job_order_details.job_order_status == 5">
+                        <li class="step danger">
+                            <span class="dot">
+                                <span class="vector" style="color:white;margin-left: 4px;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">J.O Submitted</span>
+                            <span class="lower-text fs-12 fw-400">{{ job_order_submitted | transformDate: '': 'lll'}}
+                            </span>
+                        </li>
+                        <li class="step danger-limit">
+                            <span class="dot">
+                                <span class="vector"style="color:white;margin-left: 6px;padding:1px;"><i class="fa fa-times" aria-hidden="true"></i></span>
+                            </span>
+                            <span class="upper-text text-safari fw-700 fs-14">Processed</span>
+                            <span class="lower-text text-safari fs-12 fw-400">J.O Request Declined</span>
+                        </li>
+                        <li class="step danger-inactive">
+                            <span class="dot">
+                                <span class="vector"></span>
+                            </span>
+                            <span class="upper-text text-safari text-secondary fs-16">Delivered</span>
+                            <span class="lower-text"></span>
+                        </li>
+                    </ng-container>
+
+                    <!-- canceled -->
+                <ng-container *ngIf="job_order_details.job_order_status == 7">
+                    
+                    <li class="step danger">
+                        <span class="dot">
+                            <span class="vector" style="color:white;margin-left: 4px;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                        </span>
+                        <span class="upper-text text-safari fw-700 fs-14">J.O Submitted</span>
+                        <span class="lower-text fs-12 fw-400">{{ job_order_submitted | transformDate: '': 'lll'}}
+                        </span>
+                    </li>
+                    <li class="step danger-limit">
+                        <span class="dot">
+                            <span class="vector"style="color:white;margin-left: 6px;padding:1px;"><i class="fa fa-times" aria-hidden="true"></i></span>
+                        </span>
+                        <span class="upper-text text-safari fw-700 fs-14">Canceled</span>
+                        <span class="lower-text text-safari fs-12 fw-400">J.O Request Canceled</span>
+                    </li>
+                    <li class="step danger-inactive">
+                        <span class="dot">
+                            <span class="vector"></span>
+                        </span>
+                        <span class="upper-text text-safari text-secondary fs-16">Delivered</span>
+                        <span class="lower-text"></span>
+                    </li>
+                </ng-container>
+                 <!--end canceled -->
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="job_order_details.job_order_status == 5" class="decline-msg-container mt-15 d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                    <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+                    </svg>                     
+            </div>
+            <div class="col-md-9 d-flex flex-column ml-10">
+                <p class="fs-14 fw-700">Thee Print declined this request.</p>
+                <span class="fs-14 fw-400" *ngIf="decline_remarks">{{decline_remarks}}</span>
+            </div>
+        </div>
+        <div class="row d-flex flex-column" style="padding: 20px 15px !important;">
+            <div>
+                <p class="fs-16 fw-700 text-safari">General Details</p>
+            </div>
+            <!-- <div class="d-flex">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <div>
+                        <p class="fs-14 fw-400 text-secondary">Payment Status</p>
+                        <span *ngIf="job_order_details.job_order_payment_status == 0" class="badge_pending">Pending</span>
+                        <span *ngIf="job_order_details.job_order_payment_status == 1" class="badge_paid">Paid</span>
+                    </div>
+                    <div class="mt-30">
+                        <p class="fs-14 fw-400 text-secondary">Contact Person</p>
+                        <span class="fs-16">{{job_order_details.company_address_person_firstname}} {{job_order_details.company_address_person_lastname}}</span>
+                    </div>
+                    <div class="mt-35">
+                        <p class="fs-14 fw-400 text-secondary">Due Date</p>
+                        <span class="fs-16">{{job_order_details.job_order_due_date |  date: 'M/d/yyyy' }}</span>
+                    </div>
+                </div>
+                <div class="col-md-5 d-flex flex-column">
+                    <div>
+                        <p class="fs-14 fw-400 text-secondary">Project Name</p>
+                        <span class="fs-16">{{job_order_details.job_order_project_name}}</span>
+                    </div>
+                    <div class="mt-30">
+                        <p class="fs-14 fw-400 text-secondary">Contact Number</p>
+                        <span class="fs-16">{{job_order_details.company_address_contact}}</span>
+                    </div>
+                    <div class="mt-35">
+                        <p class="fs-14 fw-400 text-secondary">Shipping Address</p>
+                        <p class="fs-16 fw-700">{{job_order_details.company_address_label}}</p>
+                        <span class="fs-16">{{job_order_details.company_address}}</span>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row pl-20">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <div>
+                        <p class="fs-14 fw-400 text-secondary">Payment Status</p>
+                        <span *ngIf="job_order_details.job_order_payment_status == 0" class="badge_pending">Pending</span>
+                        <span *ngIf="job_order_details.job_order_payment_status == 1" class="badge_paid">Paid</span>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Client</p>
+                    <span class="fs-16"><img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/company_logo/{{job_order_details.partner_logo}}">
+                            {{job_order_details.partner_company}}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+            </div>
+            <div class="row pl-20">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Project Name</p>
+                    <span class="fs-16">{{job_order_details.job_order_project_name}}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Due Date</p>
+                    <span class="fs-16">{{job_order_details.job_order_due_date |  transformDate: '': 'L' }}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+            </div>
+            <div class="row pl-20">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Shipping Address</p>
+                    <p class="fs-16 fw-700 text-safari">{{job_order_details.company_address_label}}</p>
+                    <span class="fs-16">{{job_order_details.company_address}}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+            </div>
+            <div class="row pl-20">
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Contact Person</p>
+                    <span class="fs-16">{{job_order_details.company_address_person_firstname}} {{job_order_details.company_address_person_lastname}}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Contact Number</p>
+                    <span class="fs-16">{{job_order_details.company_address_contact}}</span>
+                </div>
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+            </div>
+            <div class="row pl-20">
+                <div class="col-md-8 d-flex flex-column pl-0">
+                    <p class="fs-14 fw-400 text-secondary">Remarks</p>
+                    <span class="fs-16" *ngIf="job_order_details.job_order_remarks">{{job_order_details.job_order_remarks}}</span>
+                    <span class="fs-16" *ngIf="!job_order_details.job_order_remarks">- -</span>
+                </div>
+                
+                <div class="col-md-4 d-flex flex-column pl-0"></div>
+            </div>
+        </div>
+        <div class="row ml--40 mr--40 justify-content-center" style="border-top: 1px solid #C2CBD7;">
+            <div style="padding: 20px 15px 10px 15px !important; width:100%;">
+                <p class="fs-16 fw-700 text-safari">Quotation Details</p>
+                <table class="table table-borderless w-100-per">
+                    <thead>
+                        <tr>
+                            <th class="text-secondary w-30-per"><div class="text-safari">Item</div></th>
+                            <th class="text-secondary w-15-per"><div class="text-safari">Dimensions</div></th>
+                            <th class="text-secondary w-10-per text-center"><div class="text-safari">Qty</div></th>
+                            <th class="text-secondary w-10-per text-right"><div class="text-safari">Unit Price</div></th>
+                            <th class="text-secondary w-10-per text-right"><div class="text-safari">Total Amount</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let job_order of order_items">
+                            <td class="fs-16">({{job_order.machine_print}}) {{job_order.product_media}}</td>
+                            <td class="fs-16">
+                                <span class="fs-16" *ngIf="job_order.job_order_item_unit == 0">{{job_order.job_order_item_width}} in x {{job_order.job_order_item_length}} in</span>
+                                <span class="fs-16" *ngIf="job_order.job_order_item_unit == 1">{{job_order.job_order_item_width}} ft x {{job_order.job_order_item_length}} ft</span>
+                            </td>
+                            <td class="fs-16 text-center">{{job_order.job_order_item_qty}}</td>
+                            <td class="fs-16 text-right">{{job_order.job_order_item_price | currency }}</td>
+                            <td class="fs-16 text-right">{{job_order.total_price | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr class="mb-0 mr-5 ml-5" style="border: 2px dashed #C2CBD7 !important; border-top: none !important;">
+                <div class="col-md-5 pr-0" style="float: right;">
+                    <div class="paper_rip">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <span class="fs-16 fw-700 text-secondary text-safari">Subtotal</span>
+                                <span class="fs-16 fw-700 ml-auto text-safari" style="color: #0A0929;">{{subTotal | currency}}</span>
+                            </div>
+                            <!-- <div class="d-flex mt-15">
+                                <span class="fs-16 fw-700 text-secondary">VAT(12%)</span>
+                                <span class="fs-16 fw-700 ml-auto" style="color: #0A0929;">{{vat | currency}}</span>
+                            </div> -->
+                            <div class="d-flex mt-25">
+                                <span class="fs-16 fw-700 text-secondary text-safari">Total</span>
+                                <span class="fs-24 fw-700 text-primary ml-auto text-total_safari text-safari">{{gross | currency}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<!-- Modal Form -->
+<ngx-smart-modal #declineMessage identifier="declineMessage" [customClass]="'modal-checkin-class nsm-centered'" [formGroup]="declineForm">
+    <ng-container  *ngIf="job_order_details">
+        <div class="card-body">
+            <div>
+                <span class="text-header fs-16 fw-700">Decline job order request</span>
+            </div>
+            <hr>
+            <div class="d-flex flex-column">
+                <span class="text-detail fs-14">Kindly state the reason why you are declining this job order.</span>
+                <label class="fs-14 mt-15 text-detail" for="decline_message">Message</label>
+                <textarea
+                name="decline_message" 
+                id="decline_message"
+                formControlName="decline_message" 
+                class="form-control h-130 w-540"
+                placeholder="Your message here" 
+                cols="30" 
+                [ngClass]="{'is-invalid':declineForm.controls.decline_message.touched&&declineForm.controls.decline_message.hasError('required')}"
+                rows="10">
+                </textarea>
+                <div class="form-validator" *ngIf="declineForm.controls.decline_message.touched">
+                    <p class="mb-0" style="color: red" *ngIf="declineForm.controls.decline_message.hasError('required')">*This field is required</p>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-8 offset-4 d-flex align-items-center justify-content-end pt-10 pb-20">
+                <button class="btn-cancel ml-10" (click)="closeDeclineMessageModal()">Cancel</button>
+                <button class="bttn btn-primary-pink" (click)='declineRequest(job_order_details.job_order_request_id)'>Send Message</button>
+            </div>
+        </div>
+    </ng-container>
+</ngx-smart-modal>
+
+<ngx-smart-modal #successUpdate [identifier]="'successUpdate'" [customClass]="'nsm-centered'" [dismissable] = "false" [closable]="false">
+    <ng-container  *ngIf="job_order_details">
+        <div class="col-md-8 offset-2 d-flex flex-column align-items-center">
+            <p class="mt-10" ><img src="assets/images/check_icon.png"></p>
+            <p class="fs-20 mt-20" ><b>Job order updated!</b></p>
+            <div class="bg-detail w-100-per p-10 mt-10 d-flex flex-column align-items-center">
+                <p class="fs-12 text-secondary">J.O Number</p>
+                <p class="fs-16" style="color:#005DAB;" >{{job_order_details.job_order_quote_num}}</p>
+            </div>
+            <p class="fs-16 tC mt-15">This job order has been been moved to your archived folder.</p>
+            <div class="mt-30 mb-15" style="text-align: center;">
+                <button class="bttn btn-primary-pink d-flex align-items-center" (click)="closeModal()">Go to job orders list</button>
+            </div>
+        </div>
+    </ng-container>
+</ngx-smart-modal>
+
+<ngx-smart-modal #successDecline [identifier]="'successDecline'" [customClass]="'nsm-centered'" [dismissable] = "false" [closable]="false">
+    <ng-container  *ngIf="job_order_details">
+        <div class="col-md-8 offset-2 d-flex flex-column align-items-center">
+            <p class="mt-10" ><img src="assets/images/check_icon.png"></p>
+            <p class="fs-20 tC mt-20" ><b>Job order has been declined!</b></p>
+            <div class="bg-detail w-100-per p-10 mt-10 d-flex flex-column align-items-center">
+                <p class="fs-12 text-secondary">J.O Number</p>
+                <p class="fs-16" style="color:#005DAB;" >{{job_order_details.job_order_quote_num}}</p>
+            </div>
+            <p class="fs-16 tC mt-15">This job order has been successfully declined.</p>
+            <div class="mt-30 mb-15" style="text-align: center;">
+                <button class="bttn btn-primary-pink d-flex align-items-center" (click)="closeModal()">Go to job orders list</button>
+            </div>
+        </div>
+    </ng-container>
+</ngx-smart-modal>
+
+<ngx-smart-modal #cancelled [identifier]="'cancelled'" [customClass]="'nsm-centered'" [dismissable] = "false" [closable]="false">
+    <ng-container  *ngIf="job_order_details">
+        <div class="col-md-8 offset-2 d-flex flex-column align-items-center">
+            <p class="mt-10" ><svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#FFC000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0833 19.125H43.9167C45.475 19.125 46.75 20.4 46.75 21.9583V41.7917C46.75 43.35 45.475 44.625 43.9167 44.625H38.25L34 48.875L29.75 44.625H24.0833C22.5108 44.625 21.25 43.35 21.25 41.7917V21.9583C21.25 20.4 22.5108 19.125 24.0833 19.125ZM37.0742 41.7917H43.9167V21.9583H24.0833V41.7917H30.9258L31.7475 42.6133L34 44.8658L36.2383 42.6275L37.0742 41.7917ZM32.5833 40.375V37.5417H35.4167V40.375H32.5833ZM36.8333 29.0417C36.8333 27.4833 35.5583 26.2083 34 26.2083C32.4417 26.2083 31.1667 27.4833 31.1667 29.0417H28.3333C28.3333 25.9108 30.8692 23.375 34 23.375C37.1308 23.375 39.6667 25.9108 39.6667 29.0417C39.6667 30.8591 38.5475 31.8372 37.4577 32.7895C36.4239 33.693 35.4167 34.5732 35.4167 36.125H32.5833C32.5833 33.5449 33.918 32.5218 35.0915 31.6224C36.012 30.9168 36.8333 30.2872 36.8333 29.0417Z" fill="#FFB100"/>
+                </svg>  </p>
+            <p class="fs-20 mt-20" ><b>Job order update failed!</b></p>
+            <div class="bg-detail w-100-per p-10 mt-10 d-flex flex-column align-items-center">
+                <p class="fs-12 text-secondary">J.O Number</p>
+                <p class="fs-16" style="color:#005DAB;" >{{job_order_details.job_order_quote_num}}</p>
+            </div>
+            <p class="fs-16 tC mt-15">This job order has been cancelled by the partner.</p>
+            <div class="mt-30 mb-15" style="text-align: center;">
+                <button class="bttn btn-primary-pink d-flex align-items-center" (click)="closeModal()">Go to job orders list</button>
+            </div>
+        </div>
+    </ng-container>
+</ngx-smart-modal>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

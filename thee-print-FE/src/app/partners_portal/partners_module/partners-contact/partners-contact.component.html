@@ -1,0 +1,429 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div style="width: 100vw;height: 100vh;overflow:hidden">
+    <div style="max-height: 100vh; width: 100%; overflow-y: scroll;">
+        <div id="topnav" class="nav-safari topnav d-none d-lg-flex justify-content-center"
+            style="background: rgb(9 21 45 / 83%) !important;">
+            <a href="index.html"><img src="assets/images/landscape.png"> </a>
+            <a [routerLink]="['/']">Home</a>
+            <a [routerLink]="['/']">About</a>
+            <a [routerLink]="['/']">Services</a>
+            <a [routerLink]="['/']">Products</a>
+            <a [routerLink]="['/partners_contact']">Contact Us</a>
+            <button [routerLink]="['/partners_login']" class="button-purple-transparent ml-60 text-safari">Go to Partner's
+                Portal<img src="assets/images/arrow_left.png"></button>
+        </div>
+
+        <div id="topnav" class="topnav d-flex d-lg-none"
+            style="background: rgb(9 21 45 / 83%) !important; padding-left: 0%;">
+            <a href="index.html"><img src="assets/images/landscape1.png"></a>
+
+            <aside [ngClass]="{'minimized':common.minimize_header}">
+                <div class="sidebar-wrapper">
+                    <div class="app-logo text-left" [ngClass]="{'invisible':common.minimize_header}">
+                        <img src="assets/images/logolandscape.png" style="width: 70%;">
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a [routerLink]="['/']">
+                                <span class="home pr-50">Home</span><br>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a [routerLink]="['/']">
+                                <span class="about">About</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a [routerLink]="['/']">
+                                <span class="services">Services</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a [routerLink]="['/']">
+                                <span class="products">Products</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a [routerLink]="['/partners_contact']">
+                                <span class="contact-us">Contact us</span>
+                            </a>
+                        </li>
+                        <div>
+                            <button [routerLink]="['/partners_login']"
+                                class="button-purple-transparent goto-partners">Go to Partner's Portal<img
+                                    src="assets/images/arrow_left.png"></button>
+                        </div>
+                        <div class="row pt-50 pl-100 pr-100">
+                            <div class="">
+                                <a href="https://www.facebook.com/Thee-Print-103595451522517">
+                                    <button class="button-red-rounded" style="box-shadow: 1px 3px 8px #C0024A; ">follow
+                                        us on facebook</button>
+                                </a>
+                            </div>
+                        </div>
+
+                    </ul>
+                </div>
+            </aside>
+
+            <header [ngClass]="{'expand':common.minimize_header}">
+                <nav class="flex">
+                    <div class="hamburger-menu hamburger-menu-two">
+                        <input type="checkbox" (click)="setHeaderView($event)" class="input-check2" id="checkbox"
+                            hidden />
+                        <label class="bars-container bars-container2" for="checkbox">
+                            <!-- <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar3"></span> -->
+                            <i-feather name="menu" class="menu-color"></i-feather>
+                        </label>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- <div class="main-container" [ngClass]="{'expand':common.minimize_header}">
+        <router-outlet></router-outlet>
+    </div> -->
+        </div>
+
+
+        <section id="home"
+            style="background-image: url(assets/images/block-hero5.png); background-repeat: round; height: 500px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <p class="hero-title partners-contact-text text-safari" style="padding-top: 180px;">Contact Us</p>
+                        <p class="body-text partners-contact-content">
+                            Interested in working with us? We'd love to hear from you.
+                        </p>
+                        <p class="body-text partners-contact-content">Share your thoughts using the form below.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sendmsg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <img src="assets/images/msg1.png" class="msg-bg">
+                        <div class="card" style="box-shadow: 0px 1px 40px #e8e7e7; margin-top: -650px;">
+                            <div class="card-body">
+                                <form [formGroup]="contactUsForm">
+                                    <div class="form-group">
+                                        <p class="title-bold send-mssge-text text-safari">Send us a message</p>
+                                        <p class="body-small send-text">Full Name <span style="color: red;">*</span></p>
+                                        <input type="text" maxlength="50" class="form-control"
+                                            formControlName="fullname" style="width: 100% !important;"
+                                            [ngClass]="{'is-invalid':contactUsForm.controls.fullname.touched &&contactUsForm.controls.fullname.hasError('required')}">
+                                    </div>
+                                    <div class="form-validator" *ngIf="contactUsForm.controls.fullname.touched">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 139px;"
+                                            *ngIf="contactUsForm.controls.fullname.hasError('required')">*This field is
+                                            required.</p>
+                                        <p class="mb-0" style="color: red; position: absolute; top: 139px;"
+                                            *ngIf="contactUsForm.controls.fullname.hasError('maxLength')">*Maximum of 50
+                                            characters only.</p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <p class="body-small send-text">Contact Number<span
+                                                        style="color: red;">*</span></p>
+                                                <input type="text" maxlength="11" (keypress)="keyPressNumbers($event)"
+                                                    class="form-control" formControlName="contactNo"
+                                                    style="width: 100% !important;"
+                                                    [ngClass]="{'is-invalid':contactUsForm.controls.contactNo.touched &&contactUsForm.controls.contactNo.hasError('required')}">
+                                            </div>
+                                            <div class="form-validator"
+                                                *ngIf="contactUsForm.controls.contactNo.touched">
+                                                <p class="mb-0" style="color: red; position: absolute; top: 72px;"
+                                                    *ngIf="contactUsForm.controls.contactNo.hasError('required')">*This
+                                                    contact is required.</p>
+                                                <p class="mb-0" style="color: red; position: absolute; top: 72px;"
+                                                    *ngIf="contactUsForm.controls.contactNo.hasError('maxLength')">
+                                                    *Maximum of 11 number only.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <p class="body-small send-text">Email Address<span
+                                                        style="color: red;">*</span></p>
+                                                <input type="email" maxlength="70" class="form-control"
+                                                    formControlName="email" style="width: 100% !important;"
+                                                    [ngClass]="{'is-invalid':contactUsForm.controls.email.touched &&contactUsForm.controls.email.hasError('required')}">
+                                            </div>
+                                            <div class="form-validator" *ngIf="contactUsForm.controls.email.touched">
+                                                <p class="mb-0" style="color: red; position: absolute; top: 72px;"
+                                                    *ngIf="contactUsForm.controls.email.hasError('email')">*Invalid
+                                                    Email.</p>
+                                                <p class="mb-0" style="color: red; position: absolute; top: 72px;"
+                                                    *ngIf="contactUsForm.controls.email.hasError('required')">*This
+                                                    email is required.</p>
+                                                <p class="mb-0" style="color: red; position: absolute; top: 72px;"
+                                                    *ngIf="contactUsForm.controls.email.hasError('maxLength')">*Maximum
+                                                    of 70 characters only.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <textarea name="message" maxlength="300" class="form-control mt-10"
+                                            formControlName="message" cols="30" rows="10"
+                                            placeholder="Your message here"
+                                            style="width: 100%; height: 100% !important;"
+                                            [ngClass]="{'is-invalid':contactUsForm.controls.message.touched &&contactUsForm.controls.message.hasError('required')}">
+                                </textarea>
+                                    </div>
+                                    <div class="form-validator" *ngIf="contactUsForm.controls.message.touched">
+                                        <p class="mb-0 msg-safari" style="color: red; position: absolute; top: 488px;"
+                                            *ngIf="contactUsForm.controls.message.hasError('required')">*This message is
+                                            required.</p>
+                                        <p class="mb-0 msg-safari" style="color: red; position: absolute; top: 488px;"
+                                            *ngIf="contactUsForm.controls.message.hasError('maxLength')">*Maximum of 300
+                                            characters only.</p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <p class="body-small-text send-text">This form is protected by invisble</p>
+                                            <p class="body-small-text send-text">reCAPTCHA (Privacy, Terms)</p>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <button class="button-red-rounded moz-submit text-safari" (click)="sendEmailContactUs()"
+                                                style="box-shadow: -1px 7px 20px #f4b3cb;">Submit message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" style="margin-top: 50px;">
+                        <p class="body-text-address send-body">Address</p>
+                        <p class="big-bodys">#106 Caimito Rd. Brgy. 80- D1, Caloocan City</p>
+
+                        <p class="body-text-email send-body mt-40">Email</p>
+                        <a href="mailto:someone@example.com">
+                            <p class="big-body">mimi@theeprint.com.ph</p>
+                        </a>
+                        <p class="body-text-contact send-body mt-40">Contact</p>
+                        <a href="tel:0977 849 3382">
+                            <p class="big-body">0977 849 3382</p>
+                        </a>
+
+
+                        <div class="row m-auto fb-icon-align mb-20">
+                            <a href="https://www.facebook.com/Thee-Print-103595451522517">
+                                <button class="button-primary-rounded ">
+                                    <svg width="8" height="16" class="mr-10" viewBox="0 0 8 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2.32424 16V8.84375H0V6H2.32424V3.75938C2.32424 1.325 3.76667 0 5.87273 0C6.88182 0 7.74849 0.078125 8 0.1125V2.65625H6.53939C5.39394 2.65625 5.17273 3.21875 5.17273 4.04063V6H7.75758L7.40303 8.84375H5.17273V16"
+                                            fill="white" />
+                                    </svg>
+
+                                    Follow us on Facebook
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map" class="image-map">
+            <agm-map [zoom]="17" [latitude]="lat" [longitude]="lng">
+                <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="location">
+                </agm-marker>
+            </agm-map>
+        </section>
+
+
+        <footer class="footer-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3" style="margin-top: 75px;">
+                        <!-- <svg width="250" height="350" class="tprint-logo" viewBox="0 0 939 516" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M546.318 169.492L470.608 245.203H473.666C498.436 245.203 516.864 239.555 528.948 228.257C541.033 216.96 547.052 201.264 547.052 181.17C547.052 177.083 546.806 173.191 546.318 169.492ZM435.311 280.5L396.805 319.006H435.311V280.5Z" fill="url(#paint0_linear)"/>
+                            <path d="M508.305 109.128L475.91 141.735H510.755V179.609H484.409V224.592H484.409L552.359 156.429C550.52 142.486 545.216 131.307 536.47 122.964C529.379 116.169 519.986 111.561 508.305 109.128ZM438.037 179.609L386.642 230.791V305.943H402.846L453.854 255.147V224.592H453.854V179.609H438.037Z" fill="url(#paint1_linear)"/>
+                            <path d="M393.918 215.857L430.701 179.074H425.279V141.201H468.574L508.73 101.044C502.184 99.6808 494.919 99 486.938 99H393.918V215.857Z" fill="url(#paint2_linear)"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M432.785 141.201H468.574L508.73 101.044C502.183 99.6804 494.92 99.0002 486.938 99.0002H421.806C422.884 114.006 426.712 128.243 432.785 141.201ZM546.318 169.492L510.036 205.774C519.526 208.251 529.475 209.573 539.731 209.573C540.462 209.573 541.19 209.559 541.917 209.545C545.343 201.335 547.052 191.877 547.052 181.17C547.052 177.083 546.807 173.191 546.318 169.492ZM508.304 109.127L475.91 141.736H510.755V179.608H484.409V195.72C490.843 199.164 497.626 202.031 504.695 204.244L552.359 156.429C550.52 142.486 545.216 131.308 536.471 122.964C529.379 116.169 519.986 111.561 508.304 109.127Z" fill="url(#paint3_linear)" fill-opacity="0.4"/>
+                            <path d="M751.274 354.424V347.163H748.562V346.192H755.087V347.163H752.364V354.424H751.274Z" fill="#1B1918"/>
+                            <path d="M756.176 354.424V346.192H757.816L759.764 352.02C759.944 352.563 760.075 352.969 760.157 353.239C760.251 352.939 760.397 352.499 760.595 351.919L762.566 346.192H764.032V354.424H762.982V347.534L760.59 354.424H759.607L757.226 347.416V354.424H756.176Z" fill="#1B1918"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M152.827 350.722H214.415V366.92H193.743V416.295H173.483V366.92H152.827V350.722ZM223.667 350.722H243.927V373.668H266.079V350.722H286.431V416.295H266.079V389.776H243.927V416.295H223.667V350.722ZM299.851 350.722H354.141V364.722H320.156V375.15H351.683V388.524H320.156V401.44H355.133V416.295H299.851V350.722ZM366.004 350.722H420.294V364.722H386.309V375.15H417.837V388.524H386.309V401.44H421.286V416.295H366.004V350.722Z" fill="#1B1918"/>
+                            <path d="M432.111 350.722H465.791C473.118 350.722 478.615 352.463 482.264 355.959C485.913 359.44 487.745 364.416 487.745 370.844C487.745 377.47 485.76 382.646 481.776 386.371C477.791 390.096 471.714 391.959 463.547 391.959H452.462V416.295H432.111V350.722ZM452.462 378.676H457.424C461.332 378.676 464.065 378.005 465.653 376.646C467.226 375.287 468.02 373.546 468.02 371.44C468.02 369.379 467.332 367.623 465.958 366.203C464.6 364.768 462.019 364.05 458.234 364.05H452.462V378.676ZM498.615 416.295V350.722H532.387C538.646 350.722 543.44 351.256 546.738 352.341C550.051 353.409 552.722 355.394 554.753 358.31C556.783 361.211 557.791 364.753 557.791 368.92C557.791 372.57 557.013 375.699 555.47 378.341C553.913 380.982 551.775 383.119 549.074 384.768C547.334 385.806 544.966 386.676 541.959 387.348C544.371 388.157 546.127 388.966 547.241 389.776C547.974 390.31 549.058 391.456 550.478 393.211C551.898 394.982 552.844 396.326 553.318 397.287L563.12 416.295H540.218L529.394 396.249C528.02 393.669 526.798 391.974 525.715 391.196C524.264 390.188 522.6 389.684 520.753 389.684H518.967V416.295H498.615ZM518.967 377.287H527.516C528.432 377.287 530.219 376.997 532.875 376.401C534.219 376.127 535.318 375.44 536.173 374.34C537.013 373.241 537.44 371.974 537.44 370.539C537.44 368.416 536.768 366.798 535.424 365.668C534.081 364.524 531.562 363.959 527.867 363.959H518.967V377.287ZM590.707 367.019V416.295H570.402V374.54L590.707 367.019ZM605.38 350.722H624.311L648.998 386.997V350.722H668.098V416.295H648.998L624.433 380.294V416.295H605.38V350.722ZM676.953 350.722H738.541V366.92H717.869V416.295H697.609V366.92H676.953V350.722Z" fill="#C4C4C4"/>
+                            <path d="M432.111 350.722H465.791C473.118 350.722 478.615 352.463 482.264 355.959C485.913 359.44 487.745 364.416 487.745 370.844C487.745 377.47 485.76 382.646 481.776 386.371C477.791 390.096 471.714 391.959 463.547 391.959H452.462V416.295H432.111V350.722ZM452.462 378.676H457.424C461.332 378.676 464.065 378.005 465.653 376.646C467.226 375.287 468.02 373.546 468.02 371.44C468.02 369.379 467.332 367.623 465.958 366.203C464.6 364.768 462.019 364.05 458.234 364.05H452.462V378.676ZM498.615 416.295V350.722H532.387C538.646 350.722 543.44 351.256 546.738 352.341C550.051 353.409 552.722 355.394 554.753 358.31C556.783 361.211 557.791 364.753 557.791 368.92C557.791 372.57 557.013 375.699 555.47 378.341C553.913 380.982 551.775 383.119 549.074 384.768C547.334 385.806 544.966 386.676 541.959 387.348C544.371 388.157 546.127 388.966 547.241 389.776C547.974 390.31 549.058 391.456 550.478 393.211C551.898 394.982 552.844 396.326 553.318 397.287L563.12 416.295H540.218L529.394 396.249C528.02 393.669 526.798 391.974 525.715 391.196C524.264 390.188 522.6 389.684 520.753 389.684H518.967V416.295H498.615ZM518.967 377.287H527.516C528.432 377.287 530.219 376.997 532.875 376.401C534.219 376.127 535.318 375.44 536.173 374.34C537.013 373.241 537.44 371.974 537.44 370.539C537.44 368.416 536.768 366.798 535.424 365.668C534.081 364.524 531.562 363.959 527.867 363.959H518.967V377.287ZM590.707 367.019V416.295H570.402V374.54L590.707 367.019ZM605.38 350.722H624.311L648.998 386.997V350.722H668.098V416.295H648.998L624.433 380.294V416.295H605.38V350.722ZM676.953 350.722H738.541V366.92H717.869V416.295H697.609V366.92H676.953V350.722Z" fill="url(#paint4_linear)"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M570.403 350.722H590.708V361.551L570.403 369.073V350.722Z" fill="#1B1918"/>
+                            <defs>
+                            <linearGradient id="paint0_linear" x1="354.077" y1="372.094" x2="643.977" y2="77.3148" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF6600"/>
+                            <stop offset="1" stop-color="#FFFF00"/>
+                            </linearGradient>
+                            <linearGradient id="paint1_linear" x1="552.468" y1="109.282" x2="269.402" y2="354.281" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF0066"/>
+                            <stop offset="1" stop-color="#280000"/>
+                            </linearGradient>
+                            <linearGradient id="paint2_linear" x1="310.641" y1="243.25" x2="520.501" y2="51.2042" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#000066"/>
+                            <stop offset="1" stop-color="#00CCFF"/>
+                            </linearGradient>
+                            <linearGradient id="paint3_linear" x1="467.06" y1="183.953" x2="570.525" y2="79.9988" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="white"/>
+                            <stop offset="1" stop-color="white" stop-opacity="0"/>
+                            </linearGradient>
+                            <linearGradient id="paint4_linear" x1="669.842" y1="485.321" x2="674.723" y2="274.973" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#000066"/>
+                            <stop offset="1" stop-color="#00CCFF"/>
+                            </linearGradient>
+                            </defs>
+                        </svg> -->
+                        <img  src="assets/images/loginAdmin.png" style="width: 250px; height: 150px;">
+                    </div>
+
+                    <div class="col-md-3 address-top" style="margin-top: 100px;">
+                        <p class="body-text-footer-address address-text text-left">ADDRESS</p>
+                        <hr class="hr-address">
+                        <p class="body-text-footers address-body text-left mt-30">#106 Caimito Rd. Brgy. 80- D1, Caloocan City</p>
+                    </div>
+
+                    <div class="col-md-3 contactus-top" style="margin-top: 100px;">
+                        <p class="body-text-footer-contact contact-text text-left">CONTACT</p>
+                        <hr class="hr-contact">
+                        <a href="mailto:someone@example.com">
+                            <p class="body-text-footer contact-body text-left mt-30">mimi@theeprint.com.ph</p>
+                        </a>
+                        <a href="tel:0977 849 3382">
+                            <p class="body-text-footer contact-body text-left">0977 849 3382</p>
+                        </a>
+
+                        <div class="row m-auto fb-icon-align">
+                            <a href="https://www.facebook.com/Thee-Print-103595451522517">
+                                <button class="button-primary-rounded">
+                                    <svg width="8" height="16" class="mr-10" viewBox="0 0 8 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2.32424 16V8.84375H0V6H2.32424V3.75938C2.32424 1.325 3.76667 0 5.87273 0C6.88182 0 7.74849 0.078125 8 0.1125V2.65625H6.53939C5.39394 2.65625 5.17273 3.21875 5.17273 4.04063V6H7.75758L7.40303 8.84375H5.17273V16"
+                                            fill="white" />
+                                    </svg>
+                                    Follow us on Facebook
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 legal-top" style="margin-top: 100px;">
+                        <p class="body-text-footer-legal legal-text text-left">LEGAL</p>
+                        <hr class="hr-legal">
+                        <p class="body-text-footer legal-body text-left c-pointer mt-30" (click)="termsModal()">Terms and
+                            Conditions</p>
+                        <p class="body-text-footer legal-body text-left c-pointer" (click)="privacyModal()">Privacy
+                            Policy</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <footer class="footer-leen">
+            <div class="row" style="width: 100% !important; background-color: #f7ffff;">
+                <div class="col-md-12">
+                    <div class="lower-footer pt-30 pb-4">
+                        <div class="row mb-5">
+                            <div class="col-md-6 col-sm-12  copy-center">
+                                <span class="sub mt-0 fw-400 copyright-text" style="color: #626172;">Copyright ©
+                                    2021 THEE PRINT</span>
+                            </div>
+                            <div class="col-md-5 col-sm-12  leentech-center">
+                                <p class="sub mt-0 fw-400 copyright-text" style="color: #626172;">Website Design by
+                                    <span class="fw-600 leentech-text" style="color: #0A0929;">LEENTech Network
+                                        Solutions, Inc.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <ngx-smart-modal #success identifier="success" [customClass]="'modal-checkin-class nsm-centered'"
+            closable="false">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z"
+                            fill="#049561" />
+                        <path
+                            d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z"
+                            fill="#00A651" />
+                    </svg>
+                </div>
+                <div class="mt-30 d-flex justify-content-center">
+                    <p class="fs-20 fw-700 text-header">Message successfully sent!</p>
+                </div>
+                <div class="mt-15 d-flex justify-content-center">
+                    <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center"
+                        (click)="closeModal()">Dismiss</button>
+                </div>
+            </div>
+        </ngx-smart-modal>
+
+        <!-- terms modal -->
+        <ngx-smart-modal #terms [identifier]="'terms'" [dismissable]="false" [closable]="false"
+            customClass="nsm-centered">
+            <div class="col-md-12  round-corners termsmodal" style="width: 900px !important;">
+                <div>
+                    <p class="fs-24 fw-700 text-header text-safari">Terms and Conditions</p>
+                </div>
+
+                <div class="card-body" style="overflow-y: scroll;">
+                    <div [innerHtml]="termsandcondition"
+                        style="text-align: justify; max-height: 400px;">
+                        <!-- <p style="text-align: justify;">{{termsandcondition}}</p> -->
+                    </div>
+                </div>
+                <div class="mb-15" style="margin-left: 780px; margin-top: 20px;">
+                    <button class="bttn btn-primary-pink d-flex align-items-center"
+                        (click)="termsCloseModal()">Close</button>
+                </div>
+            </div>
+        </ngx-smart-modal>
+
+        <!-- privacy_modal -->
+        <ngx-smart-modal #privacy [identifier]="'privacy'" [dismissable]="false" [closable]="false"
+            customClass="nsm-centered">
+            <div class="col-md-12  round-corners" style="width: 900px !important;">
+                <div>
+                    <p class="fs-24 fw-700 text-header text-safari">Privacy Policy</p>
+                </div>
+
+                <div class="card-body" style="overflow-y: scroll;">
+                    <div [innerHtml]="privacyPolicy"
+                        style="text-align: justify; max-height: 400px;">
+                    </div>
+                </div>
+                <div class="mb-15" style="margin-left: 780px; margin-top: 20px;">
+                    <button class="bttn btn-primary-pink d-flex align-items-center"
+                        (click)="privacyCloseModal()">Close</button>
+                </div>
+            </div>
+        </ngx-smart-modal>
+
+    </div>
+</div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

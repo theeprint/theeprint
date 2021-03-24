@@ -1,0 +1,175 @@
+<div class="container mt-30">
+    <button class="button-purple-transparent text-safari" [routerLink]="['/admin/admin_products_cms']"><img src="assets/images/arrow_right_pink.png">Back to Product List</button>
+    <h3 class="font-weight-bold mt-30 text-safari" style="color: #0A0929;">Edit Product List</h3>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body"> 
+            <form [formGroup]="cmsUpdateProductForm">
+            <p class="fs-16 fw-400 text ml-5">Photo</p>
+                <div class="row ml-5">
+                    <div class="col-3 p-0">
+                        <ng-container *ngIf="!cProfilePhoto">
+                            <div class="cms-image">
+                                <img *ngIf="croppedImage" class="h-173 D-flex justify-content-center" [src]="croppedImage" />
+                                <img *ngIf="!croppedImage" class="h-173 D-flex justify-content-center" src="{{userService.image_path}}/cms_logo/{{productName.cms_products_logo}}">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="cProfilePhoto">
+                            <div class="cms-image">
+                                <img class="h-173 D-flex justify-content-center" [src]="cProfilePhoto" />
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="col-8 p-0">
+                        <div class="form-group inline-grid w-500 p-0 m-0 button-wrap">
+                            <div class="flex ai-center" style="position: relative;">
+                                <button class="button-upload" for="profile_photo" (click)="hiddenFileInput.click()">
+                                    <svg style="vertical-align: middle;" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.25 12.375V7.875H14.25L9 2.625L3.75 7.875H6.75V12.375H11.25ZM9 4.7475L10.6275 6.375H9.75V10.875H8.25V6.375H7.3725L9 4.7475ZM14.25 15.375V13.875H3.75V15.375H14.25Z" fill="#47494b"/>
+                                    </svg>
+                                        Choose a file</button>
+                                <input type="file" 
+                                (click)="onChange($event)"
+                                (change)="fileChangeEvent($event)"
+                                accept="image/jpeg, image/png"
+                                formControlName="cms_products_logo" 
+                                class="form-control" 
+                                id="profile_photo"
+                                style="display: none;"
+                                #hiddenFileInput
+                                />
+                                <ng-container *ngIf="productName.cms_products_logo;">
+                                    <span class="italic d-flex align-items-center ml-10">{{productName.cms_products_logo}}</span>
+                                </ng-container>
+                                <!-- <ng-container *ngIf="product_image; else noImage">
+                                    <span class="italic">{{product_image}}</span>
+                                </ng-container> -->
+                            </div>
+                        </div>
+                        
+                        <div class="text-secondary fs-12 mt-15">
+                            <p class="m-0 text-grey fs-12">Maximum image file size is 1MB. Try rezising it to atleast 500x500 px in resolution.</p>
+                        </div>
+                        <ngx-smart-modal #cropperviewer identifier="cropperviewer" closable="false" [customClass]="'modal-cropper-class p-30'">
+                            <div class="card-body">
+                                <p style="font-weight: 500; font-size: 16px;">Crop image</p>
+                                <hr style="background-color: #e0dbdb;">
+                                <div id="cropper-container">
+                                    <image-cropper 
+                                        [imageChangedEvent]="imageChangedEvent" 
+                                        [maintainAspectRatio]="true" 
+                                        [aspectRatio]="4 / 5"
+                                        format="png,jpg,jpeg,ico" 
+                                        alignImage="center" 
+                                        imageQuality="50" 
+                                        (imageCropped)="imageCropped($event)"
+                                        (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                                    </image-cropper>
+                                    <hr class="mt-10" style="background-color: #e0dbdb;">
+                                    <div style="text-align: right;">
+                                        <button id="crop-photo-action" class="button-red-rounded mt-10 ml-20"
+                                        (click)="dismissCropperModal()" style="height:35px;padding:0px 27px">Done</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ngx-smart-modal>
+                    </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 mt-20">
+                    <p class="fs-16 text fw-400">Service</p>
+                    <p *ngIf="isLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '30px', margin: 0}"></ngx-skeleton-loader></p>
+                    <ng-container *ngIf="!isLoading">
+                        <div class="form-group">
+                            <!-- <select type="text" class="form-control" formControlName="cms_products_services_category" >
+                                <option selected disabled>Select Service</option>
+                                <option *ngFor="let productCategoriesList of productCategories"  value="{{productCategoriesList.cms_products_category_name}}">{{productCategoriesList.cms_products_category_name}}</option>
+                            </select> -->
+                            <mat-form-field appearance="fill" class="inputPROCMS" style="width: 382px;">
+                                <mat-label disbled selected>Select Service</mat-label>
+                                <mat-select formControlName="cms_products_services_category">
+                                <mat-option *ngFor="let productCategoriesList of productCategories" value="{{productCategoriesList.cms_products_category_name}}">{{productCategoriesList.cms_products_category_name}}</mat-option>
+                                </mat-select>   
+                            </mat-form-field>
+                            
+                            <div class="form-validator" *ngIf="cmsUpdateProductForm.controls.cms_products_services_category.touched">
+                                <p class="mb-0" style="color: red" *ngIf="cmsUpdateProductForm.controls.cms_products_services_category.hasError('required')">*This field is required</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="col-md-8">
+                    <p class="fs-16 text fw-400">Product Name</p>
+                    <p *ngIf="isLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '30px', margin: 0}"></ngx-skeleton-loader></p>
+                    <ng-container *ngIf="!isLoading">
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="cms_products_name" >
+                            <div class="form-validator" *ngIf="cmsUpdateProductForm.controls.cms_products_name.touched">
+                                    <p class="mb-0" style="color: red" *ngIf="cmsUpdateProductForm.controls.cms_products_name.hasError('required')">*This field is required</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <hr>
+        
+            <div class="col-md-2" style="margin-left: 58%;">
+                <button [routerLink]="['/admin/admin_products_cms']" class="button-white">Cancel</button>
+            </div>
+
+            <div class="col-md-3">
+                <button type="submit" (click)="updateCmsProducts()" class="button-purple-rounded  fs-16 lh-24 h-46 fw-400">Save Changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ngx-smart-modal #success identifier="success" [customClass]="'modal-checkin-class nsm-centered'" closable="false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#049561"/>
+                <path d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z" fill="#00A651"/>
+            </svg> 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Product Successfully Updated!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-100 pr-100">Product has been successfully updated in our database.</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="closeEditProductModal()" >Go back to Website CMS</button>
+        </div>     
+    </div>
+</ngx-smart-modal>
+
+<!-- invalid_format -->
+<ngx-smart-modal #invalid identifier="invalid" [customClass]="'modal-checkin-class nsm-centered'">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle opacity="0.2" cx="25.5" cy="25.5" r="25.5" fill="#DD1003"/>
+                <circle cx="25.8333" cy="25.8333" r="19.8333" fill="#DD1003"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30.9998 29.75V24.75C30.9998 21.68 29.3698 19.11 26.4998 18.43V17.75C26.4998 16.92 25.8298 16.25 24.9998 16.25C24.1698 16.25 23.4998 16.92 23.4998 17.75V18.43C20.6398 19.11 18.9998 21.67 18.9998 24.75V29.75L16.9998 31.75V32.75H32.9998V31.75L30.9998 29.75ZM24.9998 35.75C26.0998 35.75 26.9998 34.85 26.9998 33.75H22.9998C22.9998 34.85 23.8998 35.75 24.9998 35.75ZM20.9998 30.75H28.9998V24.75C28.9998 22.27 27.4898 20.25 24.9998 20.25C22.5098 20.25 20.9998 22.27 20.9998 24.75V30.75ZM20.5798 17.83L19.1498 16.4C16.7498 18.23 15.1698 21.05 15.0298 24.25H17.0298C17.1798 21.6 18.5398 19.28 20.5798 17.83ZM34.9698 24.25H32.9698C32.8198 21.6 31.4498 19.28 29.4298 17.83L30.8498 16.4C33.2398 18.23 34.8198 21.05 34.9698 24.25Z" fill="white"/>
+            </svg>   
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Invalid type format of photos</p>
+        </div>
+
+        <div style="text-align: center;">
+            <button id="crop-photo-action" class="button-red-rounded mt-10 ml-20"
+            (click)="invalidFormat()" style="height:35px;padding:0px 27px">Dismiss</button>
+        </div>
+    </div>
+</ngx-smart-modal>
+<!-- end invalid format -->
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

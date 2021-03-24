@@ -1,0 +1,18 @@
+table{
+    thead{
+        tr{
+            th{
+                background-color: #fff !important;
+                padding-bottom: 15px;
+            }
+        }
+    }
+}
+
+@media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+      .datecreated-safari {
+        align-items: center !important;
+      }
+    }
+  }

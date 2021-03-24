@@ -1,0 +1,156 @@
+<div class="container">
+    <h3 class="font-weight-bold mt-40 text-safari" style="color: #0A0929;">Managed Website Contents</h3>
+</div>
+
+<div class="container mt-25">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">About Thee Print</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">A brief overview or introduction of Thee Print. Includes the missions & vision.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="aboutTheePrintLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!aboutTheePrintLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope; width: 100px;">Last edited {{aboutTheePrint.updated_at | transformDate: '': 'l'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_about_thee_print_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Services</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">List of services that Thee Print offers.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="servicesLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!servicesLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{Services.updated_at | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_services_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card" style="width: 350px;">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Products</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">List of products available in Thee Print.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="productNameLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!productNameLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{productsUpdate[0].updated_at | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_products_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Core Values</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">Why they should work with us</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="coreValuesLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!coreValuesLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{coreValues.updated_at | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_core_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Featured Partners</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">List of partners who have worked with Thee Print.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="featuredPartnersLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!featuredPartnersLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{featuredPartners.updated_at | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_featured_partners_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Terms and Conditions</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">Rules by which one must agree to abide in order to use the platform.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="termsandconditionLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!termsandconditionLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{termsandcondition | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_terms_and_conditions_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="body-fixed">
+                        <p class="fw-800 fs-20 text-safari" style="color: #030918; font-family: manrope;">Privacy Policy</p>
+                        <p class="fs-16 fw-400" style="color: #232121; font-family: manrope;">A document that tells readers how a technology  or other product or service will use their personal information.</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p *ngIf="privacyPolicyLoading"><ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader></p>
+                            <p *ngIf="!privacyPolicyLoading" class="fs-14 fw-400 mt-10" style="font-family: manrope;">Last edited {{privacyPolicy | transformDate: '': 'L'}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="button-purple-transparent text-safari" style="width: 100px;" [routerLink]="['/admin/admin_privacy_policy_cms']">Update<img src="assets/images/arrow_left_pink.png"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

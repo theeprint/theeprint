@@ -1,0 +1,80 @@
+.button-purple-transparent{
+    border-radius: 8px;
+    background-color: transparent;
+    border: 0px;
+    color: #C0024A;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px;
+    outline-color: #fff;
+}
+
+.card-body{
+    box-shadow: 0 0 3px #dee2e6;
+}
+
+hr{
+    color: #C2CBD7;
+    border: 1px solid;
+    margin-top: 40px;
+  }
+
+
+.button-white{
+    border-radius: 6px;
+    background-color: transparent;
+    color: #626172 ;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+    border: 0px; 
+}
+
+.button-purple-rounded {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent !important;
+    border-radius: 8px;
+    padding: 7px 8px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #C0024A;
+    border: none;
+  }
+  
+  .button-purple-rounded:hover {background-color:#d42065}
+  
+  .button-purple-rounded:active {
+    background-color: #C0024A;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  @-moz-document url-prefix() {
+    .moz-row{
+      width: 100%;
+    }
+  }
+
+  ::ng-deep{
+    .ck.ck-editor {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ddd;
+    height:1px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: #C0024A;
+    outline: 1px solid #C0024A;
+  }

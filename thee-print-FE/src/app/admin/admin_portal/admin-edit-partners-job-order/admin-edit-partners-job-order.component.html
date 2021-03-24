@@ -1,0 +1,777 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<div class="container mt-20">
+    <div class="row mb-30 p-15">
+        <span class="back-page">
+            <a class="c-pointer text-black d-flex align-items-center" routerLink = "/admin/job-order-list" style="text-decoration: none;">
+                <svg width="18" height="12" viewbox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#C70039" stroke="#C70039" stroke-width="0"/>
+                </svg>
+                <span class="mr-15 ml-10 fs-16 text-safari" style="color:#C70039;">Cancel Job Order</span>
+            </a>    
+        </span>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="fw-700 text-safari fs-20" style="color: #000000;">Create Job Order</h4>
+            <p class="text-secondary fs-14">Please fill up the following</p>
+            <p class="text-secondary fs-14">details to get started.</p>
+            <div class="wizard">
+                <div class="process">
+                    <ul>
+                        <li class="step current">
+                        <div class="name text-secondary fs-13">Step 1</div>
+                        <p class="fs-15 ml-36 text-safari fw-700">General Details</p>
+                        </li>
+                        <li class="step">
+                        <div class="name text-secondary fs-13">Step 2</div>
+                        <p class="fs-15 ml-36 text-secondary">Quotation Details</p>
+                        </li>
+                        <li class="step">
+                        <div class="name text-secondary fs-13">Step 3</div>
+                        <p class="fs-15 ml-36 text-secondary">Confirm Job Order</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card" style="box-shadow: 0px 0px 8px #dee2e6;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <span class="badge badge-dark">1</span>
+                        <span class="text-header text-safari ml-10 fs-20 fw-700">Basic Information</span>
+                    </div>
+                    <form [formGroup]="addJobForm">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group mt-30 d-flex flex-column">
+                                    <span class=" fs-14">Client<span style="color:red">*</span></span>
+                                    <!-- <select class="form-control w-100-per"   
+                                    formControlName="job_order_user_id"
+                                    [ngClass]="{'is-invalid':addJobForm.controls.job_order_user_id.touched&&addJobForm.controls.job_order_user_id.hasError('required')}"
+                                    (change)="setPartners($event)">
+                                        <option value="" selected disabled>Select Partner</option>
+                                        <option *ngFor="let partners of partnersList"  value="{{partners.partner_user}}">{{partners.partner_company}}</option>
+                                    </select> -->
+                                    <mat-form-field appearance="fill" class="inputCJO">
+                                        <mat-label disbled selected>Select Partner</mat-label>
+                                        <mat-select formControlName="job_order_user_id" >
+                                        <mat-option *ngFor="let partners of partnersList"  value="{{partners.partner_user}}" (click)="setPartners(partners.partner_user)">{{partners.partner_company}}</mat-option>
+                                        </mat-select>   
+                                    </mat-form-field>
+                                    <div class="form-validator" *ngIf="addJobForm.controls.job_order_user_id.touched || addJobForm.controls.job_order_user_id.dirty">
+                                        <p class="mb-0" style="color: red" *ngIf="addJobForm.controls.job_order_user_id.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                       
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mt-15">
+                                    <span class="text-detail  fs-14">Project Name <span style="color:red">*</span></span>
+                                    <input type="hidden" formControlName="job_order_delivery_address"  class="form-control" >
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        placeholder="Enter project name" 
+                                        maxlength="100"
+                                        formControlName="job_order_project_name"
+                                        [ngClass]="{'is-invalid':addJobForm.controls.job_order_project_name.touched&&addJobForm.controls.job_order_project_name.hasError('required')}"
+                                    >
+                                </div>
+                                <div class="form-validator" *ngIf="addJobForm.controls.job_order_project_name.touched || addJobForm.controls.job_order_project_name.dirty">
+                                    <p class="mb-0" style="color: red; position: absolute; top: 77px;" *ngIf="addJobForm.controls.job_order_project_name.hasError('required')">*This field is required.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <span class="text-detail  fs-14">Due Date<span style="color:red">*</span></span>
+                                <div class="date-input" 
+                                [ngClass]="{'is-invalid':addJobForm.controls.job_order_due_date.touched&&addJobForm.controls.job_order_due_date.hasError('required')}">
+                                    <input 
+                                        readonly 
+                                        placeholder="MM/DD/YYYY"
+                                        matInput [matDatepicker]="picker" 
+                                        class="w-full date-input-i" 
+                                        (click)="picker.open()"
+                                        formControlName="job_order_due_date"
+                                        min="{{today | date: 'yyyy-MM-dd' }}" 
+                                    >
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </div>
+                                <div class="form-validator" *ngIf="addJobForm.controls.job_order_due_date.touched || addJobForm.controls.job_order_due_date.dirty">
+                                    <p class="mb-0" style="color: red; position: absolute; top: 77px; " *ngIf="addJobForm.controls.job_order_due_date.hasError('required')">*This field is required.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-detail fs-14">Select Shipping Address <span style="color:red">*</span></span>
+                        <div class="row">
+                            <ng-container *ngIf="company_address">
+                                <div class="col-md-6 pt-10 pb-10 c-pointer" (click)="selectAddress(address.company_address_id)" *ngFor="let address of company_address">
+                                    <div [ngClass]="isSelected==address.company_address_id ? 'card-active' : 'bg-detail'" class=" p-15 w-100-per">
+                                        <div class="d-flex align-items-center justify-content-between mb-3" >
+                                            <span class="fs-16 fw-700 text-safari" style="color: #1E2631;">{{address.company_address_label}}</span>
+                                            <span class="text-blue fs-12" *ngIf=(address.company_address_default)>
+                                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.5 0C2.91014 0 0 2.91014 0 6.5C0 10.0899 2.91014 13 6.5 13C10.0899 13 13 10.0899 13 6.5C13 2.91014 10.0899 0 6.5 0ZM6.5 1.25806C9.39701 1.25806 11.7419 3.60255 11.7419 6.5C11.7419 9.39701 9.39745 11.7419 6.5 11.7419C3.60299 11.7419 1.25806 9.39745 1.25806 6.5C1.25806 3.60299 3.60255 1.25806 6.5 1.25806ZM10.1747 4.67232L9.58404 4.07689C9.46172 3.95357 9.26258 3.95276 9.13926 4.07511L5.43447 7.75012L3.86734 6.17028C3.74502 6.04697 3.54588 6.04615 3.42256 6.16847L2.82711 6.75913C2.70379 6.88146 2.70298 7.0806 2.82532 7.20394L5.20467 9.60254C5.32699 9.72586 5.52613 9.72667 5.64944 9.60433L10.1729 5.11713C10.2962 4.99478 10.297 4.79564 10.1747 4.67232V4.67232Z" fill="#005DAB"/>
+                                                    </svg>
+                                                Default Address
+                                            </span>
+                                        </div>
+                                        <p class="fs-14 text-secondary">{{address.company_address}}</p>
+                                        <p class="fs-14 text-secondary"><span class="text-secondary fs-14">Contact Person: </span>{{address.company_address_person_firstname}} {{address.company_address_person_lastname}}</p>
+                                        <p class="fs-14 text-secondary"><span class="text-secondary fs-14">Mobile.No: </span>{{address.company_address_contact}}</p>
+                                    </div>
+                                </div>
+                            </ng-container>
+                           <div class="col-md-12">
+                            <span (click)="addNewAddressesModal()" class="add-address text-pink fs-14 fw-500 pl-15 d-flex align-items-center mt-15 c-pointer" style="width:25%;">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.25 9.75H9.75V14.25H8.25V9.75H3.75V8.25H8.25V3.75H9.75V8.25H14.25V9.75Z" fill="#C0024A"/>
+                                </svg>                                    
+                                Add new address
+                            </span>
+                           </div>
+                        </div>
+                    </form>
+                    <hr style="margin: 30px -25px !important; border: 0px solid #C2CBD7 !important;">
+                    <div class="d-flex align-items-center mb-20">
+                        <span class="badge badge-dark">2</span>
+                        <span class="text-header text-safari fw-700 ml-10 fs-20">Product Information</span>
+                    </div>
+                    <div *ngIf="job_order_item" class="row mt-20 pl-15 pr-15">
+                        <div  *ngFor="let item of job_order_item; let i = index" class="card-item pl-15 pr-15 mb-15">
+                            <div class="d-flex justify-content-end pt-10">
+                                <div class="col-md-1 p-0">
+                                    <span class="fs-14 fw-600 text-pink c-pointer" (click)="openEditProductModal(i)">
+                                        <svg class="mr-0" width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.245 0.25C11.0575 0.25 10.8625 0.325 10.72 0.4675L9.3475 1.84L12.16 4.6525L13.5325 3.28C13.825 2.9875 13.825 2.515 13.5325 2.2225L11.7775 0.4675C11.6275 0.3175 11.44 0.25 11.245 0.25ZM8.545 4.765L9.235 5.455L2.44 12.25H1.75V11.56L8.545 4.765ZM0.25 10.9375L8.545 2.6425L11.3575 5.455L3.0625 13.75H0.25V10.9375Z" fill="#C0024A"/>
+                                        </svg>    
+                                        Edit
+                                    </span>
+                                </div>
+                                <span (click)="removeItems(i)" class="c-pointer"><i class="fa fa-times fs-16"></i></span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group mt-30 mb-20" *ngIf='product_media_list'>
+                                    <span class="text-detail mb-10 fs-14">Media <span style="color:red">*</span></span>
+                                    <input 
+                                        type="hidden" 
+                                        class="form-control" 
+                                        value="{{i}}"
+                                        disabled
+                                    />
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        value="{{item.product_media}}"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mt-30 mb-20">
+                                    <span class="text-detail mb-10 fs-14">Machine print <span style="color:red">*</span></span>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        value="{{item.machine_print}}"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group mb-30">
+                                    <span class="text-detail mb-10 fs-14">Length <span style="color:red">*</span></span>
+                                    <div class="input-group">
+                                        <input 
+                                            type="text" 
+                                            class="form-control"
+                                            value="{{item.job_order_item_length}}"
+                                            disabled
+                                        >
+                                        <div class="input-group-append">
+                                            <div class="btn-group h-42" dropdown>
+                                                <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                                    aria-controls="dropdown-basic"> 
+                                                    <span *ngIf="item.job_order_item_unit==0">inches</span>
+                                                    <span *ngIf="item.job_order_item_unit!=0">feet</span>
+                                                    <span class="caret ml-2"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group mb-30">
+                                    <span class="text-detail mb-10 fs-14">Width <span style="color:red">*</span></span>
+                                    <div class="input-group">
+                                        <input 
+                                            type="text" 
+                                            class="form-control" 
+                                            value="{{item.job_order_item_width}}"
+                                            disabled
+                                        >
+                                        <div class="input-group-append">
+                                            <div class="btn-group h-42" dropdown>
+                                                <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                                    aria-controls="dropdown-basic"> 
+                                                    <span *ngIf="item.job_order_item_unit==0">inches</span>
+                                                    <span *ngIf="item.job_order_item_unit!=0">feet</span>
+                                                    <span class="caret ml-2"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-30">
+                                    <span class="text-detail mb-10 fs-14">Quantity<span style="color:red">*</span></span>
+                                    <input 
+                                        type="text" 
+                                        class="form-control"
+                                        value="{{item.job_order_item_qty}}" 
+                                        disabled
+                                    >
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-30">
+                                    <span class="text-detail mb-10 fs-14">Item Description</span>
+                                    <input 
+                                        type="text" 
+                                        class="form-control"
+                                        value="{{item.job_order_item_remark}}" 
+                                        disabled
+                                    >
+                                </div>
+                            </div>
+                            <div class="col-md-8 d-flex pb-30" *ngIf='item_product_description'>
+                                <span class="mt-1">
+                                    <svg class="mr-1" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49984 1.41663C4.58984 1.41663 1.4165 4.58996 1.4165 8.49996C1.4165 12.41 4.58984 15.5833 8.49984 15.5833C12.4098 15.5833 15.5832 12.41 15.5832 8.49996C15.5832 4.58996 12.4098 1.41663 8.49984 1.41663ZM7.7915 4.95829V6.37496H9.20817V4.95829H7.7915ZM7.7915 7.79163V12.0416H9.20817V7.79163H7.7915ZM2.83317 8.49996C2.83317 11.6237 5.37609 14.1666 8.49984 14.1666C11.6236 14.1666 14.1665 11.6237 14.1665 8.49996C14.1665 5.37621 11.6236 2.83329 8.49984 2.83329C5.37609 2.83329 2.83317 5.37621 2.83317 8.49996Z" fill="#005DAB"/>
+                                        </svg>
+                                </span>
+                                <div class="d-flex flex-column">
+                                    <span class="text-secondary fs-14">Specs/Description</span>
+                                    <span class="text-detail fs-14" >--</span> 
+                                </div>    
+                            </div>
+                        </div>    
+                    </div>
+                    <ng-container *ngIf="addProductHidden">
+                        <span (click)="showAddItem()" class="add-items text-pink fs-14 fw-500 pl-15 d-flex align-items-center mt-15 c-pointer" >
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.25 9.75H9.75V14.25H8.25V9.75H3.75V8.25H8.25V3.75H9.75V8.25H14.25V9.75Z" fill="#C0024A"/>
+                            </svg>
+                            Add another item
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="!addProductHidden">
+                        <form [formGroup]="addItemForm">
+                            <div class="d-flex justify-content-end pt-10">
+                                <span (click)="hideAddProduct()" class="c-pointer"><i class="fa fa-times fs-16"></i></span>
+                            </div>
+                            <div class="row card-item pl-15 pr-15 mb-15 mr-0 ml-0" >
+                                <div class="col-md-6">
+                                    <div class="form-group mt-30 mb-20" >
+                                        <span class="text-detail mb-10 fs-14">Media <span style="color:red">*</span></span>
+                                        <!-- <select 
+                                            type="text" 
+                                            class="form-control" 
+                                            formControlName="product_media" 
+                                            (change)="mediaChange($event)"
+                                            [ngClass]="{'is-invalid':addItemForm.controls.product_media.touched&&addItemForm.controls.product_media.hasError('required')}"
+                                        >
+                                            <option value="" selected>Select Media</option>
+                                            <option *ngFor='let media of product_media_list' value="{{media.product_media}}">{{media.product_media}}</option>
+                                        </select> -->
+                                        <mat-form-field appearance="fill" class="inputCJO" style="width: 103%;">
+                                            <mat-label disbled selected>Select Media</mat-label>
+                                            <mat-select formControlName="product_media">
+                                            <mat-option *ngFor='let media of product_media_list' value="{{media.product_media}}" (click)="mediaChange(media.product_media)">{{media.product_media}}</mat-option>
+                                            </mat-select>   
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.product_media.touched || addItemForm.controls.product_media.dirty">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 100px;" *ngIf="addItemForm.controls.product_media.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group mt-30 mb-20">
+                                        <span class="text-detail mb-10 fs-14">Machine print <span style="color:red">*</span></span>
+                                        <!-- <select 
+                                            type="text" 
+                                            class="form-control" 
+                                            formControlName="machine_print" 
+                                            (change)="machinePrintChange($event)"
+                                            [ngClass]="{'is-invalid':addItemForm.controls.machine_print.touched&&addItemForm.controls.machine_print.hasError('required')}"
+                                        >
+                                            <option value="" selected>Select Machine Print</option>
+                                            <option *ngFor='let machine_print of machine_print_list' value="{{machine_print.machine_print_id}}">{{machine_print.machine_print}}</option>
+                                        </select> -->
+                                        <mat-form-field appearance="fill" class="inputCJO" style="width: 121%;">
+                                            <mat-label disbled selected>Select Machine Print</mat-label>
+                                            <mat-select formControlName="machine_print" >
+                                            <mat-option *ngFor='let machine_print of machine_print_list' value="{{machine_print.machine_print_id}}" (click)="machinePrintChange(machine_print.machine_print_id)">{{machine_print.machine_print}}</mat-option>
+                                            </mat-select>   
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.product_media.touched || addItemForm.controls.product_media.dirty">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 100px;" *ngIf="addItemForm.controls.product_media.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group mb-30">
+                                        <span class="text-detail mb-10 fs-14">Length <span style="color:red">*</span></span>
+                                        <div class="input-group">
+                                            <input 
+                                                type="text" 
+                                                placeholder="Enter Length"
+                                                class="form-control" 
+                                                formControlName="job_order_item_length" 
+                                                aria-label="Text input with dropdown button"
+                                                (keypress)="keyPressNumbers($event)"
+                                                [ngClass]="{'is-invalid':addItemForm.controls.job_order_item_length.touched&&addItemForm.controls.job_order_item_length.hasError('required')}"
+                                            >
+                                            <div class="input-group-append">
+                                                <div class="btn-group h-42" dropdown>
+                                                    <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                                     aria-controls="dropdown-basic"> 
+                                                        <span>{{measurement}}</span>
+                                                        <span class="caret ml-2"></span>
+                                                    </button>
+                                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                                        <li role="menuitem">
+                                                            <button class="dropdown-item" *ngFor="let item of measurements" (click)="setMeasurement(item)">
+                                                                 {{item}}
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.job_order_item_length.touched || addItemForm.controls.job_order_item_length.dirty">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 65px;" *ngIf="addItemForm.controls.job_order_item_length.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group mb-30">
+                                        <span class="text-detail mb-10 fs-14">Width <span style="color:red">*</span></span>
+                                        <div class="input-group">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                placeholder="Enter Width"
+                                                formControlName="job_order_item_width" 
+                                                aria-label="Text input with dropdown button"
+                                                (keypress)="keyPressNumbers($event)"
+                                                [ngClass]="{'is-invalid':addItemForm.controls.job_order_item_width.touched&&addItemForm.controls.job_order_item_width.hasError('required')}"
+                                            >
+                                            <div class="input-group-append">
+                                                <div class="btn-group h-42" dropdown>
+                                                    <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                                     aria-controls="dropdown-basic"> 
+                                                        <span>{{measurement}}</span>
+                                                        <span class="caret ml-2"></span>
+                                                    </button>
+                                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                                        <li role="menuitem">
+                                                            <button class="dropdown-item" *ngFor="let item of measurements" (click)="setMeasurement(item)">
+                                                                 {{item}}
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.job_order_item_width.touched || addItemForm.controls.job_order_item_width.dirty">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 65px;" *ngIf="addItemForm.controls.job_order_item_width.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-30">
+                                        <span class="text-detail mb-10 fs-14">Quantity<span style="color:red">*</span></span>
+                                        <input 
+                                            type="text" 
+                                            class="form-control" 
+                                            placeholder="Qty"
+                                            formControlName="job_order_item_qty"
+                                            (keypress)="keyPressNumbers($event)"
+                                            [ngClass]="{'is-invalid':addItemForm.controls.job_order_item_qty.touched&&addItemForm.controls.job_order_item_qty.hasError('required')}"
+                                        >
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.job_order_item_qty.touched || addItemForm.controls.job_order_item_qty.dirty">
+                                        <p class="mb-0" style="color: red; position: absolute; top: 65px; display: flex; align-items: center; width: 150px;" *ngIf="addItemForm.controls.job_order_item_qty.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group mb-30">
+                                        <span class="text-detail mb-10 fs-14">Item Description</span>
+                                        <input 
+                                            type="text" 
+                                            class="form-control" 
+                                            formControlName="product_description" 
+                                            placeholder="Type your remarks for this product"
+                                            [ngClass]="{'is-invalid':addItemForm.controls.product_description.touched&&addItemForm.controls.product_description.hasError('required')}"
+                                        >
+                                    </div>
+                                    <div class="form-validator" *ngIf="addItemForm.controls.product_description.touched || addItemForm.controls.product_description.dirty">
+                                        <p class="mb-0" style="color: red;position: absolute; top: 65px;" *ngIf="addItemForm.controls.product_description.hasError('required')">*This field is required.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 d-flex pb-30" *ngIf='item_product_description'>
+                                    <span class="mt-1">
+                                        <svg class="mr-1" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49984 1.41663C4.58984 1.41663 1.4165 4.58996 1.4165 8.49996C1.4165 12.41 4.58984 15.5833 8.49984 15.5833C12.4098 15.5833 15.5832 12.41 15.5832 8.49996C15.5832 4.58996 12.4098 1.41663 8.49984 1.41663ZM7.7915 4.95829V6.37496H9.20817V4.95829H7.7915ZM7.7915 7.79163V12.0416H9.20817V7.79163H7.7915ZM2.83317 8.49996C2.83317 11.6237 5.37609 14.1666 8.49984 14.1666C11.6236 14.1666 14.1665 11.6237 14.1665 8.49996C14.1665 5.37621 11.6236 2.83329 8.49984 2.83329C5.37609 2.83329 2.83317 5.37621 2.83317 8.49996Z" fill="#005DAB"/>
+                                            </svg>
+                                    </span>
+                                    <div class="d-flex flex-column">
+                                        <span class="text-secondary fs-14">Specs/Description</span>
+                                        <span class="text-detail fs-14" >{{item_product_description}}</span> 
+                                    </div>    
+                                </div>
+                            </div>    
+                            <span (click)="addItems()" class="add-items text-pink fs-14 fw-500 pl-15 d-flex align-items-center mt-15 c-pointer"> 
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.25 9.75H9.75V14.25H8.25V9.75H3.75V8.25H8.25V3.75H9.75V8.25H14.25V9.75Z" fill="#C0024A"/>
+                                </svg>
+                                Add another item
+                            </span>
+                            
+                        </form> 
+                    </ng-container>
+                       
+                    <hr style="margin: 30px -25px !important; border: 0px solid #C2CBD7 !important;">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="btn-cancel d-flex align-items-center fs-16 text-secondary" (click)="openCancelJobOrder()">Cancel Job Order</button>
+                        <button class="bttn btn-primary-pink d-flex align-items-center" type="submit" (click)="addJob()">
+                            Save Changess
+                            <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.01 10.0833H4V11.9166H16.01V14.6666L20 10.9999L16.01 7.33325V10.0833Z" fill="white"/>
+                                </svg>                                
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form -->
+
+<!-- Add Address -->
+<ngx-smart-modal #addnewaddress identifier="addnewaddress" [customClass]="'modal-checkin-class'" [formGroup]="addressForm" [dismissable]="false" [closable]="false">
+    <div class="card-body">
+        <p style="font-weight: 500; font-size: 16px;">New Shipping Address</p>
+    <hr style="background-color: #e0dbdb;">
+        <div class="form-group">
+            <p class="fs-13">Label</p>
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="ex: Home" 
+                maxlength="250"
+                formControlName="company_address_label"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address_label.touched&&addressForm.controls.company_address_label.hasError('required')}"
+            >
+        </div>
+        <div class="form-validator" *ngIf="addressForm.controls.company_address_label.touched||addressForm.controls.company_address_label.dirty">
+            <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_label.hasError('required')">*This field is required</p>
+        </div>
+        <div class="form-group">
+            <p class="fs-13">Address</p>
+            <textarea 
+                type="text" 
+                class="form-control" 
+                maxlength="250"
+                style="height: 100px !important;"
+                placeholder="ex: 8199 Sgt. Yabut Circle Guadalupe Nuevo Makati City" 
+                formControlName="company_address"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address.touched&&addressForm.controls.company_address.hasError('required')}"
+            ></textarea>
+        </div>
+        <div class="form-validator" *ngIf="addressForm.controls.company_address.touched||addressForm.controls.company_address.dirty">
+            <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address.hasError('required')">*This field is required</p>
+        </div>
+        <div class="row mt-25">
+            <div class="ml-15">
+                <label class="switch">
+                    <input type="checkbox" checked formControlName="company_address_default">
+                    <span class="slider round"></span>
+                </label>
+            </div>    
+            <div class="col-md-6">
+                 <p class="fs-14">Set as Default shipping address</p>
+            </div>
+        </div>
+        <p class="fs-15 mt-15" style="font-weight: 500;">Contact Person</p>
+        <div class="row">
+            <div class="col md-6">
+                <div class="form-group">
+                    <p class="fs-13">First Name</p>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        maxlength="70"
+                        formControlName="company_address_person_firstname"
+                        placeholder="ex: Juan" 
+                        [ngClass]="{'is-invalid':addressForm.controls.company_address_person_firstname.touched&&addressForm.controls.company_address_person_firstname.hasError('required')}"
+                    >
+                </div>
+                <div class="form-validator" *ngIf="addressForm.controls.company_address_person_firstname.touched || addressForm.controls.company_address_person_firstname.dirty">
+                    <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_person_firstname.hasError('required')">*This field is required</p>
+                </div>
+            </div>
+            <div class="col md-6">
+                <div class="form-group">
+                    <p class="fs-13">Last Name</p>
+                    <input type="text" 
+                        class="form-control" 
+                        maxlength="70"
+                        formControlName="company_address_person_lastname"
+                        placeholder="ex: Dela Cruz" 
+                        [ngClass]="{'is-invalid':addressForm.controls.company_address_person_lastname.touched&&addressForm.controls.company_address_person_lastname.hasError('required')}"
+                    >
+                </div>
+                <div class="form-validator" *ngIf="addressForm.controls.company_address_person_lastname.touched || addressForm.controls.company_address_person_lastname.dirty">
+                    <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_person_lastname.hasError('required')">*This field is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="fs-13">Mobile Number</p>
+            <input 
+                type="text" 
+                class="form-control" 
+                formControlName="company_address_contact"
+                placeholder="ex: 09123456789" 
+                (keypress)="keyPressNumbers($event)"
+                maxlength="11"
+                [ngClass]="{'is-invalid':addressForm.controls.company_address_contact.touched&&addressForm.controls.company_address_contact.hasError('required')}"
+            >
+        </div>
+        <div class="form-validator" *ngIf="addressForm.controls.company_address_contact.touched || addressForm.controls.company_address_contact.dirty">
+            <p class="mb-0" style="color: red" *ngIf="addressForm.controls.company_address_contact.hasError('required')">*This field is required</p>
+        </div>
+        <hr class="mt-30" style="background-color: #e0dbdb;">
+        <div class="d-flex align-items-center justify-content-end">
+            <button class="btn-cancel mr-15 d-flex align-items-center" (click)="closeNewAddressesModal()">Cancel</button>
+            <button (click)="addAddress('1')" class="bttn btn-primary-pink">Save Address</button>
+        </div>
+    </div>
+</ngx-smart-modal>
+
+<!-- Cancel Job Order -->
+<ngx-smart-modal #cancelOrder identifier="cancelOrder" [customClass]="'modal-checkin-class nsm-centered'" [dismissable]="false" [closable]="false">
+    <div class="card-body d-flex flex-column justify-content-center">
+       <div class="col-md-10 offset-1 d-flex flex-column justify-content-center">
+        <span class="d-flex justify-content-center mb-20">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#FFC000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0833 19.125H43.9167C45.475 19.125 46.75 20.4 46.75 21.9583V41.7917C46.75 43.35 45.475 44.625 43.9167 44.625H38.25L34 48.875L29.75 44.625H24.0833C22.5108 44.625 21.25 43.35 21.25 41.7917V21.9583C21.25 20.4 22.5108 19.125 24.0833 19.125ZM37.0742 41.7917H43.9167V21.9583H24.0833V41.7917H30.9258L31.7475 42.6133L34 44.8658L36.2383 42.6275L37.0742 41.7917ZM32.5833 40.375V37.5417H35.4167V40.375H32.5833ZM36.8333 29.0417C36.8333 27.4833 35.5583 26.2083 34 26.2083C32.4417 26.2083 31.1667 27.4833 31.1667 29.0417H28.3333C28.3333 25.9108 30.8692 23.375 34 23.375C37.1308 23.375 39.6667 25.9108 39.6667 29.0417C39.6667 30.8591 38.5475 31.8372 37.4577 32.7895C36.4239 33.693 35.4167 34.5732 35.4167 36.125H32.5833C32.5833 33.5449 33.918 32.5218 35.0915 31.6224C36.012 30.9168 36.8333 30.2872 36.8333 29.0417Z" fill="#FFB100"/>
+                </svg>            
+           </span>
+           <p class="text-header fs-20 fw-700 tC">Cancel Job Order</p>
+           <p class="text-detail fs-14 tC mb-30">Are you sure you want to cancel this job order?</p>
+           <button class="bttn btn-primary-red mb-10" (click)="closeCancelJobOrder()">Yes, cancel job order</button>
+           <!-- <button class="btn-cancel fs-16 text-secondary" (click)="saveAsDraft()">Save as draft instead</button>   -->
+       </div> 
+    </div>
+</ngx-smart-modal>
+<!-- End of Modal Form -->
+
+
+<!-- Edit Job Product Info -->
+<ngx-smart-modal #editProduct identifier="editProduct" [customClass]="'modal-checkin-class nsm-centered'"  [formGroup]="editJobForm">
+    <div class="card-body d-flex flex-column" style="width: 750px !important;">
+        <p class="edit-prod-text text-safari">Edit Product Information</p>
+        <hr style="margin: 0px -25px !important; border: 0px solid #C2CBD7 !important;">
+       <div class="row card-item mt-15 pl-15 pr-15 pb-15 pt-15" style="width: 104% !important;">
+           <div class="col-6">
+                <div class="form-group" >
+                    <span class="text-detail mb-10 fs-14">Media <span style="color:red">*</span></span>
+                    <!-- <select 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="product_media" 
+                        (change)="editMediaChange($event)"
+                        [ngClass]="{'is-invalid':editJobForm.controls.product_media.touched&&editJobForm.controls.product_media.hasError('required')}">
+                        <option value="" selected>Select Media</option>
+                        <option *ngFor='let media of product_media_list' value="{{media.product_media}}">{{media.product_media}}</option>
+                    </select> -->
+                    <mat-form-field appearance="fill" class="inputCJO" style="width: 100%;">
+                        <mat-label disbled selected>Select Media</mat-label>
+                        <mat-select formControlName="product_media">
+                        <mat-option *ngFor='let media of product_media_list' value="{{media.product_media}}" (click)="editMediaChange(media.product_media)">{{media.product_media}}</mat-option>
+                        </mat-select>   
+                    </mat-form-field>
+                </div>
+           </div>
+           <div class="col-5">
+                <div class="form-group">
+                    <span class="text-detail mb-10 fs-14">Machine print <span style="color:red">*</span></span>
+                    <!-- <select 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="machine_print" 
+                        (change)="editMachinePrintChange($event)"
+                        [ngClass]="{'is-invalid':editJobForm.controls.machine_print.touched&&editJobForm.controls.machine_print.hasError('required')}">
+                        <option value="" selected>Select Machine Print</option>
+                        <option *ngFor='let machine_print of machine_print_list_edit' value="{{machine_print.machine_print_id}}">{{machine_print.machine_print}}</option>
+                    </select> -->
+                    <mat-form-field appearance="fill" class="inputCJO" style="width: 121%;">
+                        <mat-label disbled selected>Select Machine Print</mat-label>
+                        <mat-select formControlName="machine_print">
+                        <mat-option *ngFor='let machine_print of machine_print_list_edit' value="{{machine_print.machine_print_id}}" (click)="editMachinePrintChange(machine_print.machine_print_id)">{{machine_print.machine_print}}</mat-option>
+                        </mat-select>   
+                    </mat-form-field>
+                </div>
+           </div>
+           <div class="col-4">
+                <div class="form-group">
+                    <span class="text-detail mb-10 fs-14">Length <span style="color:red">*</span></span>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            placeholder="Enter Length"
+                            class="form-control" formControlName="job_order_item_length" 
+                            aria-label="Text input with dropdown button"
+                            (keypress)="keyPressNumbers($event)"
+                            [ngClass]="{'is-invalid':editJobForm.controls.job_order_item_length.touched&&editJobForm.controls.job_order_item_length.hasError('required')}"
+                        >
+                        <div class="input-group-append">
+                            <div class="btn-group h-42" dropdown>
+                                <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                aria-controls="dropdown-basic"> 
+                                    <span>{{measurement}}</span>
+                                    <span class="caret ml-2"></span>
+                                </button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                    <li role="menuitem">
+                                        <button class="dropdown-item" *ngFor="let item of measurements" (click)="setMeasurement(item)">
+                                            {{item}}
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           <div class="col-4">
+                <div class="form-group">
+                    <span class="text-detail mb-10 fs-14">Width <span style="color:red">*</span></span>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Enter Width"
+                            formControlName="job_order_item_width" 
+                            aria-label="Text input with dropdown button"
+                            (keypress)="keyPressNumbers($event)"
+                            [ngClass]="{'is-invalid':editJobForm.controls.job_order_item_width.touched&&editJobForm.controls.job_order_item_width.hasError('required')}"
+                        >
+                        <div class="input-group-append">
+                            <div class="btn-group h-42" dropdown>
+                                <button id="button-basic" dropdownToggle type="button" class="btn-measure text-detail d-flex justify-content-between align-items-center"
+                                aria-controls="dropdown-basic"> 
+                                    <span>{{measurement}}</span>
+                                    <span class="caret ml-2"></span>
+                                </button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                                    <li role="menuitem">
+                                        <button class="dropdown-item" *ngFor="let item of measurements" (click)="setMeasurement(item)">
+                                            {{item}}
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           <div class="col-4">
+                <div class="form-group">
+                    <span class="text-detail mb-10 fs-14">Quantity<span style="color:red">*</span></span>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Qty"
+                        formControlName="job_order_item_qty"
+                        (keypress)="keyPressNumbers($event)"
+                        [ngClass]="{'is-invalid':editJobForm.controls.job_order_item_qty.touched&&editJobForm.controls.job_order_item_qty.hasError('required')}">
+                </div>
+           </div>
+           <div class="col-12">
+                <div class="form-group">
+                    <span class="text-detail mb-10 fs-14">Item Description</span>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="product_description" 
+                        placeholder="Type your remarks for this product"
+                        [ngClass]="{'is-invalid':editJobForm.controls.product_description.touched&&editJobForm.controls.product_description.hasError('required')}">
+                </div>
+           </div>
+           <div class="col-md-8 d-flex pb-10" *ngIf='item_product_description_edit'>
+                <span class="mt-1">
+                    <svg class="mr-1" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49984 1.41663C4.58984 1.41663 1.4165 4.58996 1.4165 8.49996C1.4165 12.41 4.58984 15.5833 8.49984 15.5833C12.4098 15.5833 15.5832 12.41 15.5832 8.49996C15.5832 4.58996 12.4098 1.41663 8.49984 1.41663ZM7.7915 4.95829V6.37496H9.20817V4.95829H7.7915ZM7.7915 7.79163V12.0416H9.20817V7.79163H7.7915ZM2.83317 8.49996C2.83317 11.6237 5.37609 14.1666 8.49984 14.1666C11.6236 14.1666 14.1665 11.6237 14.1665 8.49996C14.1665 5.37621 11.6236 2.83329 8.49984 2.83329C5.37609 2.83329 2.83317 5.37621 2.83317 8.49996Z" fill="#005DAB"/>
+                        </svg>
+                </span>
+                <div class="d-flex flex-column">
+                    <span class="text-secondary fs-14">Specs/Description</span>
+                    <span class="text-detail fs-14" >{{item_product_description_edit}}</span> 
+                </div>    
+           </div>
+            <div class="d-flex mt-15" style="margin-left: 465px !important;">
+                <button class="btn-cancel fs-16 mr-15 d-flex align-items-center" (click)="closeEditProductModal()">Cancel</button>
+                <button class="bttn btn-primary-pink" (click)="editJobOrderProduct()">Save</button>
+            </div>
+       </div> 
+    </div>
+</ngx-smart-modal>
+<!-- End Edit Job Product Info -->
+
+
+<ngx-smart-modal #wrong identifier="wrong" [customClass]="'modal-checkin-class nsm-centered'">
+    <div class="card-body d-flex flex-column justify-content-center">
+       <div class="col-md-10 offset-1 d-flex flex-column justify-content-center">
+        <span class="d-flex justify-content-center mb-20">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#FFC000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0833 19.125H43.9167C45.475 19.125 46.75 20.4 46.75 21.9583V41.7917C46.75 43.35 45.475 44.625 43.9167 44.625H38.25L34 48.875L29.75 44.625H24.0833C22.5108 44.625 21.25 43.35 21.25 41.7917V21.9583C21.25 20.4 22.5108 19.125 24.0833 19.125ZM37.0742 41.7917H43.9167V21.9583H24.0833V41.7917H30.9258L31.7475 42.6133L34 44.8658L36.2383 42.6275L37.0742 41.7917ZM32.5833 40.375V37.5417H35.4167V40.375H32.5833ZM36.8333 29.0417C36.8333 27.4833 35.5583 26.2083 34 26.2083C32.4417 26.2083 31.1667 27.4833 31.1667 29.0417H28.3333C28.3333 25.9108 30.8692 23.375 34 23.375C37.1308 23.375 39.6667 25.9108 39.6667 29.0417C39.6667 30.8591 38.5475 31.8372 37.4577 32.7895C36.4239 33.693 35.4167 34.5732 35.4167 36.125H32.5833C32.5833 33.5449 33.918 32.5218 35.0915 31.6224C36.012 30.9168 36.8333 30.2872 36.8333 29.0417Z" fill="#FFB100"/>
+                </svg>            
+           </span>
+           <p class="text-header fs-20 fw-700 tC">Something went wrong</p>
+           <p class="text-detail fs-14 tC mb-30">Please try again</p>
+           <button class="bttn btn-primary-red mb-10" (click)="closeWrong()">Dismiss</button>
+       </div> 
+    </div>
+</ngx-smart-modal>
+
+<ngx-smart-modal #saveAsDraftsSuccess identifier="saveAsDraftsSuccess" [customClass]="'modal-checkin-class nsm-centered'" closable="false">
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" fill-rule="evenodd" clip-rule="evenodd" d="M34 -1.03315e-06C52.7782 -1.03315e-06 68 15.2231 68 33.9992C68 52.7769 52.7782 68 34 68C15.2218 68 0 52.7769 0 33.9992C0 15.2231 15.2218 -1.03315e-06 34 -1.03315e-06Z" fill="#049561"/>
+                <path d="M28.6585 40.4583L21.7085 33.5083L19.3418 35.8583L28.6585 45.175L48.6585 25.175L46.3085 22.825L28.6585 40.4583Z" fill="#00A651"/>
+            </svg> 
+        </div> 
+        <div class="mt-30 d-flex justify-content-center">
+            <p class="fs-20 fw-700 text-header">Save as drafts successfully!</p>
+        </div>
+        <div class="mt-15 d-flex justify-content-center">
+            <p class="fs-14 text-detail tC pl-100 pr-100">All changes has been save to the database.</p>
+        </div>
+        <!-- <div class="mt-15 d-flex justify-content-center">
+            <button class="bttn btn-primary-pink d-flex align-items-center justify-content-center" (click)="closeModal()" routerLink="/admin/partners-details/{{partner_id}}">Go Back Partners Details</button>
+        </div>      -->
+    </div>
+</ngx-smart-modal>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > loading... </p></ngx-spinner>

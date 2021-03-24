@@ -1,0 +1,254 @@
+    <div class="container">
+    <div class="row mt-20 d-flex align-items-center">
+        <div>
+            <p class="fs-24 fw-700 ml-25 text-header text-safari">Job Order</p>
+            <p class="fs-16 ml-25 fw-400">You have <span class="fs-14 body-small-txt text-safari">{{pending_jo_request}} pending</span> job order request(s).</p>
+        </div>
+        <div class="ml-auto d-flex">
+            <button class="btn-csv mr-15 h-50 d-flex align-items-center justify-content-between" (click)="exportCsv();">
+                <svg class="mr-5" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4168 8.70837H13.7502V3.20837H8.25016V8.70837H4.5835L11.0002 15.125L17.4168 8.70837ZM10.0835 10.5417V5.04171H11.9168V10.5417H12.9893L11.0002 12.5309L9.011 10.5417H10.0835ZM17.4168 18.7917V16.9584H4.5835V18.7917H17.4168Z" fill="black"/>
+                    </svg>                                           
+                Export CSV
+            </button>
+            <button class="bttn btn-primary-pink h-50 d-flex align-items-center justify-content-between" routerLink='/admin/create-job-order'>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="white" />
+                  </svg>
+                Create Job Order
+            </button>
+            <div class="dropdown ml-15 c-pointer">
+                <span>
+                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="25" cy="25" r="24.5" fill="white" stroke="#D6E3F8"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5007 22.8333C17.309 22.8333 16.334 23.8083 16.334 24.9999C16.334 26.1916 17.309 27.1666 18.5007 27.1666C19.6923 27.1666 20.6673 26.1916 20.6673 24.9999C20.6673 23.8083 19.6923 22.8333 18.5007 22.8333ZM31.5007 22.8333C30.309 22.8333 29.334 23.8083 29.334 24.9999C29.334 26.1916 30.309 27.1666 31.5007 27.1666C32.6923 27.1666 33.6673 26.1916 33.6673 24.9999C33.6673 23.8083 32.6923 22.8333 31.5007 22.8333ZM22.834 24.9999C22.834 23.8083 23.809 22.8333 25.0007 22.8333C26.1923 22.8333 27.1673 23.8083 27.1673 24.9999C27.1673 26.1916 26.1923 27.1666 25.0007 27.1666C23.809 27.1666 22.834 26.1916 22.834 24.9999Z" fill="#2C2C39"/>
+                    </svg>
+                </span>
+                <div class="dropdown-content c-pointer">
+                <a routerLink='/admin/job-order-list/draft' class="d-flex align-items-center text-detail">
+                    <svg class="mr-10" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.245 2.25C13.0575 2.25 12.8625 2.325 12.72 2.4675L11.3475 3.84L14.16 6.6525L15.5325 5.28C15.825 4.9875 15.825 4.515 15.5325 4.2225L13.7775 2.4675C13.6275 2.3175 13.44 2.25 13.245 2.25ZM10.545 6.765L11.235 7.455L4.44 14.25H3.75V13.56L10.545 6.765ZM2.25 12.9375L10.545 4.6425L13.3575 7.455L5.0625 15.75H2.25V12.9375Z" fill="#626172"/>
+                        </svg>
+                    Draft
+                </a>
+                <hr style="margin: 10px -15px !important;">
+                <a routerLink='/admin/job-order-list/archive' class="d-flex align-items-center text-detail">
+                    <svg class="mr-10" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.4982 7.5H15V5.25C15 4.00734 14.3284 3 13.5 3H8.5L6.5 0H1.5C0.671563 0 0 1.00734 0 2.25V15.75C0 16.9927 0.671563 18 1.5 18H14C14.2544 18 14.5046 17.9029 14.7272 17.7179C14.9497 17.5329 15.1372 17.2661 15.272 16.9425L17.7702 10.9425C18.3936 9.44639 17.6753 7.5 16.4982 7.5ZM1.6875 2.25H5.87869L7.87869 5.25H13.3125C13.3622 5.25 13.4099 5.27963 13.4451 5.33238C13.4803 5.38512 13.5 5.45666 13.5 5.53125V7.5H4.75C4.49161 7.5 4.23759 7.60013 4.01258 7.79068C3.78757 7.98122 3.59918 8.25573 3.46569 8.58759L1.5 13.4742V2.53092C1.5 2.494 1.50485 2.45745 1.51428 2.42334C1.5237 2.38924 1.53752 2.35825 1.55493 2.33216C1.57235 2.30607 1.59302 2.28539 1.61576 2.27129C1.63851 2.25719 1.66289 2.24996 1.6875 2.25ZM14 15.75H2.25L4.66357 9.75H16.5L14 15.75Z" fill="#626172"/>
+                        </svg>                        
+                    Archive
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-20 p-20 bg-white">
+        <div class="row">
+             <div class="col-md-7">
+                <div class="search" [formGroup]="searchForm" (keydown)="keyDownFunction($event)">
+                    <input type="text" placeHolder="Search" formControlName="search" class="input" (keyup)="searchKey($event)">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="search-icon" (click)="searchList();">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9649 11.2549H12.7549L17.7449 16.2549L16.2549 17.7449L11.2549 12.7549V11.9649L10.9849 11.6849C9.84488 12.6649 8.36488 13.2549 6.75488 13.2549C3.16488 13.2549 0.254883 10.3449 0.254883 6.75488C0.254883 3.16488 3.16488 0.254883 6.75488 0.254883C10.3449 0.254883 13.2549 3.16488 13.2549 6.75488C13.2549 8.36488 12.6649 9.84488 11.6849 10.9849L11.9649 11.2549ZM2.25488 6.75488C2.25488 9.24488 4.26488 11.2549 6.75488 11.2549C9.24488 11.2549 11.2549 9.24488 11.2549 6.75488C11.2549 4.26488 9.24488 2.25488 6.75488 2.25488C4.26488 2.25488 2.25488 4.26488 2.25488 6.75488Z" fill="#626172"/>
+                    </svg>              
+                 </div>
+             </div>
+             <div class="col-md-4 d-flex align-items-end">
+                 <span class="filter-by">Filter by</span>
+                 <form [formGroup]="statusFilterForm">
+                    <mat-form-field appearance="fill" class="inputJO">
+                        <mat-label disbled selected>Select Status</mat-label>
+                        <mat-select formControlName="filter_status" (selectionChange)="filterStatus()">
+                        <mat-option value="">All</mat-option>
+                        <mat-option value="2">Submitted</mat-option>
+                        <mat-option value="3">Processed</mat-option>
+                        <mat-option value="4">Delivered</mat-option>
+                        <mat-option value="5">Declined</mat-option>
+                        <mat-option value="7">Canceled</mat-option>
+                        </mat-select>   
+                    </mat-form-field>
+                </form>
+                 <!-- <div class="ml-20">
+                    <form [formGroup]="statusFilterForm"> 
+                        <select class="dropdown-sort w-166 h-50 p-5 c-pointer" formControlName="filter_status" (change)="filterStatus()">
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="">All</option>
+                            <option value="2">Submitted</option>
+                            <option value="3">Processed</option>
+                            <option value="4">Delivered</option>
+                            <option value="5">Declined</option>
+                            <option value="7">Canceled</option>
+                        </select>
+                    </form>
+                 </div> -->
+                 <div class="d-flex align-items-baseline ml-10 c-pointer">
+                    <form [formGroup]="dateFilterForm" > 
+                        <!-- <input data-date-format="MM/DD/YYYY" type="date" formControlName="created_at" (change)="filterDate()" class="calendar pr-10 c-pointer"> -->
+                        <div class="date-input">
+                            <input 
+                                (dateChange)="filterDate()" 
+                                formControlName="created_at"
+                                placeholder="Date Created"
+                                matInput [matDatepicker]="picker"
+                                class="w-full date-input-i" 
+                                (click)="picker.open()"
+                            >
+                            <mat-icon matDatepickerToggleIcon (click)="removeDateFilter($event)">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 17px" width="22" height="21" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                                </svg>
+                            </mat-icon>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker ></mat-datepicker>
+                        </div>
+                    </form>
+                 </div>
+             </div>
+             <div *ngIf="isEmpty" class="col-md-12 mh-600 d-flex flex-column align-items-center justify-content-center">
+                <img src="/assets/images/partner_dashboard_empty.svg">
+                <p class="text-secondary fs-16 tC mt-20">You have no job orders yet.</p>    
+            </div>
+            <div *ngIf="!isEmpty" class="pl-20 pr-20 mt-20" style="overflow: auto;">
+                <table class="table mt-20 p-relative">
+                    <thead>
+                        <tr>
+                        <th class="body-small-txt text-safari mnw-100 c-pointer" (click)="sortList('job_order_quote_num', sort_type)">J.O No
+                            <i 
+                                [ngClass]="(sort_column=='job_order_quote_num'&&sort_type=='DESC')?'fas fa-sort-up ml-10  sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari  mnw-250 c-pointer" (click)="sortList('job_order_project_name', sort_type)">Project Name
+                            <i 
+                                [ngClass]="(sort_column=='job_order_project_name'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari mnw-200 c-pointer" (click)="sortList('partner_company', sort_type)">Partner
+                            <i 
+                                [ngClass]="(sort_column=='partner_company'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari mnw-150 c-pointer" (click)="sortList('user_profile_first_name', sort_type)">Account Owner
+                            <i 
+                                [ngClass]="(sort_column=='user_profile_first_name'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari mnw-150 text-center">Order Status</th>
+                        <th class="body-small-txt text-safari mnw-150 text-center">Payment Status</th>
+                        <th class="body-small-txt text-safari mnw-150 c-pointer" (click)="sortList('created_at', sort_type)">Date Created
+                            <i 
+                                [ngClass]="(sort_column=='created_at'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari mnw-150 c-pointer" (click)="sortList('job_order_due_date', sort_type)">Due Date
+                            <i 
+                                [ngClass]="(sort_column=='job_order_due_date'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        <th class="body-small-txt text-safari mnw-150 tR c-pointer" (click)="sortList('job_order_total', sort_type)">Total Amount
+                            <i 
+                                [ngClass]="(sort_column=='job_order_total'&&sort_type=='DESC')?'fas fa-sort-up ml-10 c-pointer sortup':'fas fa-sort-down ml-10 c-pointer v-top'"
+                                >
+                            </i>
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let skeleton of skeleton_loader">
+                        <tr *ngIf="isLoaded">
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                            <td> <ngx-skeleton-loader [theme]="{width: '100%', height: '24px', margin: 0}"></ngx-skeleton-loader> </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!isLoaded">
+                        <tr *ngFor="let job_order of job_order_list" class="table-dashboard c-pointer" routerLink="/admin/job-order-details/{{job_order.job_order_request_id}}">
+                        <td class="v-mid text-id fs-16 pt-15 pb-15">{{job_order.job_order_quote_num}}</td>
+                        <td class="v-mid fs-16 pt-15 pb-15">{{job_order.job_order_project_name}}</td>
+                        <td class="v-mid fs-16 pt-15 pb-15">
+                            <img class="w-30 h-30 rounded-circle object-fit-cover mr-8" src="{{userService.image_path}}/company_logo/{{job_order.partner_logo}}">
+                            {{job_order.partner_company}}
+                            </td>
+                        <td class="v-mid fs-16 pt-15 pb-15">{{job_order.user_profile_first_name}} {{job_order.user_profile_last_name}}</td>
+                        <td class="v-mid fs-16 pt-15 pb-15 text-center">
+                            <span *ngIf="job_order.job_order_status == 0" class="badge_checkedprice">Checked Price</span>
+                            <span *ngIf="job_order.job_order_status == 1" class="badge_draft">Draft</span>
+                            <span *ngIf="job_order.job_order_status == 2" class="badge_submitted">Submitted</span>
+                            <span *ngIf="job_order.job_order_status == 3" class="badge_processed">Processed</span>
+                            <span *ngIf="job_order.job_order_status == 4" class="badge_delivered">Delivered</span>
+                            <span *ngIf="job_order.job_order_status == 5" class="badge_declined">Declined</span>
+                            <span *ngIf="job_order.job_order_status == 6" class="badge_archived">Archived</span>
+                            <span *ngIf="job_order.job_order_status == 7" class="badge_canceled">Canceled</span>
+                            </td>
+                            <td class="v-mid fs-16 pt-15 pb-15 text-center">
+                                <span *ngIf="job_order.job_order_payment_status == 0&&job_order.job_order_status != 5 &&job_order.job_order_status != 7" class="text-pending fw-700 fs-14">Pending</span>
+                                <span *ngIf="job_order.job_order_payment_status == 1&&job_order.job_order_status != 5 &&job_order.job_order_status != 7" class="text-paid fw-700 fs-14">Paid</span>
+                                <span *ngIf="job_order.job_order_status == 5" class="fw-700 fs-14">- -</span>
+                                <span *ngIf="job_order.job_order_status == 7" class="fw-700 fs-14">- -</span>
+                            </td>
+                            <td class="v-mid fs-16 pt-15 pb-15">{{job_order.created_at | transformDate: '': 'L'}}</td>
+                            <td class="v-mid fs-16 pt-15 pb-15">{{job_order.job_order_due_date | transformDate: '': 'L'}}</td>
+                        <td class="v-mid fs-16 pt-15 pb-15 tR">{{job_order.job_order_total | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div> 
+        </div>
+     </div>
+
+    <!--pagination-->
+
+    <div class="row pt-30 pb-30 d-flex align-items-center">
+        <div class="col-md-5 d-flex align-items-center">
+            <span class="text-secondary fs-16">Showing</span> 
+            <div class="btn-group h-50 ml-10 mr-10" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn-limit filterShow text-left d-flex justify-content-between align-items-center"
+                 aria-controls="dropdown-basic"> 
+                    <span class="fs-16">{{ limit }}</span>
+                    <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"role="menu" aria-labelledby="button-basic">
+                     <li role="menuitem">
+                         <button class="dropdown-item" *ngFor="let item of limits" (click)="setLimit(item)">{{ item }}</button>
+                    </li>
+                </ul>
+            </div>
+           <span class="text-secondary fs-16">of {{total}} entries</span>
+        </div>
+        <div class="col-md-6 ml-70 d-flex align-items-center justify-content-end">
+            <div class="pr-3 d-flex justify-content-end align-items-center" style="text-align: right;">
+                <button class="mr-5 page-btn" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 5L3.83 5L7.41 1.41L6 1.04907e-06L-1.04907e-06 6L6 12L7.41 10.59L3.83 7L18 7L18 5Z" fill="#626172"/>
+                        </svg>                        
+                </button>                                
+                <button class="page-btn text-secondary fs-14" style="white-space: nowrap;" (click) = "prevPage()" [disabled] = "this.current_page == 1">
+                    Prev 
+                </button> 
+                <ng-container *ngFor="let item of pages_array | slice:0:3; let i= index;">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(item)" [ngClass]="{'active': current_page == item}">{{ item }}</span>
+                </ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">...</ng-container>
+                <ng-container *ngIf="total_pages>3&&current_page+1<total_pages">
+                    <span class="pink-square page c-pointer page-number" (click) = "setPage(total_pages)" [ngClass]="{'active': current_page == item}">{{ total_pages }}</span>
+                </ng-container>
+                <button class="page-btn text-secondary fs-14" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">Next</button>
+                <button class="ml-5 page-btn" (click) = "nextPage()" [disabled] = "this.current_page == total_pages">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 7L14.17 7L10.59 10.59L12 12L18 6L12 0L10.59 1.41L14.17 5L0 5V7Z" fill="#626172"/>
+                        </svg>                        
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
